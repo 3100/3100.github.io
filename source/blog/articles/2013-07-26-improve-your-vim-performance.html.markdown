@@ -16,21 +16,21 @@ vimにはstartuptimeという実行時オプションがあります。これを
 
 現在の起動時間を計測(hogeファイルにログ保存)
 
-```
+~~~
 $ vim --startuptime hoge
-```
+~~~
 
 Xサーバへの接続を行わせずに起動時間を計測
 
-```
+~~~
 $ vim -X --startuptime hoge
-```
+~~~
 
 空のvimrcファイルを用いて起動時間を計測
 
-```
+~~~
 $ vim -u vimrc --noplugin --startuptime hoge
-```
+~~~
 
 ### プラグインを用いて
 
@@ -38,25 +38,25 @@ benchvimrc-vimというプラグインを用いると、各行にかかった時
 
 NeoBundleを利用している場合は
 
-```
+~~~
 NeoBundle 'mattn/benchvimrc-vim'
-```
+~~~
 
 あるいは
 
-```
+~~~
 NeoBundleLazy 'mattn/benchvimrc-vim', {
   \ 'autoload': {
     \   'commands': ['BenchVimrc'],
       \  },
     \}
-```
+~~~
 
 を$HOME/.vimrcなどに追加してください。インストール後、
 
-```
+~~~
 :BenchVimrc
-```
+~~~
 
 で測定します。
 
@@ -66,23 +66,23 @@ NeoBundleLazy 'mattn/benchvimrc-vim', {
 
 ### setup clipboard
 
-```
+~~~
 $ vim -X
-```
+~~~
 
 で軽くなる場合は$HOME/.vimrcに
 
-```
+~~~
 set clipboard=exclude:.*
-```
+~~~
 
 と設定すれば同じ効果が得られます。自分の場合はほとんどこいつが原因でした。修正後、起動時間が100ミリ秒に短縮しました。
 
 ### inits 3
 
-```
+~~~
 $ vim -i NONE
-```
+~~~
 
 で改善する場合はviminfoファイルなどを生成しないようにするなどの対応で改善可能です。
 
@@ -96,19 +96,19 @@ NeoBundleを利用している前提ですが、NeoBundleLazyを検討しまし�
 
 例えば、上のほうで出てきたこの記述ですが
 
-```
+~~~
 NeoBundle 'mattn/benchvimrc-vim'
-```
+~~~
 
 以下のように書き換えることで、:BenchVimrcが呼び出されるまでプラグイン読み込みを遅延できます。
 
-```
+~~~
 NeoBundleLazy 'mattn/benchvimrc-vim', {
   \ 'autoload': {
     \   'commands': ['BenchVimrc'],
       \  },
     \}
-```
+~~~
 
 autoloadにはcommandsの他、filetypesを指定することもできます。その場合は該当拡張子のファイルが開かれる段階で、プラグイン読み込みが行われます。
 

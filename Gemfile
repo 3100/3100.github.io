@@ -4,9 +4,10 @@ source 'http://rubygems.org'
 
 gem "middleman", "~> 3.1.6"
 gem "middleman-blog", "~> 3.3.0"
+gem "middleman-syntax"
 
 gem "slim", "~> 2.0.2"
-gem "rdiscount"
+gem "redcarpet"
 gem "nokogiri"
 
 group :deveropment do

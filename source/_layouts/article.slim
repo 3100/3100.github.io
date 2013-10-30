@@ -1,6 +1,9 @@
 - content_for :title do
   = current_article.title
 
+- content_for :highlight do
+  'highlight'
+
 - wrap_layout :layout do
   current_article.article itemscope="" itemtype="http://schema.org/Article"
     - unless current_article.data.no_header
