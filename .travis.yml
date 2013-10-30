@@ -7,7 +7,28 @@ after_success:
   - '[ "$TRAVIS_BRANCH" == "master" ] && [ "$GH_TOKEN" ] && rake publish > /dev/null'
 env:
   global:
+    # GH_TOKEN
     - secure: |-
-        mcsu4H9ShKFbEO1mF09px8qU8OLQtX9EtsvlU2Hqk9Xfc5dEzBUHa9Hub32vc
-        bY1RVEA/79Ij78s9z6wLLlS2TlSUqgZrnyk/7c7ob0e9CZ/TRaaBF3+/FKWja
-        QHjRhr0YiebLxnqOIcbCIAOsHdiQCjYe9t0oGCmdU8+BQ8fxU=
+      mcsu4H9ShKFbEO1mF09px8qU8OLQtX9EtsvlU2Hqk9Xfc5dEzBUHa9Hub32vc
+      bY1RVEA/79Ij78s9z6wLLlS2TlSUqgZrnyk/7c7ob0e9CZ/TRaaBF3+/FKWja
+      QHjRhr0YiebLxnqOIcbCIAOsHdiQCjYe9t0oGCmdU8+BQ8fxU=
+    # GIT_COMMITTER_NAME
+    - secure: |-
+      HZjbTsZ3sHZRO8OzuVIKRaSu+QWuvt4Eq1c6TYLKhTCopzijynYc0YIAPKSg1
+      xQGGUWSlJovJgRCR1sAD1thFLVfDyGnvlpT1EWFGW0IVA3LKlpQjLlCunwyMv
+      rFvOrJPS3qwT5hsXLxhTxIFJe7tFOGunoAvGCDMIFrwJLn+58=
+    # GIT_COMMITTER_EMAIL
+    - secure: |-
+      ipTEPQ5uBU6Zz6OhjjPtbvPrRALuAnpqAvqY8Ae7hVleOrJJxrWllx/Ppcz36
+      Mk6wj9NxOO0Wsxvkt/w+9qb8N38pBAGnUr7e4oC2sO2zmJTcB/PdnZrJVU8SG
+      381U8LmMTBHiHZaABsNtkfTAhNmGO05QG56w0GBj+1GO/fttI=
+    # GIT_AUTHOR_NAME
+    - secure: |-
+      m7ZU9eByWzPznqNNRmWKSTOZhtx2PjVVFcJc9b8MRspJjNb0+Edjtxa6qFCLX
+      qF4vWSHIO6h/xZHqes5Dx4AYk8RR0rPZYJhZ0vZOnxIBu3nvJnEke6P0JoLYC
+      Jqg6Rl1B+LYRkfai3fB+vFUseC4tILv3t+8YoS2otUlLrWaXM=
+    # GIT_AUTHOR_EMAIL
+    - secure: |-
+      jftGhcZewoP9DGamYyPAerGy0B88fEvqU0R5zHmrl8zRjXQkALEV4NT4B8Jyt
+      qir7TqyLSil8o1xxs5txbNqFJfvDS4AUMxZyOlCoa9G3aZSWAad5keVUgNOp5
+      Iab4lVp0GA6ZunTG8+9V/R+KbZ8U5jD4Si9+jJ+OlYvtTckEY=

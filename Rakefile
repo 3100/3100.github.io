@@ -15,14 +15,20 @@ def initialize_repository(repository, branch)
   end
 
   Dir.chdir DEST_DIR do
-    sh "git checkout --orphan #{branch}"
+    #sh "git checkout --orphan #{branch}"
+    sh "git checkout #{branch}"
   end
 end
 
 def update_repository(branch)
   Dir.chdir DEST_DIR do
-    sh 'git fetch origin'
-    sh "git reset --hard origin/#{branch}"
+    begin
+      sh 'git fetch origin'
+      sh "git reset --hard origin/#{branch}"
+    rescue
+      # 初回はorigin/#{branch}がないので例外が発生する？
+      puts "初回？例外発生"
+    end
   end
 end
 
