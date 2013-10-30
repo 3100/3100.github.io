@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Room 3100</title>
+  <subtitle>Nothing to see here, citizen.</subtitle>
+  <id>http://3100.github.io/blog</id>
+  <link href="http://3100.github.io/blog"/>
+  <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
+  <updated>2013-10-28T15:00:00Z</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>Middlemanに移行しました</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2013/10/29/move-to-middleman.html"/>
+    <id>http://3100.github.io/blog/2013/10/29/move-to-middleman.html</id>
+    <published>2013-10-28T15:00:00Z</published>
+    <updated>2013-10-30T13:41:14+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Github Pagesを本格的に使おうと、Middlemanに移行しました。&lt;/p&gt;
+
+&lt;p&gt;技術ネタを放り込んでいけるように習慣づけたい。&lt;/p&gt;
+
+&lt;p&gt;OctoPressで書いてた記事も、そのうち取り込む予定。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>NeoSnippetを使ってみた</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html"/>
+    <id>http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html</id>
+    <published>2013-07-26T09:15:00Z</published>
+    <updated>2013-10-30T13:41:14+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;OctopressのCodeblockの構文が結構気持ち悪い感じです。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{% raw %}
+{% codeblock lang:&amp;lt;lang&amp;gt; %}
+&amp;lt;content&amp;gt;
+{% endcodeblock %}
+{% endraw %}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;こんなのを毎回書いていられないので、&lt;a href="https://github.com/Shougo/neosnippet.vim"&gt;Shougo/neosnippet.vim&lt;/a&gt;を使ってみました。
+インストールや設定については公式のREADMEを参照。&lt;/p&gt;
+
+&lt;p&gt;markdown用のスニペットファイルを作成するには、以下のコマンドを実行します。(実際には適当なキーにマッピングしてます。)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+:NeoSnippetEdit markdown
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;すると、スニペットフォルダにmarkdown.snipが作られるので、ここにスニペットを記述していきます。&lt;/p&gt;
+
+&lt;p&gt;今回は3つのスニペットを試しに加えてみました。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;シンプルなCodeblock&lt;/li&gt;
+  &lt;li&gt;ハイライト用のCodeblock&lt;/li&gt;
+  &lt;li&gt;ハイパーリンク&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;{% raw %}
+snippet codeblock
+abbr cb
+alias code cb
+options head
+    {% codeblock %}
+    ${1}
+    {% endcodeblock %}
+
+snippet codeblocklang
+abbr cbl
+alias codel cbl
+options head
+    {% codeblock lang:${1} %}
+    ${2}
+    {% endcodeblock %}
+
+snippet hyperlink
+abbr hl
+alias hl
+    [${1:text}](${2:url})
+{% endraw %}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;${1}などとあるのは、スニペット展開時に&lt;c-k&gt;(公式設定コピペの場合)を押す度にカーソルが当たる場所です。&lt;/c-k&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;これでmarkdownファイルの編集時にcodeなどと入力すると、NeoComplCacheがスニペットを含む候補一覧を表示してくれます。&lt;c-k&gt;(同上)を入力することで展開されます。&lt;/c-k&gt;&lt;/p&gt;
+
+&lt;p&gt;Octopressは他にも似たような構文があるので、よく使いそうなものからどんどん追加してこうかと思います。&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>vimの起動速度を改善する</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html"/>
+    <id>http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html</id>
+    <published>2013-07-26T07:41:00Z</published>
+    <updated>2013-10-30T13:41:14+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;ふと気づいたら、vimの起動に2秒ほどかかるようになっていました。そこで、google先生を頼りに、原因の究明と解決策を調べてみました。&lt;/p&gt;
+
+&lt;h2 id="section"&gt;時間計測&lt;/h2&gt;
+
+&lt;h3 id="vim"&gt;とりあえずvimの標準機能で&lt;/h3&gt;
+
+&lt;p&gt;vimにはstartuptimeという実行時オプションがあります。これを使ってみましょう。&lt;/p&gt;
+
+&lt;p&gt;現在の起動時間を計測(hogeファイルにログ保存)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ vim --startuptime hoge
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Xサーバへの接続を行わせずに起動時間を計測&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ vim -X --startuptime hoge
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;空のvimrcファイルを用いて起動時間を計測&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ vim -u vimrc --noplugin --startuptime hoge
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id="section-1"&gt;プラグインを用いて&lt;/h3&gt;
+
+&lt;p&gt;benchvimrc-vimというプラグインを用いると、各行にかかった時間を計測してくれます。&lt;/p&gt;
+
+&lt;p&gt;NeoBundleを利用している場合は&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+NeoBundle 'mattn/benchvimrc-vim'
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;あるいは&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+NeoBundleLazy 'mattn/benchvimrc-vim', {
+  \ 'autoload': {
+    \   'commands': ['BenchVimrc'],
+      \  },
+    \}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;を$HOME/.vimrcなどに追加してください。インストール後、&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+:BenchVimrc
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;で測定します。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mattn/benchvimrc-vim"&gt;.vimrcの各行ごとにどれくらい時間がかかっているかを測定できる。&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="section-2"&gt;重い原因例&lt;/h2&gt;
+
+&lt;h3 id="setup-clipboard"&gt;setup clipboard&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ vim -X
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;で軽くなる場合は$HOME/.vimrcに&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+set clipboard=exclude:.*
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;と設定すれば同じ効果が得られます。自分の場合はほとんどこいつが原因でした。修正後、起動時間が100ミリ秒に短縮しました。&lt;/p&gt;
+
+&lt;h3 id="inits-3"&gt;inits 3&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ vim -i NONE
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;で改善する場合はviminfoファイルなどを生成しないようにするなどの対応で改善可能です。&lt;/p&gt;
+
+&lt;p&gt;viminfoの役割については以下などを参照しましょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://nanasi.jp/articles/howto/file/seemingly-unneeded-file.html#viminfo"&gt;vimエディタが(勝手に)作成する、一見、不要に見えるファイルが何をしているか — 名無しのvim使い&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id="section-3"&gt;特定プラグインの読み込みに時間がかかっている&lt;/h3&gt;
+
+&lt;p&gt;NeoBundleを利用している前提ですが、NeoBundleLazyを検討しましょう。&lt;/p&gt;
+
+&lt;p&gt;例えば、上のほうで出てきたこの記述ですが&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+NeoBundle 'mattn/benchvimrc-vim'
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;以下のように書き換えることで、:BenchVimrcが呼び出されるまでプラグイン読み込みを遅延できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+NeoBundleLazy 'mattn/benchvimrc-vim', {
+  \ 'autoload': {
+    \   'commands': ['BenchVimrc'],
+      \  },
+    \}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;autoloadにはcommandsの他、filetypesを指定することもできます。その場合は該当拡張子のファイルが開かれる段階で、プラグイン読み込みが行われます。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://qiita.com/rbtnn/items/600ac451ebb43b2c9c13"&gt;NeoBundleLazyをvimrcに導入した。 - Qiita &lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id="section-4"&gt;参考&lt;/h1&gt;
+
+&lt;p&gt;その他、以下の記事が役に立ちました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://rhysd.hatenablog.com/entry/2012/12/19/001145"&gt;「立て！立つんだビムー！」 - sorry, unimplemented:&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/14635295/vim-takes-a-very-long-time-to-start-up"&gt;vim takes a very long time to start up - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://mattn.kaoriya.net/software/vim/20120315221158.htm"&gt;Big Sky :: vimrcのどこが重いのかを調べられるプラグイン書いた。&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+</feed>
