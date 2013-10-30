@@ -3,7 +3,19 @@
   font-family: "craftygirls";
   src: url("http://themes.googleusercontent.com/static/fonts/craftygirls/v0/0Sv8UWFFdhQmesHL32H8o3hCUOGz7vYGh680lGh-uXM.woff"); }
 
-/* line 8, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+@font-face {
+  font-family: "marker";
+  src: url("http://themes.googleusercontent.com/static/fonts/permanentmarker/v0/9vYsg5VgPHKK8SXYbf3sMupm9E4gBdgiUiSJePew_SQ.woff"); }
+
+@font-face {
+  font-family: "sueellen";
+  src: url("http://themes.googleusercontent.com/static/fonts/sueellenfrancisco/v2/TwHX4vSxMUnJUdEz1JIgrrtXaZAN_aGv07JTA91X2HI.woff"); }
+
+@font-face {
+  font-family: "cedarcursive";
+  src: url("http://themes.googleusercontent.com/static/fonts/cedarvillecursive/v1/cuCe6HrkcqrWTWTUE7dw-5zpMnghKP_wiJrQSyqob5U.woff"); }
+
+/* line 21, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 body {
   background: url(../images/geometry.png);
   font-family: "Helvetica Nwue", Helvetica, Arial, "ヒラギノ角ゴ Pro W2", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
@@ -11,56 +23,61 @@ body {
   color: #2f3639;
   line-height: 1.8; }
 
-/* line 16, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 29, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 *, *:before, *:after {
   -moz-box-sizing: border-box; }
 
-/* line 19, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 32, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 body.article .container .article header .meta .article-tag {
   margin-left: 10px;
   display: inline-block; }
 
-/* line 23, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 36, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 #license {
   text-align: center;
   line-height: 1.8;
   color: #647878; }
 
-/* line 28, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 41, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 a.tk-learning-curve {
-  font-family: "craftygirls";
-  font-size: 40px; }
+  font-family: "sueellen";
+  font-size: 64px;
+  text-align: center;
+  color: #bbaabb; }
 
-/* line 33, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 48, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 ul.horizontal li {
   white-space: nowrap;
   margin-right: 7px; }
 
-/* line 37, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 52, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 ul.horizontal div, ul.horizontal form, ul.horizontal li {
   display: inline; }
 
-/* line 40, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 55, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 ul {
   list-style-type: none; }
 
-/* line 43, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 58, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 .recent-articles .date {
   font-weight: 200px;
   font-size: 12px; }
 
-/* line 50, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 65, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 .date span.month:after, .date span.day:after {
   content: "."; }
 
-/* line 53, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 68, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 .navbar-default {
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   border: 0px none;
   background: url(../images/geometry.png); }
 
-/* line 60, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 74, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 h1#blog-title {
   color: #ababab; }
+
+/* line 77, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+h2 a, h2 a:hover {
+  color: #111111; }
