@@ -1,5 +1,8 @@
 language: ruby
 rvm: 2.0.0
+branches:
+  only:
+    - middleman
 before_script:
   - '[ "$TRAVIS_BRANCH" == "middleman" ] && [ "$GH_TOKEN" ] && rake setup > /dev/null'
 script: rake build

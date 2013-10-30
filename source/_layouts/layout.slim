@@ -13,24 +13,13 @@ html
     - thumb_url = current_page.data.thumb_url
 
   body
-    h1
-      a.navbar-brand.tk-learning-curve href="#{data.site.baseurl}" title="#{data.site.title}" =data.site.title
-    /nav.navbar.navbar-default
-      .navbar-header
-        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-exl-collapse"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand.tk-learning-curve href="#{data.site.baseurl}" title="#{data.site.title}" =data.site.title
-      .collapse.navbar-collapse.navbar-exl-collapse
-        ul.nav.navbar-nav.navbar-right
-          /li =link_to "", tag_path("Develop")
     .container
+      a.tk-learning-curve href="#{data.site.baseurl}" title="#{data.site.title}" =data.site.title
+
       .row
         #main.col-md-9
           = yield
-        aside#sidebar.col-md-3
+        #sidebar.col-md-3
           = partial "asides/profile"
           = partial "asides/subscribe"
           - if current_page.data.recent_articles != false

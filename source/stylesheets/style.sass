@@ -1,9 +1,22 @@
 $opacity: 0.7
 $color-white: #fff
 
+// FIXME fontは使ってないものもある。デザイン検討中
 @font-face
   font-family: "craftygirls"
   src: url('http://themes.googleusercontent.com/static/fonts/craftygirls/v0/0Sv8UWFFdhQmesHL32H8o3hCUOGz7vYGh680lGh-uXM.woff')
+
+@font-face
+  font-family: "marker"
+  src: url('http://themes.googleusercontent.com/static/fonts/permanentmarker/v0/9vYsg5VgPHKK8SXYbf3sMupm9E4gBdgiUiSJePew_SQ.woff')
+
+@font-face
+  font-family: "sueellen"
+  src: url('http://themes.googleusercontent.com/static/fonts/sueellenfrancisco/v2/TwHX4vSxMUnJUdEz1JIgrrtXaZAN_aGv07JTA91X2HI.woff')
+
+@font-face
+  font-family: "cedarcursive"
+  src: url('http://themes.googleusercontent.com/static/fonts/cedarvillecursive/v1/cuCe6HrkcqrWTWTUE7dw-5zpMnghKP_wiJrQSyqob5U.woff')
 
 body
   //background: url(../images/seamlesstexture29_1200.jpg)
@@ -27,8 +40,10 @@ body.article .container .article header .meta .article-tag
 
 a.tk-learning-curve
   //font-family: "learning-curve",cursive
-  font-family: "craftygirls"
-  font-size: 40px
+  font-family: "sueellen"
+  font-size: 64px
+  text-align: center
+  color: #bab
 
 ul.horizontal li
   white-space: nowrap
@@ -51,7 +66,6 @@ ul
         content: "."
 
 .navbar-default
-  max-width: 1200px
   margin-left: auto
   margin-right: auto
   border: 0px none
@@ -59,5 +73,8 @@ ul
 
 h1#blog-title
   color: #ababab
+
+h2 a, h2 a:hover
+  color: #111
 
 p#blog-description
