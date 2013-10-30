@@ -9,7 +9,7 @@ gem "slim", "~> 2.0.2"
 gem "rdiscount"
 gem "nokogiri"
 
-gem "therubyracer", :require => 'v8'
+#gem "therubyracer", :require => 'v8'
 
 # For feed.xml.builder
 gem "builder", "~> 3.0"
