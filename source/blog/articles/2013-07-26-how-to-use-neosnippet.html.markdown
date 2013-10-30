@@ -8,7 +8,7 @@ categories: vim
 ---
 OctopressのCodeblockの構文が結構気持ち悪い感じです。
 
-~~~
+~~~octopress
 {% raw %}
 {% codeblock lang:<lang> %}
 <content>
@@ -56,17 +56,6 @@ abbr hl
 alias hl
     [${1:text}](${2:url})
 {% endraw %}
-~~~
-
-~~~ruby
-class hoge
-  def initialize
-    [1..10].each do |x|
-      p x
-    end
-    p "end"
-  end
-end
 ~~~
 
 * ${1}などとあるのは、スニペット展開時に<C-k>(公式設定コピペの場合)を押す度にカーソルが当たる場所です。

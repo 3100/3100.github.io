@@ -1,3 +1,18 @@
+GIT
+  remote: git://github.com/3100/middleman-syntax.git
+  revision: 66b7340845316693fd8e367323649d3553297e35
+  specs:
+    middleman-syntax (1.2.1)
+      middleman-core (~> 3.0)
+      middleman-more (~> 3.0)
+
+GIT
+  remote: git://github.com/3100/rouge.git
+  revision: 6c54f8f916d6c8ee0744d07abcda28b9c0fa2c5c
+  branch: monokai
+  specs:
+    rouge (1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -16,7 +31,7 @@ GEM
       sass (~> 3.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    ffi (1.9.0)
+    ffi (1.9.2)
     fssm (0.2.10)
     haml (4.0.3)
       tilt
@@ -59,11 +74,10 @@ GEM
       sprockets (~> 2.1)
       sprockets-helpers (~> 1.0.0)
       sprockets-sass (~> 1.0.0)
-    middleman-syntax (1.2.1)
-      middleman-core (~> 3.0)
-      rouge (~> 0.3.0)
+    mini_portile (0.5.2)
     multi_json (1.8.2)
-    nokogiri (1.5.6)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -74,8 +88,6 @@ GEM
       ffi (>= 0.5.0)
     redcarpet (3.0.0)
     ref (1.0.5)
-    rouge (0.3.10)
-      thor
     sass (3.2.12)
     slim (2.0.2)
       temple (~> 0.6.6)
@@ -108,8 +120,9 @@ DEPENDENCIES
   builder (~> 3.0)
   middleman (~> 3.1.6)
   middleman-blog (~> 3.3.0)
-  middleman-syntax
+  middleman-syntax!
   nokogiri
   redcarpet
+  rouge!
   slim (~> 2.0.2)
   therubyracer

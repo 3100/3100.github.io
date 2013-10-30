@@ -4,11 +4,13 @@ source 'http://rubygems.org'
 
 gem "middleman", "~> 3.1.6"
 gem "middleman-blog", "~> 3.3.0"
-gem "middleman-syntax"
+gem "middleman-syntax", :git => "git://github.com/3100/middleman-syntax.git"
+gem "rouge", :git => "git://github.com/3100/rouge.git", :branch => "monokai"
 
 gem "slim", "~> 2.0.2"
 gem "redcarpet"
 gem "nokogiri"
+
 
 group :deveropment do
   gem "therubyracer", :require => 'v8'
