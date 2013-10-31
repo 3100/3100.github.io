@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/29/move-to-middleman.html"/>
     <id>http://3100.github.io/blog/2013/10/29/move-to-middleman.html</id>
     <published>2013-10-28T15:00:00Z</published>
-    <updated>2013-10-30T08:20:51+00:00</updated>
+    <updated>2013-10-31T02:07:03+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -30,19 +30,18 @@
     <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html"/>
     <id>http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html</id>
     <published>2013-07-26T09:15:00Z</published>
-    <updated>2013-10-30T08:20:51+00:00</updated>
+    <updated>2013-10-31T02:07:03+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
     <content type="html">&lt;p&gt;OctopressのCodeblockの構文が結構気持ち悪い感じです。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;{% raw %}
+&lt;pre class="highlight plaintext"&gt;{% raw %}
 {% codeblock lang:&amp;lt;lang&amp;gt; %}
 &amp;lt;content&amp;gt;
 {% endcodeblock %}
 {% endraw %}
-&lt;/code&gt;&lt;/pre&gt;
-
+&lt;/pre&gt;
 &lt;p&gt;こんなのを毎回書いていられないので、&lt;a href="https://github.com/Shougo/neosnippet.vim"&gt;Shougo/neosnippet.vim&lt;/a&gt;を使ってみました。
 インストールや設定については公式のREADMEを参照。&lt;/p&gt;
 
@@ -62,30 +61,29 @@
   &lt;li&gt;ハイパーリンク&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code&gt;{% raw %}
+&lt;pre class="highlight viml"&gt;&lt;span class="p"&gt;{&lt;/span&gt;% raw %&lt;span class="p"&gt;}&lt;/span&gt;
 snippet codeblock
-abbr cb
-alias code cb
-options head
-    {% codeblock %}
-    ${1}
-    {% endcodeblock %}
+abbr &lt;span class="k"&gt;cb&lt;/span&gt;
+alias code &lt;span class="k"&gt;cb&lt;/span&gt;
+&lt;span class="k"&gt;options&lt;/span&gt; head
+    &lt;span class="p"&gt;{&lt;/span&gt;% codeblock %&lt;span class="p"&gt;}&lt;/span&gt;
+    $&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;% endcodeblock %&lt;span class="p"&gt;}&lt;/span&gt;
 
 snippet codeblocklang
 abbr cbl
 alias codel cbl
-options head
-    {% codeblock lang:${1} %}
-    ${2}
-    {% endcodeblock %}
+&lt;span class="k"&gt;options&lt;/span&gt; head
+    &lt;span class="p"&gt;{&lt;/span&gt;% codeblock &lt;span class="k"&gt;lang&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;$&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; %&lt;span class="p"&gt;}&lt;/span&gt;
+    $&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;% endcodeblock %&lt;span class="p"&gt;}&lt;/span&gt;
 
 snippet hyperlink
 abbr hl
 alias hl
-    [${1:text}](${2:url})
-{% endraw %}
-&lt;/code&gt;&lt;/pre&gt;
-
+    &lt;span class="p"&gt;[&lt;/span&gt;$&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;text&lt;span class="p"&gt;}](&lt;/span&gt;$&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;url&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;% endraw %&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
 &lt;ul&gt;
   &lt;li&gt;${1}などとあるのは、スニペット展開時に&lt;c-k&gt;(公式設定コピペの場合)を押す度にカーソルが当たる場所です。&lt;/c-k&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -100,7 +98,7 @@ alias hl
     <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html"/>
     <id>http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html</id>
     <published>2013-07-26T07:41:00Z</published>
-    <updated>2013-10-30T08:20:51+00:00</updated>
+    <updated>2013-10-31T02:07:03+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -114,48 +112,36 @@ alias hl
 
 &lt;p&gt;現在の起動時間を計測(hogeファイルにログ保存)&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ vim --startuptime hoge
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;$ vim --startuptime hoge
+&lt;/pre&gt;
 &lt;p&gt;Xサーバへの接続を行わせずに起動時間を計測&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ vim -X --startuptime hoge
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;$ vim -X --startuptime hoge
+&lt;/pre&gt;
 &lt;p&gt;空のvimrcファイルを用いて起動時間を計測&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ vim -u vimrc --noplugin --startuptime hoge
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;$ vim -u vimrc --noplugin --startuptime hoge
+&lt;/pre&gt;
 &lt;h3 id="section-1"&gt;プラグインを用いて&lt;/h3&gt;
 
 &lt;p&gt;benchvimrc-vimというプラグインを用いると、各行にかかった時間を計測してくれます。&lt;/p&gt;
 
 &lt;p&gt;NeoBundleを利用している場合は&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-NeoBundle 'mattn/benchvimrc-vim'
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;NeoBundle &amp;#39;mattn/benchvimrc-vim&amp;#39;
+&lt;/pre&gt;
 &lt;p&gt;あるいは&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-NeoBundleLazy 'mattn/benchvimrc-vim', {
-  \ 'autoload': {
-    \   'commands': ['BenchVimrc'],
+&lt;pre class="highlight plaintext"&gt;NeoBundleLazy &amp;#39;mattn/benchvimrc-vim&amp;#39;, {
+  \ &amp;#39;autoload&amp;#39;: {
+    \   &amp;#39;commands&amp;#39;: [&amp;#39;BenchVimrc&amp;#39;],
       \  },
     \}
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;/pre&gt;
 &lt;p&gt;を$HOME/.vimrcなどに追加してください。インストール後、&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-:BenchVimrc
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;:BenchVimrc
+&lt;/pre&gt;
 &lt;p&gt;で測定します。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="https://github.com/mattn/benchvimrc-vim"&gt;.vimrcの各行ごとにどれくらい時間がかかっているかを測定できる。&lt;/a&gt;&lt;/p&gt;
@@ -164,24 +150,18 @@ NeoBundleLazy 'mattn/benchvimrc-vim', {
 
 &lt;h3 id="setup-clipboard"&gt;setup clipboard&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ vim -X
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;$ vim -X
+&lt;/pre&gt;
 &lt;p&gt;で軽くなる場合は$HOME/.vimrcに&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-set clipboard=exclude:.*
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;set clipboard=exclude:.*
+&lt;/pre&gt;
 &lt;p&gt;と設定すれば同じ効果が得られます。自分の場合はほとんどこいつが原因でした。修正後、起動時間が100ミリ秒に短縮しました。&lt;/p&gt;
 
 &lt;h3 id="inits-3"&gt;inits 3&lt;/h3&gt;
 
-&lt;p&gt;&lt;code&gt;
-$ vim -i NONE
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;$ vim -i NONE
+&lt;/pre&gt;
 &lt;p&gt;で改善する場合はviminfoファイルなどを生成しないようにするなどの対応で改善可能です。&lt;/p&gt;
 
 &lt;p&gt;viminfoの役割については以下などを参照しましょう。&lt;/p&gt;
@@ -194,20 +174,16 @@ $ vim -i NONE
 
 &lt;p&gt;例えば、上のほうで出てきたこの記述ですが&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-NeoBundle 'mattn/benchvimrc-vim'
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;pre class="highlight plaintext"&gt;NeoBundle &amp;#39;mattn/benchvimrc-vim&amp;#39;
+&lt;/pre&gt;
 &lt;p&gt;以下のように書き換えることで、:BenchVimrcが呼び出されるまでプラグイン読み込みを遅延できます。&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-NeoBundleLazy 'mattn/benchvimrc-vim', {
-  \ 'autoload': {
-    \   'commands': ['BenchVimrc'],
+&lt;pre class="highlight plaintext"&gt;NeoBundleLazy &amp;#39;mattn/benchvimrc-vim&amp;#39;, {
+  \ &amp;#39;autoload&amp;#39;: {
+    \   &amp;#39;commands&amp;#39;: [&amp;#39;BenchVimrc&amp;#39;],
       \  },
     \}
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;/pre&gt;
 &lt;p&gt;autoloadにはcommandsの他、filetypesを指定することもできます。その場合は該当拡張子のファイルが開かれる段階で、プラグイン読み込みが行われます。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://qiita.com/rbtnn/items/600ac451ebb43b2c9c13"&gt;NeoBundleLazyをvimrcに導入した。 - Qiita &lt;/a&gt;&lt;/p&gt;
