@@ -1,15 +1,6 @@
 GIT
-  remote: git://github.com/3100/middleman-syntax.git
-  revision: 66b7340845316693fd8e367323649d3553297e35
-  specs:
-    middleman-syntax (1.2.1)
-      middleman-core (~> 3.0)
-      middleman-more (~> 3.0)
-
-GIT
-  remote: git://github.com/3100/rouge.git
-  revision: 6c54f8f916d6c8ee0744d07abcda28b9c0fa2c5c
-  branch: monokai
+  remote: git://github.com/jayferd/rouge.git
+  revision: 5107ba9619338c611af7c7102dc6d4accb2d1a00
   specs:
     rouge (1.0.0)
 
@@ -31,7 +22,7 @@ GEM
       sass (~> 3.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    ffi (1.9.2)
+    ffi (1.9.3)
     fssm (0.2.10)
     haml (4.0.3)
       tilt
@@ -120,7 +111,6 @@ DEPENDENCIES
   builder (~> 3.0)
   middleman (~> 3.1.6)
   middleman-blog (~> 3.3.0)
-  middleman-syntax!
   nokogiri
   redcarpet
   rouge!
