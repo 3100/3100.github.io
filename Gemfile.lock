@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/3100/middleman-syntax.git
+  revision: 0a4635c8dfb47b78334323ce44a3380485ab8b27
+  specs:
+    middleman-syntax (1.2.1)
+      middleman-core (~> 3.0)
+      middleman-more (~> 3.0)
+
+GIT
   remote: git://github.com/jayferd/rouge.git
   revision: 5107ba9619338c611af7c7102dc6d4accb2d1a00
   specs:
@@ -111,6 +119,7 @@ DEPENDENCIES
   builder (~> 3.0)
   middleman (~> 3.1.6)
   middleman-blog (~> 3.3.0)
+  middleman-syntax!
   nokogiri
   redcarpet
   rouge!

@@ -4,7 +4,8 @@ source 'http://rubygems.org'
 
 gem "middleman", "~> 3.1.6"
 gem "middleman-blog", "~> 3.3.0"
-#gem "middleman-syntax", :git => "git://github.com/3100/middleman-syntax.git"
+#gem "middleman-syntax", "~> 1.2.1"
+gem "middleman-syntax", :git => "git://github.com/3100/middleman-syntax.git"
 gem "rouge", :git => "git://github.com/jayferd/rouge.git"
 
 gem "slim", "~> 2.0.2"
