@@ -5,16 +5,62 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2013-10-30T15:00:00Z</updated>
+  <updated>2013-11-07T15:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>rbenvでruby2.0を入れようとするとOpensslのエラーが出る</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html"/>
+    <id>http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html</id>
+    <published>2013-11-07T15:00:00Z</published>
+    <updated>2013-11-08T13:29:07+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Marvericksを入れた後のMacでrbenvからRuby2.0を入れようとするとエラーになってしまいました。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;$ gem install 2.0.0-p0
+Downloading ruby-2.0.0-p0.tar.gz...
+-&amp;gt; http://dqw8nmjcqpjn7.cloudfront.net/50d307c4dc9297ae59952527be4e755d
+Installing ruby-2.0.0-p0...
+
+BUILD FAILED
+
+Inspect or clean up the working tree at /var/folders/8h/mdr7s3ns64sfnscg5c4h2w0c0000gn/T/ruby-build.20131108212415.26000
+Results logged to /var/folders/8h/mdr7s3ns64sfnscg5c4h2w0c0000gn/T/ruby-build.20131108212415.26000.log
+
+Last 10 log lines:
+installing default gems:      /Users/zero/.rbenv/versions/2.0.0-p0/lib/ruby/gems/2.0.0 (build_info, cache, doc, gems, specifications)
+                              bigdecimal 1.2.0
+                              io-console 0.4.2
+                              json 1.7.7
+                              minitest 4.3.2
+                              psych 2.0.0
+                              rake 0.9.6
+                              rdoc 4.0.0
+                              test-unit 2.0.0.0
+The Ruby openssl extension was not compiled. Missing the OpenSSL lib?
+&lt;/pre&gt;
+&lt;p&gt;調べるとドンピシャな解答がStack Overflowにありました。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;$ CONFIGURE_OPTS=&amp;quot;--with-openssl-dir=`brew --prefix openssl`&amp;quot; rbenv install 2.0.0-p0
+&lt;/pre&gt;
+&lt;p&gt;もちろん、openssl自体がインストールされていない環境ではあらかじめインストールしておく必要があります。Homebrewを利用しているなら&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;$ brew install openssl
+&lt;/pre&gt;
+&lt;p&gt;ですね。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/17181075/openssl-error-installing-ruby-2-0-0-p195-on-mac-with-rbenv"&gt;homebrew - OpenSSL error installing ruby 2.0.0-p195 on Mac with rbenv - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>middleman-blogのハイライトにMonokaiテーマを使う</title>
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html"/>
     <id>http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html</id>
     <published>2013-10-30T15:00:00Z</published>
-    <updated>2013-10-31T05:13:15+00:00</updated>
+    <updated>2013-11-08T13:29:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -121,7 +167,7 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/29/move-to-middleman.html"/>
     <id>http://3100.github.io/blog/2013/10/29/move-to-middleman.html</id>
     <published>2013-10-28T15:00:00Z</published>
-    <updated>2013-10-31T05:13:15+00:00</updated>
+    <updated>2013-11-08T13:29:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -137,7 +183,7 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
     <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html"/>
     <id>http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html</id>
     <published>2013-07-26T09:15:00Z</published>
-    <updated>2013-10-31T05:13:15+00:00</updated>
+    <updated>2013-11-08T13:29:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -205,7 +251,7 @@ alias hl
     <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html"/>
     <id>http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html</id>
     <published>2013-07-26T07:41:00Z</published>
-    <updated>2013-10-31T05:13:15+00:00</updated>
+    <updated>2013-11-08T13:29:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
