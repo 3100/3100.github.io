@@ -1,0 +1,111 @@
+<!DOCTYPE html><html><head><meta charset="utf-8" /><meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" /><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /></head><body><div class="container"><a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a><div class="row"><div class="col-md-9" id="main"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header><h1 class="title" itemprop="name">MoinMoin WikiをNginxで動かす</h1><div class="meta"><time class="date" content="2013-11-16T00:00:00+09:00" datetime="2013-11-16T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="day">16</span><span class="month">11</span><span class="year">13</span></time></div><div class="article-tag"><span class="glyphicon glyphicon-tags"><ul class="tags horizontal"><li><a href="/blog/tags/moin.html">moin</a></li><li><a href="/blog/tags/nginx.html">nginx</a></li></ul></span></div></header><div class="body markdown" itemprop="articleBody"><p>さくらVPSで動かしていた<a href="http://moinmo.in/">MoinMoin Wiki</a>を<a href="https://www.digitalocean.com/">DigitalOcean</a>に移行することにしました。
+これを機に、WebサーバもApacheからNginxに移行しました。</p>
+
+<p>DigitalOceanのdroplet(仮想インスタンス)はArch Linux 64bit版です。とりあえず使うだけなら、512MBで問題ないでしょう。</p>
+
+<h2 id="moinmoin">MoinMoinのインストール</h2>
+
+<p>まずMoinMoinをインストールします。公式サイトからソースを落としてきてもいいですが、
+今回は以下のパッケージを利用しました。</p>
+
+<p><a href="https://www.archlinux.org/packages/community/any/moinmoin/">Arch Linux - moinmoin 1.9.7-1 (any)</a></p>
+
+<pre class="highlight plaintext">$ sudo pacman -S moin
+</pre>
+<p>デフォルトのインストール先は/usr/share/moinになります。</p>
+
+<h2 id="nginx">Nginxのインストール</h2>
+
+<p>同様にNginxもインストールします。</p>
+
+<pre class="highlight plaintext">$ sudo pacman -S nginx
+</pre>
+<h2 id="uwsgi">uWSGIのインストール</h2>
+
+<p>今回、MoinMoinはWSGIを利用します。
+<a href="http://projects.unbit.it/uwsgi/">uWSGI</a>をNginxと組み合わせることで、MoinMoinをNginx上で動かすことができるようになります。</p>
+
+<p>uWSGIについてもう少し知りたい方は以下のブログ記事が参考になります。</p>
+
+<p><a href="http://d.hatena.ne.jp/m-hiyama/20120312/1331513519">便利で超強力なWSGIサーバー uWSGI を使ってみよう - 檜山正幸のキマイラ飼育記</a></p>
+
+<p>話を戻して、uWSGIをインストールします。</p>
+
+<pre class="highlight plaintext">$ sudo pacman -S uwsgi uwsgi-plugin-python
+</pre>
+<h2 id="section">設定</h2>
+
+<h3 id="uwsgi-1">uWSGI</h3>
+
+<p>まず、uWSGIの設定を行います。uWSGIはini、xml、json等の形式で設定ファイルを記述できますが、今回はini形式で書きました。
+/etc/uwsgi/moin.iniに下記のような設定を記述しています。</p>
+
+<pre class="highlight ini"><span class="nn">[uwsgi]</span>
+<span class="py">plugins</span> <span class="p">=</span> <span class="s">python2</span>
+<span class="err">ignore-script-name</span>
+<span class="py">processes</span> <span class="p">=</span> <span class="s">4</span>
+<span class="err">limit-</span><span class="py">as</span> <span class="p">=</span> <span class="s">256</span>
+<span class="err">wsgi-</span><span class="py">file</span> <span class="p">=</span> <span class="s">/usr/share/moin/server/moin.wsgi</span>
+<span class="py">socket</span> <span class="p">=</span> <span class="s">/tmp/moin.sock</span>
+<span class="err">chmod-</span><span class="py">socket</span> <span class="p">=</span> <span class="s">777</span>
+</pre>
+<p>chmod-socketのパーミションを777にしているのは、実行時にパーミションエラーが発生したためです。。
+もし、より良い解決法がある場合は、教えていただけると幸いです。</p>
+
+<p>この設定をもとにuwsgiを立ち上げます。</p>
+
+<pre class="highlight plaintext">$ sudo systemctl enable uwsgi@moin.service
+$ sudo systemctl start uwsgi@moin.service
+</pre>
+<h3 id="nginx-1">Nginx</h3>
+
+<p>続いて、Nginxの設定です。/etc/nginx/nginx.confを編集します。</p>
+
+<pre class="highlight nginx"><span class="k">location</span> <span class="n">/</span> <span class="p">{</span>
+    <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
+    <span class="kn">uwsgi_modifier1</span> <span class="mi">30</span><span class="p">;</span>
+    <span class="kn">uwsgi_pass</span> <span class="s">unix:/tmp/moin.sock</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="n">/moin_static197/</span> <span class="p">{</span>
+    <span class="kn">alias</span> <span class="n">/usr/share/moin/htdocs</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>実際にはExpiresやCache-Control、Gzipなどの設定も必要でしょうが、とりあえず動かすだけならこれでよいと思います。</p>
+
+<p>以下で、サービスを開始できるようになります。</p>
+
+<pre class="highlight plaintext">$ sudo systemctl enable nginx
+$ sudo systemctl start nginx
+</pre>
+<h3 id="moinmoin-1">MoinMoin</h3>
+
+<p>あとはMoinMoinの設定をお好みに応じて変更するだけです。</p>
+
+<p>/usr/share/moin/config/wikiconfig.pyを編集します。</p>
+
+<p>とりあえず、以下だけ修正しておけば良いのではないでしょうか。</p>
+
+<pre class="highlight python"><span class="n">sitename</span> <span class="o">=</span> <span class="s">u&#39;Your Wiki&#39;</span>
+<span class="n">log_reverse_dns_lookups</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">tz_offset</span> <span class="o">=</span> <span class="mf">9.0</span>
+</pre>
+<p>以下のページも読むと、どういったことを設定可能かわかりやすいでしょう。</p>
+
+<p><a href="http://moinmo.in/HelpOnConfiguration">HelpOnConfiguration - MoinMoin</a></p>
+
+<p>wikiconfig.pyを編集した場合は、uwsgiを再起動することで、反映されます。</p>
+
+<h2 id="section-1">おわり</h2>
+
+<p>ここまでで、無事にMoinMoinが立ち上がっていることと思います。
+最初のLanguageSetupを行うために、ユーザ登録をして、
+そのユーザ名をwikiconfig.pyに登録して、uwsgiを再起動することになります。</p>
+
+<p>LanguageSetupも完了すれば、あとはMoinMoinを好きに弄っていくだけです！</p>
+
+<p>尚、初期状態ではMoinの検索エンジンは遅いので、Xapianを導入するのも良いでしょう。
+これについてもそのうち記事を書きたいと思います。</p>
+
+<p>お疲れ様でした。</p>
+</div><div class="clearfix"></div><footer></footer></current_article></div><div class="col-md-3" id="sidebar"><article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><h3>Profile</h3><section class="namecard"><h4 class="name" itemprop="name">3100</h4></section><ul class="contact holizontal"><li><a href="//twitter.com/zero310">Twitter</a></li><li><a href="//github.com/3100">Github</a></li><li><a href="//bitbucket.org/3100">Bitbucket</a></li></ul><p>開発者</p></article><article id="subscribe"><h3>Subscribe</h3><ul class="holizontal"><li><a href="/blog/feed.xml"><span class="glyphicon glyphicon-star-empty"></span></a></li></ul></article><article id="recent_articles"><h3>Recent Articles</h3><ul><li><a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a><time class="date" content="2013-11-16T00:00:00+09:00" datetime="2013-11-16T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="day">16</span><span class="month">11</span><span class="year">13</span></time></li><li><a href="/blog/2013/11/08/openssl-error-installing-ruby-2.html">rbenvでruby2.0を入れようとするとOpensslのエラーが出る</a><time class="date" content="2013-11-08T00:00:00+09:00" datetime="2013-11-08T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="day">08</span><span class="month">11</span><span class="year">13</span></time></li><li><a href="/blog/2013/10/31/monokai-theme-to-middleman-blog.html">middleman-blogのハイライトにMonokaiテーマを使う</a><time class="date" content="2013-10-31T00:00:00+09:00" datetime="2013-10-31T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="day">31</span><span class="month">10</span><span class="year">13</span></time></li><li><a href="/blog/2013/10/29/move-to-middleman.html">Middlemanに移行しました</a><time class="date" content="2013-10-29T00:00:00+09:00" datetime="2013-10-29T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="day">29</span><span class="month">10</span><span class="year">13</span></time></li><li><a href="/blog/2013/07/26/how-to-use-neosnippet.html">NeoSnippetを使ってみた</a><time class="date" content="2013-07-26T18:15:00+09:00" datetime="2013-07-26T18:15:00+09:00" itemprop="datePublished" pubdate=""><span class="day">26</span><span class="month">07</span><span class="year">13</span></time></li></ul></article><h3>Tags</h3><ul class="tags holizontal"><li><a href="/blog/tags/middleman.html">middleman</a> (2)</li><li><a href="/blog/tags/monokai.html">monokai</a> (1)</li><li><a href="/blog/tags/vim.html">vim</a> (2)</li><li><a href="/blog/tags/moin.html">moin</a> (1)</li><li><a href="/blog/tags/nginx.html">nginx</a> (1)</li><li><a href="/blog/tags/ruby.html">ruby</a> (1)</li><li><a href="/blog/tags/os-x.html">os x</a> (1)</li><li><a href="/blog/tags/rbenv.html">rbenv</a> (1)</li></ul><h3>By Year</h3><ul class="holizontal"><a href="/blog/2013.html">2013</a> (6)</ul><h3>Built with</h3><ul class="holizontal"><li><a href="http://middlemanapp.com/">Middleman</a></li><li><a href="http://getbootstrap.com/">Bootstrap</a></li></ul></div></div><div class="row" id="license"><div class="col-md-12"><p>&copy; 2013 3100 - All code snippets on this site are cc-by.</p></div></div></div><script src="/javascripts/bootstrap.min.js" type="text/javascript"></script></body></html>
