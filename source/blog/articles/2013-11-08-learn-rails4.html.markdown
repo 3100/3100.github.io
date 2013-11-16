@@ -14,12 +14,34 @@ categories: rails
 
 以下、個人的なメモ書き。
 
+何はともあれ、まずはインストール。
+
 ~~~
 $ gem install rails
 ~~~
+
+新しいプロジェクト。
 
 ~~~
 $ rails new first_app
 ~~~
 
+すぐさまの実行。
 
+~~~
+$ rails server
+~~~
+
+Herokuへのログインと新規プロジェクト作成
+
+~~~
+$ heroku login
+$ heroku create
+~~~
+
+Herokuへのデプロイ(git使用時)
+
+~~~
+$ git push heroku master
+$ heroku run rake db:migrate
+~~~
