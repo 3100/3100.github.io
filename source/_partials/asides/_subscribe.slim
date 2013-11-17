@@ -1,7 +1,7 @@
 article#subscribe
   h3 Subscribe
-  ul.holizontal
+  ul.horizontal
     /li.feedly
       = partial 'feedly_button'
     li
-      = link_to '<span class="glyphicon glyphicon-star-empty"></span>', '/blog/feed.xml'
+      = link_to '<i class="fa fa-rss fa-2x"></i>', '/blog/feed.xml', :class => 'no-color'

@@ -4,5 +4,6 @@ article#recent_articles
     - blog.articles[0...5].each do |article|
       li
         = link_to article.title, article
+        |&nbsp;
         = partial "date", locals: {date: article.date}
 

@@ -1,5 +1,6 @@
 $opacity: 0.7
 $color-white: #fff
+$text-color: #442
 
 // FIXME fontは使ってないものもある。デザイン検討中
 @font-face
@@ -23,15 +24,12 @@ body
   background: url(../images/geometry.png)
   font-family: "Helvetica Nwue",Helvetica,Arial,"ヒラギノ角ゴ Pro W2","Hiragino Kaku Gothic Pro",メイリオ,Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif
   font-size: 14px
-  color: rgb(47, 54, 57)
+  //color: rgb(47, 54, 57)
+  color: $text-color
   line-height: 1.8
 
 *, *:before, *:after
   -moz-box-sizing: border-box
-
-body.article .container .article header .meta .article-tag
-  margin-left: 10px
-  display: inline-block
 
 #license
   text-align: center
@@ -44,16 +42,28 @@ a.tk-learning-curve
   font-size: 64px
   text-align: center
   color: #bab
+  text-decoration: none
 
-ul.horizontal li
-  white-space: nowrap
-  margin-right: 7px
+a.no-color
+  color: $text-color
+  text-decoration: none
 
-ul.horizontal div, ul.horizontal form, ul.horizontal li
-  display: inline
+ul.horizontal
+  display: inline-block
+  padding-left: 10px
+  li
+    //white-space: nowrap
+    margin-left: 5px
+    display: inline-block
+  div, form
+    display: inline-block
 
 ul
   list-style-type: none
+
+.article-tag
+  margin-left: 10px
+  display: inline-block
 
 .recent-articles .date
   font-weight: 200px
@@ -61,9 +71,12 @@ ul
 
 .date
   span
-    &.month, &.day
+    &.month
       &:after
-        content: "."
+        content: " "
+    &.day
+      &:after
+        content: ", "
 
 .navbar-default
   margin-left: auto
@@ -74,7 +87,13 @@ ul
 h1#blog-title
   color: #ababab
 
-h2 a, h2 a:hover
-  color: #111
-
-p#blog-description
+h1
+  color: #333
+  span.meta
+    font-size: 24px
+    color: #556
+    margin-left: 10px
+  a, a:hover
+    color: #200
+    text-decoration: none
+    border: 0px none
