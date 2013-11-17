@@ -15,69 +15,91 @@
   font-family: "cedarcursive";
   src: url("http://themes.googleusercontent.com/static/fonts/cedarvillecursive/v1/cuCe6HrkcqrWTWTUE7dw-5zpMnghKP_wiJrQSyqob5U.woff"); }
 
-/* line 21, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 22, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 body {
   background: url(../images/geometry.png);
   font-family: "Helvetica Nwue", Helvetica, Arial, "ヒラギノ角ゴ Pro W2", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-size: 14px;
-  color: #2f3639;
+  color: #444422;
   line-height: 1.8; }
 
-/* line 29, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 31, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 *, *:before, *:after {
   -moz-box-sizing: border-box; }
 
-/* line 32, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
-body.article .container .article header .meta .article-tag {
-  margin-left: 10px;
-  display: inline-block; }
-
-/* line 36, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 34, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 #license {
   text-align: center;
   line-height: 1.8;
   color: #647878; }
 
-/* line 41, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 39, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 a.tk-learning-curve {
   font-family: "sueellen";
   font-size: 64px;
   text-align: center;
-  color: #bbaabb; }
+  color: #bbaabb;
+  text-decoration: none; }
 
-/* line 48, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
-ul.horizontal li {
-  white-space: nowrap;
-  margin-right: 7px; }
+/* line 47, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+a.no-color {
+  color: #444422;
+  text-decoration: none; }
 
-/* line 52, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
-ul.horizontal div, ul.horizontal form, ul.horizontal li {
-  display: inline; }
+/* line 51, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+ul.horizontal {
+  display: inline-block;
+  padding-left: 10px; }
+  /* line 54, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+  ul.horizontal li {
+    margin-left: 5px;
+    display: inline-block; }
+  /* line 58, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+  ul.horizontal div, ul.horizontal form {
+    display: inline-block; }
 
-/* line 55, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 61, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 ul {
   list-style-type: none; }
 
-/* line 58, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 64, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+.article-tag {
+  margin-left: 10px;
+  display: inline-block; }
+
+/* line 68, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 .recent-articles .date {
   font-weight: 200px;
   font-size: 12px; }
 
-/* line 65, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
-.date span.month:after, .date span.day:after {
-  content: "."; }
+/* line 75, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+.date span.month:after {
+  content: " "; }
+/* line 78, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+.date span.day:after {
+  content: ", "; }
 
-/* line 68, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 81, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 .navbar-default {
   margin-left: auto;
   margin-right: auto;
   border: 0px none;
   background: url(../images/geometry.png); }
 
-/* line 74, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+/* line 87, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
 h1#blog-title {
   color: #ababab; }
 
-/* line 77, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
-h2 a, h2 a:hover {
-  color: #111111; }
+/* line 90, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+h1 {
+  color: #333333; }
+  /* line 92, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+  h1 span.meta {
+    font-size: 24px;
+    color: #555566;
+    margin-left: 10px; }
+  /* line 96, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+  h1 a, h1 a:hover {
+    color: #220000;
+    text-decoration: none;
+    border: 0px none; }
