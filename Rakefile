@@ -50,7 +50,7 @@ def push_to_gh_pages(repository, branch)
 
   Dir.chdir DEST_DIR do
     sh 'git add -A'
-    sh "git commit -m 'Update with #{sha1}'"
+    sh "git commit -m 'Update with #{sha1} [ci skip]'"
     system "git push --quiet #{repository} #{branch} 2> /dev/null"
   end
 end
