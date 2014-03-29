@@ -1,6 +1,6 @@
 ---
 title: "DigitalOceanにMinecraftサーバを建てる"
-published: false
+published: true
 date: 2014-03-29 22:00
 comments: true
 tags: digitalocean, minecraft
