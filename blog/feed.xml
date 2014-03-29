@@ -5,16 +5,62 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-03-29T13:00:00Z</updated>
+  <updated>2014-03-29T15:30:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Travis CIのビルドスキップ機能について</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
+    <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
+    <published>2014-03-29T15:30:00Z</published>
+    <updated>2014-03-29T16:12:46+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;Travis CIにいつの間にかビルドスキップ機能が追加されていたので、
+早速MiddlemanのビルドでもGithub Pages生成後の処理をスキップするようにしました。&lt;/p&gt;
+
+&lt;h2 id="middleman"&gt;Middlemanのビルドについて&lt;/h2&gt;
+
+&lt;p&gt;このblogはMiddlemanを用いていますが、編集用ブランチとサイト生成先ブランチ(master)を分けています。
+編集用ブランチをローカルでコミットしてGithubにプッシュすると、Travis CIが自動的にmasterブランチへ静的ファイルを配置するという仕組みです。&lt;/p&gt;
+
+&lt;p&gt;その実態はRakefileを用意して、Travis CIに叩かせるというもので、以下の記事で紹介されていたものを利用しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://tricknotes.hateblo.jp/entry/2013/06/17/020229"&gt;Middleman で作った web サイトを Travis + GitHub pages でお手軽に運用する - tricknotesのぼうけんのしょ&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;今までの問題点&lt;/h2&gt;
+
+&lt;p&gt;Travis CIのビルドはmasterブランチのコミット時にも動作してしまい、.travis.ymlが見つからないためにエラーが発生していました。&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="error log" src="/blog/2014/03/30/skip-ci/errorlog.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;上画像のように、成功ビルドの後に失敗ビルドがつくられています。&lt;/p&gt;
+
+&lt;p&gt;しかし、ビルドスキップを設定することで、この問題を回避できるようになりました。&lt;/p&gt;
+
+&lt;h2 id="section-2"&gt;スキップの設定&lt;/h2&gt;
+
+&lt;p&gt;Travis CIに特定のビルドをスキップさせる方法は単純で、コミットメッセージに&lt;code&gt;[skip ci]&lt;/code&gt;などとあれば良いということです。
+上記の自動ビルドではRakefileにてコミットメッセージも設定しているので、その中に&lt;code&gt;[skip ci]&lt;/code&gt;という文字列を含むようにしました。&lt;/p&gt;
+
+&lt;p&gt;この変更をコミットし、プッシュしたところ、無事にmaster生成後のビルドはスキップされるようになりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="success log" src="/blog/2014/03/30/skip-ci/successlog.png" /&gt;&lt;/p&gt;
+
+&lt;p&gt;上画像のように、masterブランチ自動生成後のビルドはスキップされるようになりました。
+今まで、実害はあまりないもののエラービルドが出ることで気持ちがブルーになっていましたが、そうした気分からはようやく解放されそうです。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>DigitalOceanにMinecraftサーバを建てる</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html</id>
     <published>2014-03-29T13:00:00Z</published>
-    <updated>2014-03-29T15:17:49+00:00</updated>
+    <updated>2014-03-29T16:12:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -126,7 +172,7 @@ sudo sysctl vm.vfs_cache_pressure=50
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/16/moin-with-nginx.html"/>
     <id>http://3100.github.io/blog/2013/11/16/moin-with-nginx.html</id>
     <published>2013-11-15T15:00:00Z</published>
-    <updated>2014-03-29T15:17:49+00:00</updated>
+    <updated>2014-03-29T16:12:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -247,7 +293,7 @@ $ sudo systemctl start nginx
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html"/>
     <id>http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html</id>
     <published>2013-11-07T15:00:00Z</published>
-    <updated>2014-03-29T15:17:49+00:00</updated>
+    <updated>2014-03-29T16:12:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -293,7 +339,7 @@ The Ruby openssl extension was not compiled. Missing the OpenSSL lib?
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html"/>
     <id>http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html</id>
     <published>2013-10-30T15:00:00Z</published>
-    <updated>2014-03-29T15:17:49+00:00</updated>
+    <updated>2014-03-29T16:12:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -400,7 +446,7 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/29/move-to-middleman.html"/>
     <id>http://3100.github.io/blog/2013/10/29/move-to-middleman.html</id>
     <published>2013-10-28T15:00:00Z</published>
-    <updated>2014-03-29T15:17:49+00:00</updated>
+    <updated>2014-03-29T16:12:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -409,74 +455,6 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
 &lt;p&gt;技術ネタを放り込んでいけるように習慣づけたい。&lt;/p&gt;
 
 &lt;p&gt;OctoPressで書いてた記事も、そのうち取り込む予定。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>NeoSnippetを使ってみた</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html"/>
-    <id>http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html</id>
-    <published>2013-07-26T09:15:00Z</published>
-    <updated>2014-03-29T15:17:49+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;OctopressのCodeblockの構文が結構気持ち悪い感じです。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;{% raw %}
-{% codeblock lang:&amp;lt;lang&amp;gt; %}
-&amp;lt;content&amp;gt;
-{% endcodeblock %}
-{% endraw %}
-&lt;/pre&gt;
-&lt;p&gt;こんなのを毎回書いていられないので、&lt;a href="https://github.com/Shougo/neosnippet.vim"&gt;Shougo/neosnippet.vim&lt;/a&gt;を使ってみました。
-インストールや設定については公式のREADMEを参照。&lt;/p&gt;
-
-&lt;p&gt;markdown用のスニペットファイルを作成するには、以下のコマンドを実行します。(実際には適当なキーにマッピングしてます。)&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-:NeoSnippetEdit markdown
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;すると、スニペットフォルダにmarkdown.snipが作られるので、ここにスニペットを記述していきます。&lt;/p&gt;
-
-&lt;p&gt;今回は3つのスニペットを試しに加えてみました。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;シンプルなCodeblock&lt;/li&gt;
-  &lt;li&gt;ハイライト用のCodeblock&lt;/li&gt;
-  &lt;li&gt;ハイパーリンク&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="highlight viml"&gt;&lt;span class="p"&gt;{&lt;/span&gt;% raw %&lt;span class="p"&gt;}&lt;/span&gt;
-snippet codeblock
-abbr &lt;span class="k"&gt;cb&lt;/span&gt;
-alias code &lt;span class="k"&gt;cb&lt;/span&gt;
-&lt;span class="k"&gt;options&lt;/span&gt; head
-    &lt;span class="p"&gt;{&lt;/span&gt;% codeblock %&lt;span class="p"&gt;}&lt;/span&gt;
-    $&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;% endcodeblock %&lt;span class="p"&gt;}&lt;/span&gt;
-
-snippet codeblocklang
-abbr cbl
-alias codel cbl
-&lt;span class="k"&gt;options&lt;/span&gt; head
-    &lt;span class="p"&gt;{&lt;/span&gt;% codeblock &lt;span class="k"&gt;lang&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;$&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; %&lt;span class="p"&gt;}&lt;/span&gt;
-    $&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-    &lt;span class="p"&gt;{&lt;/span&gt;% endcodeblock %&lt;span class="p"&gt;}&lt;/span&gt;
-
-snippet hyperlink
-abbr hl
-alias hl
-    &lt;span class="p"&gt;[&lt;/span&gt;$&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;text&lt;span class="p"&gt;}](&lt;/span&gt;$&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;url&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;span class="p"&gt;{&lt;/span&gt;% endraw %&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
-&lt;ul&gt;
-  &lt;li&gt;${1}などとあるのは、スニペット展開時に&lt;c-k&gt;(公式設定コピペの場合)を押す度にカーソルが当たる場所です。&lt;/c-k&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;これでmarkdownファイルの編集時にcodeなどと入力すると、NeoComplCacheがスニペットを含む候補一覧を表示してくれます。&lt;c-k&gt;(同上)を入力することで展開されます。&lt;/c-k&gt;&lt;/p&gt;
-
-&lt;p&gt;Octopressは他にも似たような構文があるので、よく使いそうなものからどんどん追加してこうかと思います。&lt;/p&gt;
 </content>
   </entry>
 </feed>
