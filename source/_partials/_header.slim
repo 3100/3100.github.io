@@ -1,0 +1,9 @@
+header
+  h1.title itemprop="name"
+    = article.title
+  .meta
+    = partial "date", locals: {date: article.date}
+    - if article.tags.any?
+      .article-tag
+        span.glyphicon.glyphicon-tags
+        = partial "tags", locals: {tags: article.tags}
