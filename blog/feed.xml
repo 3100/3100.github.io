@@ -5,16 +5,128 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2013-11-15T15:00:00Z</updated>
+  <updated>2014-03-29T13:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>DigitalOceanにMinecraftサーバを建てる</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html"/>
+    <id>http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html</id>
+    <published>2014-03-29T13:00:00Z</published>
+    <updated>2014-03-29T15:17:49+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="Minecraft画像" src="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean/minecraft.png" /&gt;&lt;/p&gt;
+
+&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;急にMinecraftで遊びたくなることがあるのですが、複数PCにデータが散ってしまっていて、どこに目的のワールドがあるのかわかりません。
+そこで、これを機にどのマシンからでも同じワールドにアクセスできるようにしようと思いました。&lt;/p&gt;
+
+&lt;p&gt;今回は最近お世話になっているDigitalOcean上にMinecraftサーバを構築してみます。契約プランは最安($5/月)です。だいたい5人程度までなら遊べるそうです。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;手順&lt;/h2&gt;
+
+&lt;h3 id="droplet"&gt;dropletの作成&lt;/h3&gt;
+
+&lt;p&gt;まずDigitalOceanで新しいdropletを作成します。自分が選択したのは&lt;code&gt;Arch Linux 2013.05 x64&lt;/code&gt;ですが、
+jreが導入できればなんでも良いと思います。&lt;/p&gt;
+
+&lt;h3 id="section-2"&gt;サーバの初期設定&lt;/h3&gt;
+
+&lt;p&gt;rootのままではセキュリティ上懸念も多いので、専用ユーザを作ると良いでしょう。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;sshdの設定ファイルを弄ってパスワードログインをやめ、鍵交換方式にする&lt;/li&gt;
+  &lt;li&gt;sshのポートをデフォルトポートから変更しておく&lt;/li&gt;
+  &lt;li&gt;必要なポート以外閉じる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;といったことをしておくと良いのではないかと思います。&lt;/p&gt;
+
+&lt;h3 id="jre"&gt;jreの導入&lt;/h3&gt;
+
+&lt;p&gt;大抵のLinuxには公式リポジトリからjreパッケージが利用可能になっているのではないかと思います。&lt;/p&gt;
+
+&lt;p&gt;Archの場合は、以下で利用可能です。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;sudo pacman -Sy
+sudo pacman -S jre7-openjdk
+&lt;/pre&gt;
+&lt;h3 id="minecraft"&gt;minecraftサーバ用ソフトの導入&lt;/h3&gt;
+
+&lt;p&gt;サーバ用ファイルは現時点の最新版を利用しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://s3.amazonaws.com/Minecraft.Download/versions/1.7.5/minecraft_server.1.7.5.jar"&gt;https://s3.amazonaws.com/Minecraft.Download/versions/1.7.5/minecraft_server.1.7.5.jar&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;上記ファイルを適当なフォルダに配置し、以下のコマンドでMinecraftサーバが起動します。(-d64オプションで64bit版Javaも指定可能)&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;java -Xms512M -Xmx512M -jar minecraft_server.1.7.5.jar
+&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;最小確保メモリが512MB&lt;/li&gt;
+  &lt;li&gt;最大確保メモリも512MB&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;の設定ですが、構成によって変えて良いと思います。&lt;/p&gt;
+
+&lt;p&gt;毎回このコマンドを実行するのは面倒くさいので、適当なshファイルに上記コマンドをコピペします。(たとえばstart_server.sh)&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;chmod +x start_server.sh
+&lt;/pre&gt;
+&lt;p&gt;これで、start_serverと呼ぶだけでMinecraftサーバが立ち上がるようになりました。&lt;/p&gt;
+
+&lt;h3 id="section-3"&gt;スワップ領域の作成&lt;/h3&gt;
+
+&lt;p&gt;DigitalOceanの最小構成プランではこのままだと不安定なので、別途スワップ領域を作成する必要があります。&lt;/p&gt;
+
+&lt;p&gt;メモリが不足した場合にSSDを仮想メモリとみなすように設定していきます。/swapfileをスワップ領域として最大512MB確保できるようにします。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;sudo fallocate -l 512M /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+&lt;/pre&gt;
+&lt;p&gt;また、&lt;code&gt;/etc/fstab&lt;/code&gt;を編集し、以下を追加します。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;/swapfile none  swap  defaults  0 0
+&lt;/pre&gt;
+&lt;p&gt;ここまででスワップ領域が利用可能になりました。
+このままでも良いですが、メモリが余っている時にスワップ領域を使い続けることはパフォーマンス上あまり嬉しくないので、そのあたりもいい感じに設定します。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;sudo sysctl vm.swappiness=10
+sudo sysctl vm.vfs_cache_pressure=50
+&lt;/pre&gt;
+&lt;h2 id="minecraft-1"&gt;Minecraftサーバ設定&lt;/h2&gt;
+
+&lt;p&gt;特定ユーザを管理者登録するなどの設定は公式他、日本語の情報がたくさんあるので割愛します。自分は以下のサイトを参考にしました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://nasutan.net/minecraft/server-win/serverproperties/"&gt;【サルでもわかる！初めてのマインクラフト講座】- サーバ設定 - なす探！&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="section-4"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;意外と簡単にMinecraftサーバを建てることが出来ました。DigitalOceanは転送料制限がある(超えると課金される)ので心配をしていましたが、Minecraftの通信料は気にするほどではなさそうです。&lt;/p&gt;
+
+&lt;p&gt;まだ同時接続人数が2人以上を経験していませんが、CPU使用率は30%程度です。参考にした記事にも5人から8人くらいが限度と書かれていましたが、だいたいそのくらいの人数までは遊ぶことができそうです。&lt;/p&gt;
+
+&lt;p&gt;$5/月くらいなら仲間うちで割り勘しても良いくらいのコストですし、Minecraftサーバ、結構オススメです。&lt;/p&gt;
+
+&lt;h2 id="section-5"&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="http://otoris.com/host-your-own-minecraft-and-mumble-server-for-5month/"&gt;Host your own Minecraft server for $5/month&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.digitalocean.com/community/articles/how-to-add-a-swap-file-on-an-arch-linux-cloud-server"&gt;How to Add a Swap File on an Arch Linux Cloud Server - DigitalOcean&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <title>MoinMoin WikiをNginxで動かす</title>
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/16/moin-with-nginx.html"/>
     <id>http://3100.github.io/blog/2013/11/16/moin-with-nginx.html</id>
     <published>2013-11-15T15:00:00Z</published>
-    <updated>2014-03-29T15:16:08+00:00</updated>
+    <updated>2014-03-29T15:17:49+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -135,7 +247,7 @@ $ sudo systemctl start nginx
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html"/>
     <id>http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html</id>
     <published>2013-11-07T15:00:00Z</published>
-    <updated>2014-03-29T15:16:08+00:00</updated>
+    <updated>2014-03-29T15:17:49+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -181,7 +293,7 @@ The Ruby openssl extension was not compiled. Missing the OpenSSL lib?
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html"/>
     <id>http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html</id>
     <published>2013-10-30T15:00:00Z</published>
-    <updated>2014-03-29T15:16:08+00:00</updated>
+    <updated>2014-03-29T15:17:49+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -288,7 +400,7 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/29/move-to-middleman.html"/>
     <id>http://3100.github.io/blog/2013/10/29/move-to-middleman.html</id>
     <published>2013-10-28T15:00:00Z</published>
-    <updated>2014-03-29T15:16:08+00:00</updated>
+    <updated>2014-03-29T15:17:49+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -304,7 +416,7 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
     <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html"/>
     <id>http://3100.github.io/blog/2013/07/26/how-to-use-neosnippet.html</id>
     <published>2013-07-26T09:15:00Z</published>
-    <updated>2014-03-29T15:16:08+00:00</updated>
+    <updated>2014-03-29T15:17:49+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -365,113 +477,6 @@ alias hl
 &lt;p&gt;これでmarkdownファイルの編集時にcodeなどと入力すると、NeoComplCacheがスニペットを含む候補一覧を表示してくれます。&lt;c-k&gt;(同上)を入力することで展開されます。&lt;/c-k&gt;&lt;/p&gt;
 
 &lt;p&gt;Octopressは他にも似たような構文があるので、よく使いそうなものからどんどん追加してこうかと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>vimの起動速度を改善する</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html"/>
-    <id>http://3100.github.io/blog/2013/07/26/improve-your-vim-performance.html</id>
-    <published>2013-07-26T07:41:00Z</published>
-    <updated>2014-03-29T15:16:08+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;ふと気づいたら、vimの起動に2秒ほどかかるようになっていました。そこで、google先生を頼りに、原因の究明と解決策を調べてみました。&lt;/p&gt;
-
-&lt;h2 id="section"&gt;時間計測&lt;/h2&gt;
-
-&lt;h3 id="vim"&gt;とりあえずvimの標準機能で&lt;/h3&gt;
-
-&lt;p&gt;vimにはstartuptimeという実行時オプションがあります。これを使ってみましょう。&lt;/p&gt;
-
-&lt;p&gt;現在の起動時間を計測(hogeファイルにログ保存)&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ vim --startuptime hoge
-&lt;/pre&gt;
-&lt;p&gt;Xサーバへの接続を行わせずに起動時間を計測&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ vim -X --startuptime hoge
-&lt;/pre&gt;
-&lt;p&gt;空のvimrcファイルを用いて起動時間を計測&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ vim -u vimrc --noplugin --startuptime hoge
-&lt;/pre&gt;
-&lt;h3 id="section-1"&gt;プラグインを用いて&lt;/h3&gt;
-
-&lt;p&gt;benchvimrc-vimというプラグインを用いると、各行にかかった時間を計測してくれます。&lt;/p&gt;
-
-&lt;p&gt;NeoBundleを利用している場合は&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;NeoBundle &amp;#39;mattn/benchvimrc-vim&amp;#39;
-&lt;/pre&gt;
-&lt;p&gt;あるいは&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;NeoBundleLazy &amp;#39;mattn/benchvimrc-vim&amp;#39;, {
-  \ &amp;#39;autoload&amp;#39;: {
-    \   &amp;#39;commands&amp;#39;: [&amp;#39;BenchVimrc&amp;#39;],
-      \  },
-    \}
-&lt;/pre&gt;
-&lt;p&gt;を$HOME/.vimrcなどに追加してください。インストール後、&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;:BenchVimrc
-&lt;/pre&gt;
-&lt;p&gt;で測定します。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/mattn/benchvimrc-vim"&gt;.vimrcの各行ごとにどれくらい時間がかかっているかを測定できる。&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="section-2"&gt;重い原因例&lt;/h2&gt;
-
-&lt;h3 id="setup-clipboard"&gt;setup clipboard&lt;/h3&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ vim -X
-&lt;/pre&gt;
-&lt;p&gt;で軽くなる場合は$HOME/.vimrcに&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;set clipboard=exclude:.*
-&lt;/pre&gt;
-&lt;p&gt;と設定すれば同じ効果が得られます。自分の場合はほとんどこいつが原因でした。修正後、起動時間が100ミリ秒に短縮しました。&lt;/p&gt;
-
-&lt;h3 id="inits-3"&gt;inits 3&lt;/h3&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ vim -i NONE
-&lt;/pre&gt;
-&lt;p&gt;で改善する場合はviminfoファイルなどを生成しないようにするなどの対応で改善可能です。&lt;/p&gt;
-
-&lt;p&gt;viminfoの役割については以下などを参照しましょう。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://nanasi.jp/articles/howto/file/seemingly-unneeded-file.html#viminfo"&gt;vimエディタが(勝手に)作成する、一見、不要に見えるファイルが何をしているか — 名無しのvim使い&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id="section-3"&gt;特定プラグインの読み込みに時間がかかっている&lt;/h3&gt;
-
-&lt;p&gt;NeoBundleを利用している前提ですが、NeoBundleLazyを検討しましょう。&lt;/p&gt;
-
-&lt;p&gt;例えば、上のほうで出てきたこの記述ですが&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;NeoBundle &amp;#39;mattn/benchvimrc-vim&amp;#39;
-&lt;/pre&gt;
-&lt;p&gt;以下のように書き換えることで、:BenchVimrcが呼び出されるまでプラグイン読み込みを遅延できます。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;NeoBundleLazy &amp;#39;mattn/benchvimrc-vim&amp;#39;, {
-  \ &amp;#39;autoload&amp;#39;: {
-    \   &amp;#39;commands&amp;#39;: [&amp;#39;BenchVimrc&amp;#39;],
-      \  },
-    \}
-&lt;/pre&gt;
-&lt;p&gt;autoloadにはcommandsの他、filetypesを指定することもできます。その場合は該当拡張子のファイルが開かれる段階で、プラグイン読み込みが行われます。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://qiita.com/rbtnn/items/600ac451ebb43b2c9c13"&gt;NeoBundleLazyをvimrcに導入した。 - Qiita &lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id="section-4"&gt;参考&lt;/h1&gt;
-
-&lt;p&gt;その他、以下の記事が役に立ちました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://rhysd.hatenablog.com/entry/2012/12/19/001145"&gt;「立て！立つんだビムー！」 - sorry, unimplemented:&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/14635295/vim-takes-a-very-long-time-to-start-up"&gt;vim takes a very long time to start up - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://mattn.kaoriya.net/software/vim/20120315221158.htm"&gt;Big Sky :: vimrcのどこが重いのかを調べられるプラグイン書いた。&lt;/a&gt;&lt;/p&gt;
-
 </content>
   </entry>
 </feed>
