@@ -1,5 +1,6 @@
 h3 By Year
 ul.holizontal
   - blog.articles.group_by {|a| a.date.year}.each do |year, articles|
-    = link_to year, blog_year_path(year)
-    |  (#{articles.size})
+    li
+      = link_to year, blog_year_path(year)
+      |  (#{articles.size})
