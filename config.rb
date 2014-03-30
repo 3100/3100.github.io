@@ -92,6 +92,7 @@ set :images_dir, 'images'
 set :markdown_engine, :kramdown
 # for redcarpet
 #set :markdown, :fenced_code_blocks => true, :smartypants => true
+set :slim, { :pretty => true, :sort_attrs => false, :format => :html5 }
 
 # Build-specific configuration
 configure :build do
