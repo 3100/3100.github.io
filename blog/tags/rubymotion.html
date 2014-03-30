@@ -4,91 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>NeoSnippetを使ってみた - Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
-    <h1 class="title" itemprop="name">
-      NeoSnippetを使ってみた
-    </h1>
-    <div class="meta">
-      <time class="date" itemprop="datePublished" content="2013-07-26T18:15:00+09:00" datetime="2013-07-26T18:15:00+09:00" pubdate=""><span class="month">Jul</span><span class="day">26</span><span class="year">2013</span></time>
-      <div class="article-tag">
-        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-          <li>
-            <a href="/blog/tags/vim.html">vim</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </header>
-  <div class="body markdown" itemprop="articleBody"><p>OctopressのCodeblockの構文が結構気持ち悪い感じです。</p>
-
-<pre class="highlight plaintext">{% raw %}
-{% codeblock lang:&lt;lang&gt; %}
-&lt;content&gt;
-{% endcodeblock %}
-{% endraw %}
-</pre>
-
-<p>こんなのを毎回書いていられないので、<a href="https://github.com/Shougo/neosnippet.vim">Shougo/neosnippet.vim</a>を使ってみました。
-インストールや設定については公式のREADMEを参照。</p>
-
-<p>markdown用のスニペットファイルを作成するには、以下のコマンドを実行します。(実際には適当なキーにマッピングしてます。)</p>
-
-<p><code>
-:NeoSnippetEdit markdown
-</code></p>
-
-<p>すると、スニペットフォルダにmarkdown.snipが作られるので、ここにスニペットを記述していきます。</p>
-
-<p>今回は3つのスニペットを試しに加えてみました。</p>
-
-<ul>
-  <li>シンプルなCodeblock</li>
-  <li>ハイライト用のCodeblock</li>
-  <li>ハイパーリンク</li>
-</ul>
-
-<pre class="highlight viml"><span class="p">{</span>% raw %<span class="p">}</span>
-snippet codeblock
-abbr <span class="k">cb</span>
-alias code <span class="k">cb</span>
-<span class="k">options</span> head
-    <span class="p">{</span>% codeblock %<span class="p">}</span>
-    $<span class="p">{</span><span class="m">1</span><span class="p">}</span>
-    <span class="p">{</span>% endcodeblock %<span class="p">}</span>
-
-snippet codeblocklang
-abbr cbl
-alias codel cbl
-<span class="k">options</span> head
-    <span class="p">{</span>% codeblock <span class="k">lang</span><span class="p">:</span>$<span class="p">{</span><span class="m">1</span><span class="p">}</span> %<span class="p">}</span>
-    $<span class="p">{</span><span class="m">2</span><span class="p">}</span>
-    <span class="p">{</span>% endcodeblock %<span class="p">}</span>
-
-snippet hyperlink
-abbr hl
-alias hl
-    <span class="p">[</span>$<span class="p">{</span><span class="m">1</span><span class="p">:</span>text<span class="p">}](</span>$<span class="p">{</span><span class="m">2</span><span class="p">:</span>url<span class="p">})</span>
-<span class="p">{</span>% endraw %<span class="p">}</span>
-</pre>
-
-<ul>
-  <li>${1}などとあるのは、スニペット展開時に<c-k>(公式設定コピペの場合)を押す度にカーソルが当たる場所です。</c-k></li>
-</ul>
-
-<p>これでmarkdownファイルの編集時にcodeなどと入力すると、NeoComplCacheがスニペットを含む候補一覧を表示してくれます。<c-k>(同上)を入力することで展開されます。</c-k></p>
-
-<p>Octopressは他にも似たような構文があるので、よく使いそうなものからどんどん追加してこうかと思います。</p>
-
-  </div>
-  <div class="clearfix"></div>
-  <footer></footer>
-</current_article>
+        <div id="main" class="col-md-9">
+          <h1>
+            Articles tagged rubymotion
+          </h1>
+          <ul>
+            <li>
+              <a href="/blog/2014/03/30/issues-in-ruby-motion-tutorial.html">RubyMotionのチュートリアルでハマったところ</a><span> Mar 30, 2014</span>
+            </li>
+          </ul>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">

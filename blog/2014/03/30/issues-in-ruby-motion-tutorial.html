@@ -4,28 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>RubyMotionのチュートリアルでハマったところ - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9">
-<header>
-  <h1 class="title" itemprop="name">
-    RubyMotionのチュートリアルでハマったところ
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-03-30T22:00:00+09:00" datetime="2014-03-30T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/rubymotion.html">rubymotion</a>
-        </li>
-      </ul>
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      RubyMotionのチュートリアルでハマったところ
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-03-30T22:00:00+09:00" datetime="2014-03-30T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/rubymotion.html">rubymotion</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</header><h2 id="section">概要</h2>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
 
 <p><a href="http://www.rubymotion.com/">RubyMotion</a>の<a href="http://tutorial.rubymotion.jp/">チュートリアルサイト</a>を進めています。
 しかし、チュートリアルが書かれてからだいぶ経つせいか
@@ -38,125 +38,84 @@
 
 <p>実は背景色が黒になっていることが原因なので、明示的に白を指定することで解決しました。</p>
 
-<pre class="highlight ruby">  <span class="k">def</span> <span class="nf">application</span></pre><a href="/blog/2014/03/30/issues-in-ruby-motion-tutorial.html">続きを読む</a>
-<hr>
-<header>
-  <h1 class="title" itemprop="name">
-    ページ読み込みを高速化するInstantClickを導入しました
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-03-30T14:00:00+09:00" datetime="2014-03-30T14:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/instantclick.html">instantclick</a>
-        </li>
-        <li>
-          <a href="/blog/tags/performance.html">performance</a>
-        </li>
-      </ul>
-    </div>
+<pre class="highlight ruby">  <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">application</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span><span class="ss">:launchOptions</span><span class="p">)</span>
+    <span class="c1">#..</span>
+    <span class="vi">@name_label</span><span class="p">.</span><span class="nf">backgroundColor</span> <span class="o">=</span> <span class="no">UIColor</span><span class="p">.</span><span class="nf">whiteColor</span>
+    <span class="c1">#..</span>
+    <span class="vi">@email_label</span><span class="p">.</span><span class="nf">backgroundColor</span> <span class="o">=</span> <span class="no">UIColor</span><span class="p">.</span><span class="nf">whiteColor</span>
+    <span class="c1">#..</span>
+    <span class="vi">@id_label</span><span class="p">.</span><span class="nf">backgroundColor</span> <span class="o">=</span> <span class="no">UIColor</span><span class="p">.</span><span class="nf">whiteColor</span>
+    <span class="c1">#..</span>
+</pre>
+
+<h2 id="specuibuttontap">SpecでUIButtonのtapができない</h2>
+
+<p>こちらはよく原因がわからないのですが、8章でコントローラのspecを書く際に、
+うまくタップイベントが発生してくれないという問題があります。</p>
+
+<pre class="highlight ruby"><span class="k">class</span> <span class="nc">ButtonController</span> <span class="o">&lt;</span> <span class="no">UIViewController</span>
+  <span class="k">def</span> <span class="nf">viewDidLoad</span>
+    <span class="k">super</span>
+
+    <span class="vi">@button</span> <span class="o">=</span> <span class="no">UIButton</span><span class="p">.</span><span class="nf">buttonWithType</span><span class="p">(</span><span class="no">UIButtonTypeRoundedRect</span><span class="p">)</span>
+    <span class="vi">@button</span><span class="p">.</span><span class="nf">setTitle</span> <span class="s2">"Test me title!"</span><span class="p">,</span> <span class="n">forState</span><span class="ss">:UIControlStateNormal</span>
+    <span class="vi">@button</span><span class="p">.</span><span class="nf">accessibilityLabel</span> <span class="o">=</span> <span class="s2">"Test me!"</span>
+    <span class="vi">@button</span><span class="p">.</span><span class="nf">sizeToFit</span>
+    <span class="vi">@button</span><span class="p">.</span><span class="nf">addTarget</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">action</span><span class="ss">:'tapped'</span><span class="p">,</span> <span class="n">forControlEvents</span><span class="ss">:UIControlEventTouchUpInside</span><span class="p">)</span>
+
+    <span class="nb">self</span><span class="p">.</span><span class="nf">view</span><span class="p">.</span><span class="nf">addSubview</span> <span class="vi">@button</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">tapped</span>
+    <span class="nb">p</span> <span class="s2">"I'm tapped!"</span>
+    <span class="vi">@was_tapped</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre>
+
+<p>こうしたコントローラを作成し、</p>
+
+<pre class="highlight ruby"><span class="n">describe</span> <span class="no">ButtonController</span> <span class="k">do</span>
+    <span class="n">tests</span> <span class="no">ButtonController</span>
+
+    <span class="n">it</span> <span class="s2">"changes instance variable when button is tapped"</span> <span class="k">do</span>
+      <span class="n">tap</span> <span class="s1">'Test me!'</span>
+      <span class="n">controller</span><span class="p">.</span><span class="nf">instance_variable_get</span><span class="p">(</span><span class="s2">"@was_tapped"</span><span class="p">).</span><span class="nf">should</span> <span class="o">==</span> <span class="kp">true</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</pre>
+
+<p>上記のようなspecがあったとします。ここで<code>rake spec</code>を実行すると、
+controllerに<code>@was_tapped</code> がないと言われてしまいます。
+(おそらくtapできていないため)</p>
+
+<p>これについてはtwitterで公式アカウント(@RubyMotion)に質問している人もいました。が、解決になってないような。。</p>
+
+<div>
+<blockquote class="twitter-tweet" lang="ja"><p><a href="https://twitter.com/gaelian">@gaelian</a> <a href="https://twitter.com/clayallsopp">@clayallsopp</a> <a href="https://twitter.com/alloy">@alloy</a> is working on it, setting app.deployment_target to &quot;6.1&quot; should work around the problem.</p>&mdash; RubyMotion (@RubyMotion) <a href="https://twitter.com/RubyMotion/statuses/409621868178857984">2013, 12月 8</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
+<p>また、PragProgのRubyMotion本に関するフォーラムでもこの問題は指摘されています。</p>
+
+<p><a href="http://forums.pragprog.com/forums/279/topics/11365">Pragmatic Forums - Section 6.2 Testing App UI and Controllers problem</a></p>
+
+<p>いまいち根本的な解決には至っていないようですが、暫定的な対処法としてUIButtonのframeに以下のような設定をすると良いと書かれていました。</p>
+
+<pre class="highlight ruby"><span class="vi">@button</span><span class="p">.</span><span class="nf">frame</span> <span class="o">=</span> <span class="no">CGRect</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="o">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">70</span><span class="o">]</span><span class="p">,</span> <span class="vi">@button</span><span class="p">.</span><span class="nf">frame</span><span class="p">.</span><span class="nf">size</span><span class="p">)</span>
+</pre>
+
+<p>実際に試すと、本当にこれで問題が解決しました。</p>
+
+<h2 id="section-1">まとめ</h2>
+
+<p>RubyMotionは書いていて楽しいですが、あまり情報が多くないためこういったハマりポイントがあると辛そうです。</p>
+
+
   </div>
-</header><h2 id="section">概要</h2>
-
-<p><a href="http://instantclick.io/">InstantClick</a>というツールは、ユーザがハイパーリンクにマウスオーバした段階でページの先読みを行います。
-これによりユーザの体感速度が改善するというので、実際にこのブログでも導入してみました。</p>
-
-<h2 id="section-1">仕組み</h2>
-
-<p>InstantClickが行っているのはページの先読みですが、公式サイトの説明によると、ユーザがリンクにマウスカーソルを当ててから実際にリンクするまで、大体200〜300ミリ秒かかっているそうです。</p>
-
-<p>そこでその間にページを先読みしちゃえばいいよね？という発想になるわけで...</p><a href="/blog/2014/03/30/use-instant-click.html">続きを読む</a>
-<hr>
-<header>
-  <h1 class="title" itemprop="name">
-    Travis CIのビルドスキップ機能について
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-03-30T00:30:00+09:00" datetime="2014-03-30T00:30:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/travis-ci.html">travis-ci</a>
-        </li>
-        <li>
-          <a href="/blog/tags/middleman.html">middleman</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><h2 id="section">概要</h2>
-
-<p>Travis CIにいつの間にかビルドスキップ機能が追加されていたので、
-早速MiddlemanのビルドでもGithub Pages生成後の処理をスキップするようにしました。</p>
-
-<h2 id="middleman">Middlemanのビルドについて</h2>
-
-<p>このblogはMiddlemanを用いていますが、編集用ブランチとサイト生成先ブランチ(master)を分けています。
-編集用ブランチをローカルでコミットしてGithubにプッシュすると、Travis CIが自動的にmasterブランチへ静的ファイルを配置するという仕組...</p><a href="/blog/2014/03/30/skip-ci.html">続きを読む</a>
-<hr>
-<header>
-  <h1 class="title" itemprop="name">
-    DigitalOceanにMinecraftサーバを建てる
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-03-29T22:00:00+09:00" datetime="2014-03-29T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">29</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/digitalocean.html">digitalocean</a>
-        </li>
-        <li>
-          <a href="/blog/tags/minecraft.html">minecraft</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><p><img alt="Minecraft画像" src="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean/minecraft.png"></p>
-
-<h2 id="section">概要</h2>
-
-<p>急にMinecraftで遊びたくなることがあるのですが、複数PCにデータが散ってしまっていて、どこに目的のワールドがあるのかわかりません。
-そこで、これを機にどのマシンからでも同じワールドにアクセスできるようにしようと思いました。</p>
-
-<p>今回は最近お世話になっているDigitalOcean上にMinecraftサーバを構築してみます。契約プランは最安($5/月)です。だいたい5人程度までなら遊べるそうです。</p>
-
-<h2 id="section-1">手順</h2>
-
-<h3 id="droplet">dropletの作成</h3>
-
-<p>まずDigitalOceanで新しいdroplet...</p><a href="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html">続きを読む</a>
-<hr>
-<header>
-  <h1 class="title" itemprop="name">
-    MoinMoin WikiをNginxで動かす
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2013-11-16T00:00:00+09:00" datetime="2013-11-16T00:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">16</span><span class="year">2013</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/moin.html">moin</a>
-        </li>
-        <li>
-          <a href="/blog/tags/nginx.html">nginx</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><p>さくらVPSで動かしていた<a href="http://moinmo.in/">MoinMoin Wiki</a>を<a href="https://www.digitalocean.com/">DigitalOcean</a>に移行することにしました。
-これを機に、WebサーバもApacheからNginxに移行しました。</p>
-
-<p>DigitalOceanのdroplet(仮想インスタンス)はArch Linux 64bit版です。とりあえず使うだけなら、512MBで問題ないでしょう。</p>
-
-<h2 id="moinmoin">MoinMoinのインストール</h2>
-
-<p>まずMoinMoinをインストールします。公式サイトからソースを落としてきてもいいですが、
-今回は以下のパッケージを利用し...</p><a href="/blog/2013/11/16/moin-with-nginx.html">続きを読む</a>
-<hr>
-<p>
-  <a href="/page/2/">次へ</a>
-</p>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
