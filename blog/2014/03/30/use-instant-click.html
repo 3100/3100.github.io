@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>MoinMoin WikiをNginxで動かす - Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>ページ読み込みを高速化するInstantClickを導入しました - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
@@ -12,140 +12,59 @@
       <div class="row">
         <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
     <h1 class="title" itemprop="name">
-      MoinMoin WikiをNginxで動かす
+      ページ読み込みを高速化するInstantClickを導入しました
     </h1>
     <div class="meta">
-      <time class="date" itemprop="datePublished" content="2013-11-16T00:00:00+09:00" datetime="2013-11-16T00:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">16</span><span class="year">2013</span></time>
+      <time class="date" itemprop="datePublished" content="2014-03-30T14:00:00+09:00" datetime="2014-03-30T14:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
       <div class="article-tag">
         <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
           <li>
-            <a href="/blog/tags/moin.html">moin</a>
+            <a href="/blog/tags/instantclick.html">instantclick</a>
           </li>
           <li>
-            <a href="/blog/tags/nginx.html">nginx</a>
+            <a href="/blog/tags/performance.html">performance</a>
           </li>
         </ul>
       </div>
     </div>
   </header>
-  <div class="body markdown" itemprop="articleBody"><p>さくらVPSで動かしていた<a href="http://moinmo.in/">MoinMoin Wiki</a>を<a href="https://www.digitalocean.com/">DigitalOcean</a>に移行することにしました。
-これを機に、WebサーバもApacheからNginxに移行しました。</p>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
 
-<p>DigitalOceanのdroplet(仮想インスタンス)はArch Linux 64bit版です。とりあえず使うだけなら、512MBで問題ないでしょう。</p>
+<p><a href="http://instantclick.io/">InstantClick</a>というツールは、ユーザがハイパーリンクにマウスオーバした段階でページの先読みを行います。
+これによりユーザの体感速度が改善するというので、実際にこのブログでも導入してみました。</p>
 
-<h2 id="moinmoin">MoinMoinのインストール</h2>
+<h2 id="section-1">仕組み</h2>
 
-<p>まずMoinMoinをインストールします。公式サイトからソースを落としてきてもいいですが、
-今回は以下のパッケージを利用しました。</p>
+<p>InstantClickが行っているのはページの先読みですが、公式サイトの説明によると、ユーザがリンクにマウスカーソルを当ててから実際にリンクするまで、大体200〜300ミリ秒かかっているそうです。</p>
 
-<p><a href="https://www.archlinux.org/packages/community/any/moinmoin/">Arch Linux - moinmoin 1.9.7-1 (any)</a></p>
+<p>そこでその間にページを先読みしちゃえばいいよね？という発想になるわけですね。もちろん、マウスオーバしただけでクリックされなかった分は無駄になりますが、そのあたりも設定によって50ミリ秒マウスオーバしてから読み込み、といった調整が可能です。</p>
 
-<pre class="highlight plaintext">$ sudo pacman -S moin
+<p>内部的にはpushStateとAjax(いわゆるpjax)で実現されています。</p>
+
+<h2 id="section-2">導入方法</h2>
+
+<p>導入方法は簡単です。ページ末尾の方に2行追加するだけ。(jsファイルはダウンロードしておきます)</p>
+
+<pre class="highlight plaintext">&lt;script src="instantclick.min.js" data-no-instant&gt;&lt;/script&gt;
+&lt;script data-no-instant&gt;InstantClick.init();&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
-<p>デフォルトのインストール先は/usr/share/moinになります。</p>
+<p>このブログは<a href="http://slim-lang.com/">slim</a>テンプレートを用いていますので</p>
 
-<h2 id="nginx">Nginxのインストール</h2>
-
-<p>同様にNginxもインストールします。</p>
-
-<pre class="highlight plaintext">$ sudo pacman -S nginx
+<pre class="highlight plaintext">= javascript_include_tag 'instantclick.min'
+script data-no-instant='' InstantClick.init();
 </pre>
 
-<h2 id="uwsgi">uWSGIのインストール</h2>
+<p>こんな感じになります。</p>
 
-<p>今回、MoinMoinはWSGIを利用します。
-<a href="http://projects.unbit.it/uwsgi/">uWSGI</a>をNginxと組み合わせることで、MoinMoinをNginx上で動かすことができるようになります。</p>
+<h2 id="section-3">確認</h2>
 
-<p>uWSGIについてもう少し知りたい方は以下のブログ記事が参考になります。</p>
+<p>Firebugなどで確認すると、実際にマウスオーバしただけでページの読み込みが行われることが確認できました。
+コンテンツサイズが大きくないので実際の体感速度はそんなに変わりませんが、他のWebにも簡単に適用できそうだということがわかりました。</p>
 
-<p><a href="http://d.hatena.ne.jp/m-hiyama/20120312/1331513519">便利で超強力なWSGIサーバー uWSGI を使ってみよう - 檜山正幸のキマイラ飼育記</a></p>
-
-<p>話を戻して、uWSGIをインストールします。</p>
-
-<pre class="highlight plaintext">$ sudo pacman -S uwsgi uwsgi-plugin-python
-</pre>
-
-<h2 id="section">設定</h2>
-
-<h3 id="uwsgi-1">uWSGI</h3>
-
-<p>まず、uWSGIの設定を行います。uWSGIはini、xml、json等の形式で設定ファイルを記述できますが、今回はini形式で書きました。
-/etc/uwsgi/moin.iniに下記のような設定を記述しています。</p>
-
-<pre class="highlight ini"><span class="nn">[uwsgi]</span>
-<span class="py">plugins</span> <span class="p">=</span> <span class="s">python2</span>
-<span class="err">ignore-script-name</span>
-<span class="py">processes</span> <span class="p">=</span> <span class="s">4</span>
-<span class="err">limit-</span><span class="py">as</span> <span class="p">=</span> <span class="s">256</span>
-<span class="err">wsgi-</span><span class="py">file</span> <span class="p">=</span> <span class="s">/usr/share/moin/server/moin.wsgi</span>
-<span class="py">socket</span> <span class="p">=</span> <span class="s">/tmp/moin.sock</span>
-<span class="err">chmod-</span><span class="py">socket</span> <span class="p">=</span> <span class="s">777</span>
-</pre>
-
-<p>chmod-socketのパーミションを777にしているのは、実行時にパーミションエラーが発生したためです。。
-もし、より良い解決法がある場合は、教えていただけると幸いです。</p>
-
-<p>この設定をもとにuwsgiを立ち上げます。</p>
-
-<pre class="highlight plaintext">$ sudo systemctl enable uwsgi@moin.service
-$ sudo systemctl start uwsgi@moin.service
-</pre>
-
-<h3 id="nginx-1">Nginx</h3>
-
-<p>続いて、Nginxの設定です。/etc/nginx/nginx.confを編集します。</p>
-
-<pre class="highlight nginx"><span class="k">location</span> <span class="n">/</span> <span class="p">{</span>
-    <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
-    <span class="kn">uwsgi_modifier1</span> <span class="mi">30</span><span class="p">;</span>
-    <span class="kn">uwsgi_pass</span> <span class="s">unix:/tmp/moin.sock</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">location</span> <span class="n">/moin_static197/</span> <span class="p">{</span>
-    <span class="kn">alias</span> <span class="n">/usr/share/moin/htdocs</span><span class="p">;</span>
-<span class="p">}</span>
-</pre>
-
-<p>実際にはExpiresやCache-Control、Gzipなどの設定も必要でしょうが、とりあえず動かすだけならこれでよいと思います。</p>
-
-<p>以下で、サービスを開始できるようになります。</p>
-
-<pre class="highlight plaintext">$ sudo systemctl enable nginx
-$ sudo systemctl start nginx
-</pre>
-
-<h3 id="moinmoin-1">MoinMoin</h3>
-
-<p>あとはMoinMoinの設定をお好みに応じて変更するだけです。</p>
-
-<p>/usr/share/moin/config/wikiconfig.pyを編集します。</p>
-
-<p>とりあえず、以下だけ修正しておけば良いのではないでしょうか。</p>
-
-<pre class="highlight python"><span class="n">sitename</span> <span class="o">=</span> <span class="s">u'Your Wiki'</span>
-<span class="n">log_reverse_dns_lookups</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">tz_offset</span> <span class="o">=</span> <span class="mf">9.0</span>
-</pre>
-
-<p>以下のページも読むと、どういったことを設定可能かわかりやすいでしょう。</p>
-
-<p><a href="http://moinmo.in/HelpOnConfiguration">HelpOnConfiguration - MoinMoin</a></p>
-
-<p>wikiconfig.pyを編集した場合は、uwsgiを再起動することで、反映されます。</p>
-
-<h2 id="section-1">おわり</h2>
-
-<p>ここまでで、無事にMoinMoinが立ち上がっていることと思います。
-最初のLanguageSetupを行うために、ユーザ登録をして、
-そのユーザ名をwikiconfig.pyに登録して、uwsgiを再起動することになります。</p>
-
-<p>LanguageSetupも完了すれば、あとはMoinMoinを好きに弄っていくだけです！</p>
-
-<p>尚、初期状態ではMoinの検索エンジンは遅いので、Xapianを導入するのも良いでしょう。
-これについてもそのうち記事を書きたいと思います。</p>
-
-<p>お疲れ様でした。</p>
+<p>MoinMoinや他に管理しているサイトなんかでも、がんばって数十ミリ秒での応答などをやっているので、先読みができればさらに嬉しいなと思います。</p>
 
   </div>
   <div class="clearfix"></div>
