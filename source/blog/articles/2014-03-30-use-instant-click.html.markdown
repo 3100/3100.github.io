@@ -1,0 +1,47 @@
+---
+title: "ページ読み込みを高速化するInstantClickを導入しました"
+published: true
+date: 2014-03-30 14:00
+comments: true
+tags: instantclick, performance
+---
+
+## 概要
+
+[InstantClick](http://instantclick.io/)というツールは、ユーザがハイパーリンクにマウスオーバした段階でページの先読みを行います。
+これによりユーザの体感速度が改善するというので、実際にこのブログでも導入してみました。
+
+## 仕組み
+
+InstantClickが行っているのはページの先読みですが、公式サイトの説明によると、ユーザがリンクにマウスカーソルを当ててから実際にリンクするまで、大体200〜300ミリ秒かかっているそうです。
+
+そこでその間にページを先読みしちゃえばいいよね？という発想になるわけですね。もちろん、マウスオーバしただけでクリックされなかった分は無駄になりますが、そのあたりも設定によって50ミリ秒マウスオーバしてから読み込み、といった調整が可能です。
+
+内部的にはpushStateとAjax(いわゆるpjax)で実現されています。
+
+## 導入方法
+
+導入方法は簡単です。ページ末尾の方に2行追加するだけ。(jsファイルはダウンロードしておきます)
+
+~~~
+<script src="instantclick.min.js" data-no-instant></script>
+<script data-no-instant>InstantClick.init();</script>
+</body>
+</html>
+~~~
+
+このブログは[slim](http://slim-lang.com/)テンプレートを用いていますので
+
+~~~
+= javascript_include_tag 'instantclick.min'
+script data-no-instant='' InstantClick.init();
+~~~
+
+こんな感じになります。
+
+## 確認
+
+Firebugなどで確認すると、実際にマウスオーバしただけでページの読み込みが行われることが確認できました。
+コンテンツサイズが大きくないので実際の体感速度はそんなに変わりませんが、他のWebにも簡単に適用できそうだということがわかりました。
+
+MoinMoinや他に管理しているサイトなんかでも、がんばって数十ミリ秒での応答などをやっているので、先読みができればさらに嬉しいなと思います。
