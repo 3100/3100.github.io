@@ -50,7 +50,8 @@ activate :syntax, :line_numbers => false
 # Per-page layout changes:
 #
 # With no layout
-# page "/path/to/file.html", :layout => false
+page "README.md", :layout => false, :proxy => "README.txt"
+ignore "README.txt"
 #
 # With alternative layout
 # page "/path/to/file.html", :layout => :otherlayout
