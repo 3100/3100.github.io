@@ -12,6 +12,7 @@
 
 <pre class="highlight plaintext">$ sudo pacman -S moin
 </pre>
+
 <p>デフォルトのインストール先は/usr/share/moinになります。</p>
 
 <h2 id="nginx">Nginxのインストール</h2>
@@ -20,6 +21,7 @@
 
 <pre class="highlight plaintext">$ sudo pacman -S nginx
 </pre>
+
 <h2 id="uwsgi">uWSGIのインストール</h2>
 
 <p>今回、MoinMoinはWSGIを利用します。
@@ -33,6 +35,7 @@
 
 <pre class="highlight plaintext">$ sudo pacman -S uwsgi uwsgi-plugin-python
 </pre>
+
 <h2 id="section">設定</h2>
 
 <h3 id="uwsgi-1">uWSGI</h3>
@@ -49,6 +52,7 @@
 <span class="py">socket</span> <span class="p">=</span> <span class="s">/tmp/moin.sock</span>
 <span class="err">chmod-</span><span class="py">socket</span> <span class="p">=</span> <span class="s">777</span>
 </pre>
+
 <p>chmod-socketのパーミションを777にしているのは、実行時にパーミションエラーが発生したためです。。
 もし、より良い解決法がある場合は、教えていただけると幸いです。</p>
 
@@ -57,6 +61,7 @@
 <pre class="highlight plaintext">$ sudo systemctl enable uwsgi@moin.service
 $ sudo systemctl start uwsgi@moin.service
 </pre>
+
 <h3 id="nginx-1">Nginx</h3>
 
 <p>続いて、Nginxの設定です。/etc/nginx/nginx.confを編集します。</p>
@@ -71,6 +76,7 @@ $ sudo systemctl start uwsgi@moin.service
     <span class="kn">alias</span> <span class="n">/usr/share/moin/htdocs</span><span class="p">;</span>
 <span class="p">}</span>
 </pre>
+
 <p>実際にはExpiresやCache-Control、Gzipなどの設定も必要でしょうが、とりあえず動かすだけならこれでよいと思います。</p>
 
 <p>以下で、サービスを開始できるようになります。</p>
@@ -78,6 +84,7 @@ $ sudo systemctl start uwsgi@moin.service
 <pre class="highlight plaintext">$ sudo systemctl enable nginx
 $ sudo systemctl start nginx
 </pre>
+
 <h3 id="moinmoin-1">MoinMoin</h3>
 
 <p>あとはMoinMoinの設定をお好みに応じて変更するだけです。</p>
@@ -86,10 +93,11 @@ $ sudo systemctl start nginx
 
 <p>とりあえず、以下だけ修正しておけば良いのではないでしょうか。</p>
 
-<pre class="highlight python"><span class="n">sitename</span> <span class="o">=</span> <span class="s">u&#39;Your Wiki&#39;</span>
+<pre class="highlight python"><span class="n">sitename</span> <span class="o">=</span> <span class="s">u'Your Wiki'</span>
 <span class="n">log_reverse_dns_lookups</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="n">tz_offset</span> <span class="o">=</span> <span class="mf">9.0</span>
 </pre>
+
 <p>以下のページも読むと、どういったことを設定可能かわかりやすいでしょう。</p>
 
 <p><a href="http://moinmo.in/HelpOnConfiguration">HelpOnConfiguration - MoinMoin</a></p>
@@ -108,4 +116,4 @@ $ sudo systemctl start nginx
 これについてもそのうち記事を書きたいと思います。</p>
 
 <p>お疲れ様でした。</p>
-</div><div class="clearfix"></div><footer></footer></current_article></div><div class="col-md-3" id="sidebar"><article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><h3>Profile</h3><section class="namecard"><h4 class="name" itemprop="name">3100</h4></section><ul class="contact horizontal"><li><a class="no-color" href="//twitter.com/zero310"><i class="fa fa-twitter fa-2x"></i></a></li><li><a class="no-color" href="//github.com/3100"><i class="fa fa-github fa-2x"></i></a></li><li><a class="no-color" href="//bitbucket.org/3100"><i class="fa fa-bitbucket fa-2x"></i></a></li></ul><p>開発者</p></article><article id="subscribe"><h3>Subscribe</h3><ul class="horizontal"><li><a class="no-color" href="/blog/feed.xml"><i class="fa fa-rss fa-2x"></i></a></li></ul></article><article id="recent_articles"><h3>Recent Articles</h3><ul><li><a href="/blog/2014/03/30/skip-ci.html">Travis CIのビルドスキップ機能について</a>&nbsp;<time class="date" content="2014-03-30T00:30:00+09:00" datetime="2014-03-30T00:30:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time></li><li><a href="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html">DigitalOceanにMinecraftサーバを建てる</a>&nbsp;<time class="date" content="2014-03-29T22:00:00+09:00" datetime="2014-03-29T22:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Mar</span><span class="day">29</span><span class="year">2014</span></time></li><li><a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a>&nbsp;<time class="date" content="2013-11-16T00:00:00+09:00" datetime="2013-11-16T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Nov</span><span class="day">16</span><span class="year">2013</span></time></li><li><a href="/blog/2013/11/08/openssl-error-installing-ruby-2.html">rbenvでruby2.0を入れようとするとOpensslのエラーが出る</a>&nbsp;<time class="date" content="2013-11-08T00:00:00+09:00" datetime="2013-11-08T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Nov</span><span class="day">08</span><span class="year">2013</span></time></li><li><a href="/blog/2013/10/31/monokai-theme-to-middleman-blog.html">middleman-blogのハイライトにMonokaiテーマを使う</a>&nbsp;<time class="date" content="2013-10-31T00:00:00+09:00" datetime="2013-10-31T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Oct</span><span class="day">31</span><span class="year">2013</span></time></li></ul></article><h3>Tags</h3><ul class="tags holizontal"><li><a href="/blog/tags/middleman.html">middleman</a> (3)</li><li><a href="/blog/tags/monokai.html">monokai</a> (1)</li><li><a href="/blog/tags/travis-ci.html">travis-ci</a> (1)</li><li><a href="/blog/tags/digitalocean.html">digitalocean</a> (1)</li><li><a href="/blog/tags/minecraft.html">minecraft</a> (1)</li><li><a href="/blog/tags/vim.html">vim</a> (2)</li><li><a href="/blog/tags/moin.html">moin</a> (1)</li><li><a href="/blog/tags/nginx.html">nginx</a> (1)</li><li><a href="/blog/tags/ruby.html">ruby</a> (1)</li><li><a href="/blog/tags/os-x.html">os x</a> (1)</li><li><a href="/blog/tags/rbenv.html">rbenv</a> (1)</li></ul><h3>By Year</h3><ul class="holizontal"><a href="/blog/2014.html">2014</a> (2)<a href="/blog/2013.html">2013</a> (6)</ul><h3>Built with</h3><ul class="holizontal"><li><a href="http://middlemanapp.com/">Middleman</a></li><li><a href="http://getbootstrap.com/">Bootstrap</a></li></ul></div></div><div class="row" id="license"><div class="col-md-12"><p>&copy; 2014 3100 - All code snippets on this site is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p></div></div></div><script src="/javascripts/bootstrap.min.js" type="text/javascript"></script></body></html>
+</div><div class="clearfix"></div><footer></footer></current_article></div><div class="col-md-3" id="sidebar"><article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person"><h3>Profile</h3><section class="namecard"><h4 class="name" itemprop="name">3100</h4></section><ul class="contact horizontal"><li><a class="no-color" href="//twitter.com/zero310"><i class="fa fa-twitter fa-2x"></i></a></li><li><a class="no-color" href="//github.com/3100"><i class="fa fa-github fa-2x"></i></a></li><li><a class="no-color" href="//bitbucket.org/3100"><i class="fa fa-bitbucket fa-2x"></i></a></li></ul><p>開発者</p></article><article id="subscribe"><h3>Subscribe</h3><ul class="horizontal"><li><a class="no-color" href="/blog/feed.xml"><i class="fa fa-rss fa-2x"></i></a></li></ul></article><article id="recent_articles"><h3>Recent Articles</h3><ul><li><a href="/blog/2014/03/30/skip-ci.html">Travis CIのビルドスキップ機能について</a>&nbsp;<time class="date" content="2014-03-30T00:30:00+09:00" datetime="2014-03-30T00:30:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time></li><li><a href="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html">DigitalOceanにMinecraftサーバを建てる</a>&nbsp;<time class="date" content="2014-03-29T22:00:00+09:00" datetime="2014-03-29T22:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Mar</span><span class="day">29</span><span class="year">2014</span></time></li><li><a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a>&nbsp;<time class="date" content="2013-11-16T00:00:00+09:00" datetime="2013-11-16T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Nov</span><span class="day">16</span><span class="year">2013</span></time></li><li><a href="/blog/2013/11/08/openssl-error-installing-ruby-2.html">rbenvでruby2.0を入れようとするとOpensslのエラーが出る</a>&nbsp;<time class="date" content="2013-11-08T00:00:00+09:00" datetime="2013-11-08T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Nov</span><span class="day">08</span><span class="year">2013</span></time></li><li><a href="/blog/2013/10/31/monokai-theme-to-middleman-blog.html">middleman-blogのハイライトにMonokaiテーマを使う</a>&nbsp;<time class="date" content="2013-10-31T00:00:00+09:00" datetime="2013-10-31T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Oct</span><span class="day">31</span><span class="year">2013</span></time></li><li><a href="/blog/2013/10/29/move-to-middleman.html">Middlemanに移行しました</a>&nbsp;<time class="date" content="2013-10-29T00:00:00+09:00" datetime="2013-10-29T00:00:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Oct</span><span class="day">29</span><span class="year">2013</span></time></li><li><a href="/blog/2013/07/26/how-to-use-neosnippet.html">NeoSnippetを使ってみた</a>&nbsp;<time class="date" content="2013-07-26T18:15:00+09:00" datetime="2013-07-26T18:15:00+09:00" itemprop="datePublished" pubdate=""><span class="month">Jul</span><span class="day">26</span><span class="year">2013</span></time></li></ul></article><h3>Tags</h3><ul class="tags holizontal"><li><a href="/blog/tags/moin.html">moin</a> (1)</li><li><a href="/blog/tags/nginx.html">nginx</a> (1)</li><li><a href="/blog/tags/vim.html">vim</a> (2)</li><li><a href="/blog/tags/middleman.html">middleman</a> (3)</li><li><a href="/blog/tags/digitalocean.html">digitalocean</a> (1)</li><li><a href="/blog/tags/minecraft.html">minecraft</a> (1)</li><li><a href="/blog/tags/ruby.html">ruby</a> (1)</li><li><a href="/blog/tags/os-x.html">os x</a> (1)</li><li><a href="/blog/tags/rbenv.html">rbenv</a> (1)</li><li><a href="/blog/tags/travis-ci.html">travis-ci</a> (1)</li><li><a href="/blog/tags/monokai.html">monokai</a> (1)</li></ul><h3>By Year</h3><ul class="holizontal"><li><a href="/blog/2014.html">2014</a> (2)</li><li><a href="/blog/2013.html">2013</a> (6)</li></ul><h3>Built with</h3><ul class="holizontal"><li><a href="http://middlemanapp.com/">Middleman</a></li><li><a href="http://getbootstrap.com/">Bootstrap</a></li></ul></div></div><div class="row" id="license"><div class="col-md-12"><p>&copy; 2014 3100 - All code snippets on this site is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p></div></div></div><script src="/javascripts/bootstrap.min.js" type="text/javascript"></script></body></html>

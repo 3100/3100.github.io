@@ -103,3 +103,20 @@ h1 {
     color: #220000;
     text-decoration: none;
     border: 0px none; }
+
+/* line 101, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+h2 {
+  font-size: 20px; }
+
+/* line 104, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+h3 {
+  font-size: 18px; }
+
+/* line 107, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+h4 {
+  font-size: 16px; }
+
+/* line 110, /home/travis/build/3100/3100.github.io/source/stylesheets/style.sass */
+hr {
+  margin-top: 40px;
+  margin-bottom: 40px; }

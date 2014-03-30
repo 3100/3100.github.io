@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
     <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
     <published>2014-03-29T15:30:00Z</published>
-    <updated>2014-03-29T16:12:46+00:00</updated>
+    <updated>2014-03-30T04:15:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -60,7 +60,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html</id>
     <published>2014-03-29T13:00:00Z</published>
-    <updated>2014-03-29T16:12:46+00:00</updated>
+    <updated>2014-03-30T04:15:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -101,6 +101,7 @@ jreが導入できればなんでも良いと思います。&lt;/p&gt;
 &lt;pre class="highlight plaintext"&gt;sudo pacman -Sy
 sudo pacman -S jre7-openjdk
 &lt;/pre&gt;
+
 &lt;h3 id="minecraft"&gt;minecraftサーバ用ソフトの導入&lt;/h3&gt;
 
 &lt;p&gt;サーバ用ファイルは現時点の最新版を利用しました。&lt;/p&gt;
@@ -111,6 +112,7 @@ sudo pacman -S jre7-openjdk
 
 &lt;pre class="highlight plaintext"&gt;java -Xms512M -Xmx512M -jar minecraft_server.1.7.5.jar
 &lt;/pre&gt;
+
 &lt;ul&gt;
   &lt;li&gt;最小確保メモリが512MB&lt;/li&gt;
   &lt;li&gt;最大確保メモリも512MB&lt;/li&gt;
@@ -122,6 +124,7 @@ sudo pacman -S jre7-openjdk
 
 &lt;pre class="highlight plaintext"&gt;chmod +x start_server.sh
 &lt;/pre&gt;
+
 &lt;p&gt;これで、start_serverと呼ぶだけでMinecraftサーバが立ち上がるようになりました。&lt;/p&gt;
 
 &lt;h3 id="section-3"&gt;スワップ領域の作成&lt;/h3&gt;
@@ -135,16 +138,19 @@ sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
 &lt;/pre&gt;
+
 &lt;p&gt;また、&lt;code&gt;/etc/fstab&lt;/code&gt;を編集し、以下を追加します。&lt;/p&gt;
 
 &lt;pre class="highlight plaintext"&gt;/swapfile none  swap  defaults  0 0
 &lt;/pre&gt;
+
 &lt;p&gt;ここまででスワップ領域が利用可能になりました。
 このままでも良いですが、メモリが余っている時にスワップ領域を使い続けることはパフォーマンス上あまり嬉しくないので、そのあたりもいい感じに設定します。&lt;/p&gt;
 
 &lt;pre class="highlight plaintext"&gt;sudo sysctl vm.swappiness=10
 sudo sysctl vm.vfs_cache_pressure=50
 &lt;/pre&gt;
+
 &lt;h2 id="minecraft-1"&gt;Minecraftサーバ設定&lt;/h2&gt;
 
 &lt;p&gt;特定ユーザを管理者登録するなどの設定は公式他、日本語の情報がたくさんあるので割愛します。自分は以下のサイトを参考にしました。&lt;/p&gt;
@@ -172,7 +178,7 @@ sudo sysctl vm.vfs_cache_pressure=50
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/16/moin-with-nginx.html"/>
     <id>http://3100.github.io/blog/2013/11/16/moin-with-nginx.html</id>
     <published>2013-11-15T15:00:00Z</published>
-    <updated>2014-03-29T16:12:46+00:00</updated>
+    <updated>2014-03-30T04:15:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -190,6 +196,7 @@ sudo sysctl vm.vfs_cache_pressure=50
 
 &lt;pre class="highlight plaintext"&gt;$ sudo pacman -S moin
 &lt;/pre&gt;
+
 &lt;p&gt;デフォルトのインストール先は/usr/share/moinになります。&lt;/p&gt;
 
 &lt;h2 id="nginx"&gt;Nginxのインストール&lt;/h2&gt;
@@ -198,6 +205,7 @@ sudo sysctl vm.vfs_cache_pressure=50
 
 &lt;pre class="highlight plaintext"&gt;$ sudo pacman -S nginx
 &lt;/pre&gt;
+
 &lt;h2 id="uwsgi"&gt;uWSGIのインストール&lt;/h2&gt;
 
 &lt;p&gt;今回、MoinMoinはWSGIを利用します。
@@ -211,6 +219,7 @@ sudo sysctl vm.vfs_cache_pressure=50
 
 &lt;pre class="highlight plaintext"&gt;$ sudo pacman -S uwsgi uwsgi-plugin-python
 &lt;/pre&gt;
+
 &lt;h2 id="section"&gt;設定&lt;/h2&gt;
 
 &lt;h3 id="uwsgi-1"&gt;uWSGI&lt;/h3&gt;
@@ -227,6 +236,7 @@ sudo sysctl vm.vfs_cache_pressure=50
 &lt;span class="py"&gt;socket&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/tmp/moin.sock&lt;/span&gt;
 &lt;span class="err"&gt;chmod-&lt;/span&gt;&lt;span class="py"&gt;socket&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;777&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;chmod-socketのパーミションを777にしているのは、実行時にパーミションエラーが発生したためです。。
 もし、より良い解決法がある場合は、教えていただけると幸いです。&lt;/p&gt;
 
@@ -235,6 +245,7 @@ sudo sysctl vm.vfs_cache_pressure=50
 &lt;pre class="highlight plaintext"&gt;$ sudo systemctl enable uwsgi@moin.service
 $ sudo systemctl start uwsgi@moin.service
 &lt;/pre&gt;
+
 &lt;h3 id="nginx-1"&gt;Nginx&lt;/h3&gt;
 
 &lt;p&gt;続いて、Nginxの設定です。/etc/nginx/nginx.confを編集します。&lt;/p&gt;
@@ -249,6 +260,7 @@ $ sudo systemctl start uwsgi@moin.service
     &lt;span class="kn"&gt;alias&lt;/span&gt; &lt;span class="n"&gt;/usr/share/moin/htdocs&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;実際にはExpiresやCache-Control、Gzipなどの設定も必要でしょうが、とりあえず動かすだけならこれでよいと思います。&lt;/p&gt;
 
 &lt;p&gt;以下で、サービスを開始できるようになります。&lt;/p&gt;
@@ -256,6 +268,7 @@ $ sudo systemctl start uwsgi@moin.service
 &lt;pre class="highlight plaintext"&gt;$ sudo systemctl enable nginx
 $ sudo systemctl start nginx
 &lt;/pre&gt;
+
 &lt;h3 id="moinmoin-1"&gt;MoinMoin&lt;/h3&gt;
 
 &lt;p&gt;あとはMoinMoinの設定をお好みに応じて変更するだけです。&lt;/p&gt;
@@ -264,10 +277,11 @@ $ sudo systemctl start nginx
 
 &lt;p&gt;とりあえず、以下だけ修正しておけば良いのではないでしょうか。&lt;/p&gt;
 
-&lt;pre class="highlight python"&gt;&lt;span class="n"&gt;sitename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;u&amp;#39;Your Wiki&amp;#39;&lt;/span&gt;
+&lt;pre class="highlight python"&gt;&lt;span class="n"&gt;sitename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;u'Your Wiki'&lt;/span&gt;
 &lt;span class="n"&gt;log_reverse_dns_lookups&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
 &lt;span class="n"&gt;tz_offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;9.0&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;以下のページも読むと、どういったことを設定可能かわかりやすいでしょう。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://moinmo.in/HelpOnConfiguration"&gt;HelpOnConfiguration - MoinMoin&lt;/a&gt;&lt;/p&gt;
@@ -293,7 +307,7 @@ $ sudo systemctl start nginx
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html"/>
     <id>http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html</id>
     <published>2013-11-07T15:00:00Z</published>
-    <updated>2014-03-29T16:12:46+00:00</updated>
+    <updated>2014-03-30T04:15:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -321,14 +335,17 @@ installing default gems:      /Users/zero/.rbenv/versions/2.0.0-p0/lib/ruby/gems
                               test-unit 2.0.0.0
 The Ruby openssl extension was not compiled. Missing the OpenSSL lib?
 &lt;/pre&gt;
+
 &lt;p&gt;調べるとドンピシャな解答がStack Overflowにありました。&lt;/p&gt;
 
-&lt;pre class="highlight plaintext"&gt;$ CONFIGURE_OPTS=&amp;quot;--with-openssl-dir=`brew --prefix openssl`&amp;quot; rbenv install 2.0.0-p0
+&lt;pre class="highlight plaintext"&gt;$ CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl`" rbenv install 2.0.0-p0
 &lt;/pre&gt;
+
 &lt;p&gt;もちろん、openssl自体がインストールされていない環境ではあらかじめインストールしておく必要があります。Homebrewを利用しているなら&lt;/p&gt;
 
 &lt;pre class="highlight plaintext"&gt;$ brew install openssl
 &lt;/pre&gt;
+
 &lt;p&gt;ですね。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://stackoverflow.com/questions/17181075/openssl-error-installing-ruby-2-0-0-p195-on-mac-with-rbenv"&gt;homebrew - OpenSSL error installing ruby 2.0.0-p195 on Mac with rbenv - Stack Overflow&lt;/a&gt;&lt;/p&gt;
@@ -339,7 +356,7 @@ The Ruby openssl extension was not compiled. Missing the OpenSSL lib?
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html"/>
     <id>http://3100.github.io/blog/2013/10/31/monokai-theme-to-middleman-blog.html</id>
     <published>2013-10-30T15:00:00Z</published>
-    <updated>2014-03-29T16:12:46+00:00</updated>
+    <updated>2014-03-30T04:15:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -352,11 +369,13 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
 
 &lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="ss"&gt;:markdown_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:kramdown&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;redcarpetなら&lt;/p&gt;
 
 &lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="ss"&gt;:markdown_engine&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:redcarpet&lt;/span&gt;
 &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="ss"&gt;:markdown&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:fenced_code_blocks&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:smartypants&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;ですかね。&lt;/p&gt;
 
 &lt;p&gt;middleman-syntaxは内部でrougeというruby製pygmentsを目指しているハイライトパーサを使用しています。&lt;/p&gt;
@@ -378,8 +397,9 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
 
 &lt;p&gt;これをmiddlemanで利用するには、stylesheets/highlight.css.erbなどというcss生成ファイルを作って以下のように書き込み&lt;/p&gt;
 
-&lt;pre class="highlight ruby"&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= Rouge::Themes::Github.render(:scope =&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.highlight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="sx"&gt;%&amp;gt;
+&lt;pre class="highlight ruby"&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= Rouge::Themes::Github.render(:scope =&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'.highlight'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="sx"&gt;%&amp;gt;
 &lt;/span&gt;&lt;/pre&gt;
+
 &lt;p&gt;あとはHTML上でhighlight.cssを読み込むようにします。&lt;/p&gt;
 
 &lt;h3 id="section"&gt;ところで(割りと無駄話)&lt;/h3&gt;
@@ -390,16 +410,19 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
 
 &lt;p&gt;まだ、gemには反映されていなので、middleman-syntaxをフォークして中のGemfileを修正する必要があります。&lt;/p&gt;
 
-&lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;rouge&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:git&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;git://github.com/jayferd/rouge.git&amp;quot;&lt;/span&gt;
+&lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"rouge"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:git&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"git://github.com/jayferd/rouge.git"&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;これをさらに、middlemanのGemfileで指定します。&lt;/p&gt;
 
-&lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;middleman-syntax&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:git&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;git://github.com/&amp;lt;あなたのid&amp;gt;/middleman-syntax.git&amp;quot;&lt;/span&gt;
+&lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"middleman-syntax"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:git&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;"git://github.com/&amp;lt;あなたのid&amp;gt;/middleman-syntax.git"&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;あとはbundle updateすれば良いはずです。これで無事Monokaiを使えるようになりました。&lt;/p&gt;
 
-&lt;pre class="highlight ruby"&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= Rouge::Themes::Monokai.render(:scope =&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;.highlight&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="sx"&gt;%&amp;gt;
+&lt;pre class="highlight ruby"&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sx"&gt;%= Rouge::Themes::Monokai.render(:scope =&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="s1"&gt;'.highlight'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="sx"&gt;%&amp;gt;
 &lt;/span&gt;&lt;/pre&gt;
+
 &lt;h3 id="section-1"&gt;もっとシンプルな方法&lt;/h3&gt;
 
 &lt;p&gt;実はmiddleman-syntaxはpygments用cssファイルを取り込めるらしいです。
@@ -421,16 +444,17 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
   &lt;span class="k"&gt;end&lt;/span&gt;
 
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;salute&lt;/span&gt;
-    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vi"&gt;@name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;!&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;puts&lt;/span&gt; &lt;span class="s2"&gt;"Hello &lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vi"&gt;@name&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;!"&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Create a new object&lt;/span&gt;
-&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Greeter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Greeter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"world"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c1"&gt;# Output &amp;quot;Hello World!&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# Output "Hello World!"&lt;/span&gt;
 &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;salute&lt;/span&gt;
 &lt;/pre&gt;
+
 &lt;p&gt;Happy highlighting!&lt;/p&gt;
 
 &lt;h3 id="section-3"&gt;余談&lt;/h3&gt;
@@ -446,7 +470,7 @@ middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだ
     <link rel="alternate" href="http://3100.github.io/blog/2013/10/29/move-to-middleman.html"/>
     <id>http://3100.github.io/blog/2013/10/29/move-to-middleman.html</id>
     <published>2013-10-28T15:00:00Z</published>
-    <updated>2014-03-29T16:12:46+00:00</updated>
+    <updated>2014-03-30T04:15:15+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
