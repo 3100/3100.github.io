@@ -2,11 +2,10 @@
 # the following line to use "https"
 source 'http://rubygems.org'
 
-gem "middleman", "~> 3.1.6"
-gem "middleman-blog", "~> 3.3.0"
-#gem "middleman-syntax", "~> 1.2.1"
-gem "middleman-syntax", :git => "git://github.com/3100/middleman-syntax.git"
-gem "rouge", :git => "git://github.com/jayferd/rouge.git"
+gem "middleman", "~> 3.2.2"
+gem "middleman-blog", "~> 3.5.2"
+gem "middleman-syntax", "~> 2.0.0"
+gem "rouge", "~> 1.3.3"
 
 gem "slim", "~> 2.0.2"
 gem "redcarpet"
@@ -18,4 +17,4 @@ group :deveropment do
 end
 
 # For feed.xml.builder
-gem "builder", "~> 3.0"
+gem "builder", "~> 3.2.2"
