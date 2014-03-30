@@ -37,7 +37,14 @@
 
 <p>InstantClickが行っているのはページの先読みですが、公式サイトの説明によると、ユーザがリンクにマウスカーソルを当ててから実際にリンクするまで、大体200〜300ミリ秒かかっているそうです。</p>
 
-<p>そこでその間にページを先読みしちゃえばいいよね？という発想になるわけですね。もちろん、マウスオーバしただけでクリックされなかった分は無駄になりますが、そのあたりも設定によって50ミリ秒マウスオーバしてから読み込み、といった調整が可能です。</p>
+<p>そこでその間にページを先読みしちゃえばいいよね？という発想になるわけですね。もちろん、マウスオーバしただけでクリックされなかった分は無駄になりますが、そのあたりも設定によって</p>
+
+<ul>
+  <li>特定ミリ秒マウスオーバしてから読み込み</li>
+  <li>特定リンクのみ先読みする／しない</li>
+</ul>
+
+<p>といったような調整が可能です。</p>
 
 <p>内部的にはpushStateとAjax(いわゆるpjax)で実現されています。</p>
 
@@ -63,6 +70,14 @@ script data-no-instant='' InstantClick.init();
 
 <p>Firebugなどで確認すると、実際にマウスオーバしただけでページの読み込みが行われることが確認できました。
 コンテンツサイズが大きくないので実際の体感速度はそんなに変わりませんが、他のWebにも簡単に適用できそうだということがわかりました。</p>
+
+<p>一方、異なるドメインへのリンクなどは先読みされませんでした。
+公式にも書いてありますが、先読み可能に設定することはできないようです。
+まぁ、そういうものですかね。</p>
+
+<h2 id="section-4">まとめ</h2>
+
+<p>InstantClickを用いることで、同一Webサイト内のコンテンツを先読みすることができるようになりました。</p>
 
 <p>MoinMoinや他に管理しているサイトなんかでも、がんばって数十ミリ秒での応答などをやっているので、先読みができればさらに嬉しいなと思います。</p>
 
@@ -136,28 +151,19 @@ script data-no-instant='' InstantClick.init();
           </h3>
           <ul class="tags holizontal">
             <li>
+              <a href="/blog/tags/travis-ci.html">travis-ci</a> (1)
+            </li>
+            <li>
               <a href="/blog/tags/middleman.html">middleman</a> (3)
             </li>
             <li>
-              <a href="/blog/tags/ruby.html">ruby</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/os-x.html">os x</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/rbenv.html">rbenv</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/travis-ci.html">travis-ci</a> (1)
+              <a href="/blog/tags/monokai.html">monokai</a> (1)
             </li>
             <li>
               <a href="/blog/tags/moin.html">moin</a> (1)
             </li>
             <li>
               <a href="/blog/tags/nginx.html">nginx</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/monokai.html">monokai</a> (1)
             </li>
             <li>
               <a href="/blog/tags/vim.html">vim</a> (2)
@@ -173,6 +179,15 @@ script data-no-instant='' InstantClick.init();
             </li>
             <li>
               <a href="/blog/tags/performance.html">performance</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/ruby.html">ruby</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/os-x.html">os x</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rbenv.html">rbenv</a> (1)
             </li>
           </ul><h3>
             By Year
