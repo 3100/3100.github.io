@@ -5,16 +5,96 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-03-30T13:00:00Z</updated>
+  <updated>2014-04-10T14:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Objective-Cへ入門</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html"/>
+    <id>http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html</id>
+    <published>2014-04-10T14:00:00Z</published>
+    <updated>2014-04-10T14:48:40+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;iOS用アプリ開発。
+数年前に挑戦した時は、あまりの文法の気持ち悪さに断念しました。&lt;/p&gt;
+
+&lt;p&gt;しかし、RubyMotionを触っているうちに結局Objective-Cや
+iOS SDKを勉強した方が良いなと思い始め、改めて再入門することにしました。
+それにあたって、以下の本を購入しました。&lt;/p&gt;
+
+&lt;h2 id="section"&gt;継続的インテグレーション&lt;/h2&gt;
+
+&lt;div class="amazlet-box" style="margin-bottom:0px;"&gt;&lt;div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798040894/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;&lt;img src="http://ecx.images-amazon.com/images/I/51dc8HfwK8L._SL160_.jpg" alt="iOSアプリ テスト自動化入門" style="border: none;" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"&gt;&lt;div class="amazlet-name" style="margin-bottom:10px;line-height:120%"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798040894/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;iOSアプリ テスト自動化入門&lt;/a&gt;&lt;div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%"&gt;posted with &lt;a href="http://www.amazlet.com/" title="amazlet" target="_blank"&gt;amazlet&lt;/a&gt; at 14.04.10&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-detail"&gt;長谷川 孝二 &lt;br /&gt;秀和システム &lt;br /&gt;売り上げランキング: 2,341&lt;br /&gt;&lt;/div&gt;&lt;div class="amazlet-sub-info" style="float: left;"&gt;&lt;div class="amazlet-link" style="margin-top: 5px"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798040894/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-footer" style="clear: left"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;趣味のWebアプリならともかくも、普段の仕事ではテストの自動化が片手間でしかなくて、そういった部分が嫌なのでiOSアプリを作るなら最低でもTDDでやりたいと思っています。&lt;/p&gt;
+
+&lt;p&gt;この本はテスト自動化について簡単な概念から始まって、CIやBDDのフレームワーク紹介なんかも取り扱っています。各ライブラリについては使っているうちに別途詳しく調べる必要が出てくるだろうけれど、最近の開発スタイルについて俯瞰するのには良い1冊な気がしました。&lt;/p&gt;
+
+&lt;p&gt;とりあえず数時間で読んでしまえるくらいの記述量で、通勤時間のお供にも良いかもしれません。&lt;/p&gt;
+
+&lt;h2 id="ios"&gt;iOSへの入門書&lt;/h2&gt;
+
+&lt;div class="amazlet-box" style="margin-bottom:0px;"&gt;&lt;div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4800710227/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;&lt;img src="http://ecx.images-amazon.com/images/I/5108ukII8yL._SL160_.jpg" alt="詳細! Objective-C iPhoneアプリ開発 入門ノート Xcode5+iOS7対応" style="border: none;" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"&gt;&lt;div class="amazlet-name" style="margin-bottom:10px;line-height:120%"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4800710227/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;詳細! Objective-C iPhoneアプリ開発 入門ノート Xcode5+iOS7対応&lt;/a&gt;&lt;div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%"&gt;posted with &lt;a href="http://www.amazlet.com/" title="amazlet" target="_blank"&gt;amazlet&lt;/a&gt; at 14.04.10&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-detail"&gt;大重 美幸 &lt;br /&gt;ソーテック社 &lt;br /&gt;売り上げランキング: 2,726&lt;br /&gt;&lt;/div&gt;&lt;div class="amazlet-sub-info" style="float: left;"&gt;&lt;div class="amazlet-link" style="margin-top: 5px"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4800710227/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-footer" style="clear: left"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;後述のObjective-C本に比べて図が大きく見やすいです。こうした入門書はあまり好きではないのですが、苦手意識がある場合には大変心強いです。
+ざっくり目を通した感じでは、文法部分は必要最低限といった感じで、どちらかというとXCodeを使って実際に簡単なアプリを作っていくことで、基礎力をつけられる構成になっています。&lt;/p&gt;
+
+&lt;p&gt;プログラム初心者向けにも見えるけど、そんなに概念を掘り下げて説明しないので、完全な初心者には少し厳しいかもしれないです。他の言語で開発している人なら問題ないでしょう。&lt;/p&gt;
+
+&lt;p&gt;きちんと手を動かしていくことが大事ですが、1週間あれば1周できるくらいの量ではないかと思います。&lt;/p&gt;
+
+&lt;div class="amazlet-box" style="margin-bottom:0px;"&gt;&lt;div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774163856/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;&lt;img src="http://ecx.images-amazon.com/images/I/618Wj6bBw1L._SL160_.jpg" alt="iOSアプリエンジニア養成読本[クリエイティブな開発のための技術力/デザイン力/マインドを養う! ] (Software Design plus)" style="border: none;" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"&gt;&lt;div class="amazlet-name" style="margin-bottom:10px;line-height:120%"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774163856/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;iOSアプリエンジニア養成読本[クリエイティブな開発のための技術力/デザイン力/マインドを養う! ] (Software Design plus)&lt;/a&gt;&lt;div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%"&gt;posted with &lt;a href="http://www.amazlet.com/" title="amazlet" target="_blank"&gt;amazlet&lt;/a&gt; at 14.04.10&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-detail"&gt;高橋 俊光 諏訪 悠紀 湯村 翼 平屋 真吾 平井 祐樹 &lt;br /&gt;技術評論社 &lt;br /&gt;売り上げランキング: 464&lt;br /&gt;&lt;/div&gt;&lt;div class="amazlet-sub-info" style="float: left;"&gt;&lt;div class="amazlet-link" style="margin-top: 5px"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4774163856/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-footer" style="clear: left"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;開発を始める前に読むべき、といった取り扱いをされているので買ってみました。良くも悪くも各要素のつまみ食いといった感じで、必ずしも必要ではないのではないかと感じました。
+特にgitやjenkins、travis-ciなんかを普段から使っている開発者の方は、他の本で知識を補えば立ち読みでも十分だと思います。&lt;/p&gt;
+
+&lt;p&gt;内容自体は面白いしタメになりそうな記事もあるので、開発が進んでいくにつれてふと気楽に読み直すというスタンスが良さそうです。(あるいは新人教育への需要があるのかもしれません。明日までに読んでおけ、的な)&lt;/p&gt;
+
+&lt;p&gt;売り上げランキングはさすがといった感じで、今回購入した中で最も人気の1冊でした。&lt;/p&gt;
+
+&lt;h2 id="objective-c"&gt;Objective-C&lt;/h2&gt;
+
+&lt;div class="amazlet-box" style="margin-bottom:0px;"&gt;&lt;div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797368276/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;&lt;img src="http://ecx.images-amazon.com/images/I/41VdFg9YqsL._SL160_.jpg" alt="詳解 Objective-C 2.0 第3版" style="border: none;" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"&gt;&lt;div class="amazlet-name" style="margin-bottom:10px;line-height:120%"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797368276/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;詳解 Objective-C 2.0 第3版&lt;/a&gt;&lt;div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%"&gt;posted with &lt;a href="http://www.amazlet.com/" title="amazlet" target="_blank"&gt;amazlet&lt;/a&gt; at 14.04.10&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-detail"&gt;荻原 剛志 &lt;br /&gt;ソフトバンククリエイティブ &lt;br /&gt;売り上げランキング: 9,586&lt;br /&gt;&lt;/div&gt;&lt;div class="amazlet-sub-info" style="float: left;"&gt;&lt;div class="amazlet-link" style="margin-top: 5px"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797368276/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-footer" style="clear: left"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通称萩原本？第2版は持っていますが、せっかくなので買い直しました。Objective-C
+の文法について日本語で最も詳しい書籍なのではないでしょうか。
+これから事あるごとに参照することになりそうです。じっくり取り組むべき本。&lt;/p&gt;
+
+&lt;p&gt;iOS5に向けて書かれた本ですし、個人的にはそろそろ第4版が出るのではないかとも思っています。(過去の更新間隔的にも。。)&lt;/p&gt;
+
+&lt;div class="amazlet-box" style="margin-bottom:0px;"&gt;&lt;div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798134198/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;&lt;img src="http://ecx.images-amazon.com/images/I/51BbaG2KA1L._SL160_.jpg" alt="Effective Objective-C 2.0" style="border: none;" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"&gt;&lt;div class="amazlet-name" style="margin-bottom:10px;line-height:120%"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798134198/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Effective Objective-C 2.0&lt;/a&gt;&lt;div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%"&gt;posted with &lt;a href="http://www.amazlet.com/" title="amazlet" target="_blank"&gt;amazlet&lt;/a&gt; at 14.04.10&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-detail"&gt;Matt Galloway &lt;br /&gt;翔泳社 &lt;br /&gt;売り上げランキング: 15,587&lt;br /&gt;&lt;/div&gt;&lt;div class="amazlet-sub-info" style="float: left;"&gt;&lt;div class="amazlet-link" style="margin-top: 5px"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798134198/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-footer" style="clear: left"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;手を出すのが早過ぎるかもしれませんが、こちらも少しずつ読んでいこうと思います。他言語版を見ても、Effectiveシリーズは実務の上で必須となるようなテクニックを扱っている良書という認識です。&lt;/p&gt;
+
+&lt;p&gt;事前に手を出しておくことで、知っていることで避けられた実装上の問題について後悔するリスクを減らしたいですね。&lt;/p&gt;
+
+&lt;p&gt;人気(あるいは売れなさすぎ？)のせいか発送が1日遅れで、まだ手元に届いていません。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;さらなる高み&lt;/h2&gt;
+
+&lt;div class="amazlet-box" style="margin-bottom:0px;"&gt;&lt;div class="amazlet-image" style="float:left;margin:0px 12px 1px 0px;"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798039799/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;&lt;img src="http://ecx.images-amazon.com/images/I/41l4NOjbb8L._SL160_.jpg" alt="iOS Core Data徹底入門" style="border: none;" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;div class="amazlet-info" style="line-height:120%; margin-bottom: 10px"&gt;&lt;div class="amazlet-name" style="margin-bottom:10px;line-height:120%"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798039799/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;iOS Core Data徹底入門&lt;/a&gt;&lt;div class="amazlet-powered-date" style="font-size:80%;margin-top:5px;line-height:120%"&gt;posted with &lt;a href="http://www.amazlet.com/" title="amazlet" target="_blank"&gt;amazlet&lt;/a&gt; at 14.04.10&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-detail"&gt;國居 貴浩 &lt;br /&gt;秀和システム &lt;br /&gt;売り上げランキング: 19,650&lt;br /&gt;&lt;/div&gt;&lt;div class="amazlet-sub-info" style="float: left;"&gt;&lt;div class="amazlet-link" style="margin-top: 5px"&gt;&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798039799/unplu-22/ref=nosim/" name="amazletlink" target="_blank"&gt;Amazon.co.jpで詳細を見る&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="amazlet-footer" style="clear: left"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;iOSの永続層に関する1冊。正直まだ不要なのではないかと思うのですが、作りたいアプリや自分の普段の興味分野から考えると、いずれ必要になる本であることは間違いないです。&lt;/p&gt;
+
+&lt;p&gt;Amazonレビューを読んだ感じではちょっと敷居の高そうな本ですが、ぱらぱらとめくった感じではわかりやすそうな印象を受けました。一応初級者向けの本であるということです。&lt;/p&gt;
+
+&lt;h2 id="section-2"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;一番最初に紹介した『&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4798040894/unplu-22/ref=nosim/"&gt;テスト自動化入門&lt;/a&gt;』は出たばかりということもありまだレビューも少ないですが、割りと推しの1冊でした。
+これと『&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4800710227/unplu-22/ref=nosim/"&gt;iPhoneアプリ開発入門ノート&lt;/a&gt;』があれば、とりあえず簡単なアプリケーションは開発できるようになるのではないかなと思います。&lt;/p&gt;
+
+&lt;p&gt;自分も試行錯誤しながら開発手法を検討していきたいなと思いました。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>RubyMotionのチュートリアルでハマったところ</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html"/>
     <id>http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html</id>
     <published>2014-03-30T13:00:00Z</published>
-    <updated>2014-03-30T13:17:45+00:00</updated>
+    <updated>2014-04-10T14:48:40+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -111,7 +191,7 @@ controllerに&lt;code&gt;@was_tapped&lt;/code&gt; がないと言われてしま
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/use-instant-click.html"/>
     <id>http://3100.github.io/blog/2014/03/30/use-instant-click.html</id>
     <published>2014-03-30T05:00:00Z</published>
-    <updated>2014-03-30T13:17:45+00:00</updated>
+    <updated>2014-04-10T14:48:40+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -174,7 +254,7 @@ script data-no-instant='' InstantClick.init();
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
     <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
     <published>2014-03-29T15:30:00Z</published>
-    <updated>2014-03-30T13:17:45+00:00</updated>
+    <updated>2014-04-10T14:48:40+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -220,7 +300,7 @@ script data-no-instant='' InstantClick.init();
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html</id>
     <published>2014-03-29T13:00:00Z</published>
-    <updated>2014-03-30T13:17:45+00:00</updated>
+    <updated>2014-04-10T14:48:40+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -338,7 +418,7 @@ sudo sysctl vm.vfs_cache_pressure=50
     <link rel="alternate" href="http://3100.github.io/blog/2013/11/16/moin-with-nginx.html"/>
     <id>http://3100.github.io/blog/2013/11/16/moin-with-nginx.html</id>
     <published>2013-11-15T15:00:00Z</published>
-    <updated>2014-03-30T13:17:45+00:00</updated>
+    <updated>2014-04-10T14:48:40+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -460,55 +540,6 @@ $ sudo systemctl start nginx
 これについてもそのうち記事を書きたいと思います。&lt;/p&gt;
 
 &lt;p&gt;お疲れ様でした。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>rbenvでruby2.0を入れようとするとOpensslのエラーが出る</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html"/>
-    <id>http://3100.github.io/blog/2013/11/08/openssl-error-installing-ruby-2.html</id>
-    <published>2013-11-07T15:00:00Z</published>
-    <updated>2014-03-30T13:17:45+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Marvericksを入れた後のMacでrbenvからRuby2.0を入れようとするとエラーになってしまいました。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ gem install 2.0.0-p0
-Downloading ruby-2.0.0-p0.tar.gz...
--&amp;gt; http://dqw8nmjcqpjn7.cloudfront.net/50d307c4dc9297ae59952527be4e755d
-Installing ruby-2.0.0-p0...
-
-BUILD FAILED
-
-Inspect or clean up the working tree at /var/folders/8h/mdr7s3ns64sfnscg5c4h2w0c0000gn/T/ruby-build.20131108212415.26000
-Results logged to /var/folders/8h/mdr7s3ns64sfnscg5c4h2w0c0000gn/T/ruby-build.20131108212415.26000.log
-
-Last 10 log lines:
-installing default gems:      /Users/zero/.rbenv/versions/2.0.0-p0/lib/ruby/gems/2.0.0 (build_info, cache, doc, gems, specifications)
-                              bigdecimal 1.2.0
-                              io-console 0.4.2
-                              json 1.7.7
-                              minitest 4.3.2
-                              psych 2.0.0
-                              rake 0.9.6
-                              rdoc 4.0.0
-                              test-unit 2.0.0.0
-The Ruby openssl extension was not compiled. Missing the OpenSSL lib?
-&lt;/pre&gt;
-
-&lt;p&gt;調べるとドンピシャな解答がStack Overflowにありました。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl`" rbenv install 2.0.0-p0
-&lt;/pre&gt;
-
-&lt;p&gt;もちろん、openssl自体がインストールされていない環境ではあらかじめインストールしておく必要があります。Homebrewを利用しているなら&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ brew install openssl
-&lt;/pre&gt;
-
-&lt;p&gt;ですね。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://stackoverflow.com/questions/17181075/openssl-error-installing-ruby-2-0-0-p195-on-mac-with-rbenv"&gt;homebrew - OpenSSL error installing ruby 2.0.0-p195 on Mac with rbenv - Stack Overflow&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>
