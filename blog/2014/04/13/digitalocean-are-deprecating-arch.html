@@ -4,38 +4,72 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>DigitalOceanがArchの提供をやめるらしい - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9">
-          <h1>Archive for
-            
-              2013
-            
-          </h1>
-          
-          
-          <ul>
-            
-              <li><a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a> <span>Nov 16, 2013</span></li>
-            
-              <li><a href="/blog/2013/11/08/openssl-error-installing-ruby-2.html">rbenvでruby2.0を入れようとするとOpensslのエラーが出る</a> <span>Nov  8, 2013</span></li>
-            
-              <li><a href="/blog/2013/10/31/monokai-theme-to-middleman-blog.html">middleman-blogのハイライトにMonokaiテーマを使う</a> <span>Oct 31, 2013</span></li>
-            
-              <li><a href="/blog/2013/10/29/move-to-middleman.html">Middlemanに移行しました</a> <span>Oct 29, 2013</span></li>
-            
-              <li><a href="/blog/2013/07/26/how-to-use-neosnippet.html">NeoSnippetを使ってみた</a> <span>Jul 26, 2013</span></li>
-            
-              <li><a href="/blog/2013/07/26/improve-your-vim-performance.html">vimの起動速度を改善する</a> <span>Jul 26, 2013</span></li>
-            
-          </ul>
-          
-            
-          
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      DigitalOceanがArchの提供をやめるらしい
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-04-13T12:00:00+09:00" datetime="2014-04-13T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">13</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/digitalocean.html">digitalocean</a>
+          </li>
+          <li>
+            <a href="/blog/tags/arch.html">arch</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><p><img alt="snap" src="/blog/2014/04/13/digitalocean-are-deprecating-arch/snapshot.png" /></p>
+
+<h2 id="section">概要</h2>
+
+<p><a href="https://www.digitalocean.com/">DigitalOcean</a>が<code>Arch</code>イメージの提供を廃止予定だそうです。その理由ですが</p>
+
+<ul>
+  <li>使っているユーザがそれほど多くない</li>
+  <li>ローリングアップデートに対応する労力を避けない</li>
+</ul>
+
+<p>とのこと。<code>Arch</code>の素晴らしさが世間に十分認知されず、とても残念です。</p>
+
+<h2 id="section-1">私見</h2>
+
+<p>個人的には<code>Docker</code>が安定すればその上で<code>Arch</code>を動かせばいいやと思っているので、すぐ代替先を探そう！とはなりません。が、<code>Docker 0.10</code>では<code>systemd</code>がうまく動作しない問題があるため、そちらが早く治ってくれるといいなぁ。</p>
+
+<ul>
+  <li><a href="https://github.com/dotcloud/docker/issues/3629">running systemd inside docker arch container hangs or segfaults · Issue #3629 · dotcloud/docker</a></li>
+</ul>
+
+<p>最近は複数の<code>Docker</code>コンテナでクラスタを構築できる<code>CoreOS</code>も気になってはいるので、そういうものも<code>DigitalOcean</code>上で動かしたい欲求があります。</p>
+
+<p>独自イメージのアップロード機能や、<code>CoreOS</code>イメージの提供を求める声も多いのですが、その辺もあまり進捗はないみたいですね。</p>
+
+<ul>
+  <li>
+    <p><a href="http://digitalocean.uservoice.com/forums/136585-digitalocean/suggestions/3276477-allow-custom-images">Allow Custom Images – Customer Feedback for Digital Ocean</a></p>
+  </li>
+  <li>
+    <p><a href="http://digitalocean.uservoice.com/forums/136585-digital-ocean/suggestions/4250154-suport-coreos-as-a-deployment-platform">Suport CoreOS as a deployment platform – Customer Feedback for Digital Ocean</a></p>
+  </li>
+</ul>
+
+<p>一時期は<code>AWS</code>型の重厚なサービスではなく、<code>DigitalOcean</code>のような軽量なサービスこそ次の主流になる、と思っていたのですが、サービス品質や姿勢についてはまだまだこれからかなという印象を抱いています。それでも価格を考えれば良いものを提供していることはわかります。ぜひとも頑張って欲しいです。</p>
+
+<p>それにしても、イメージファイルのメンテや追加ってそんなに大変なのだろうか。もしかすると提供速度やスケールメリットを活かした独自構成がその辺りを犠牲にしているのかもしれないですね。</p>
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">

@@ -5,16 +5,64 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-04-10T14:00:00Z</updated>
+  <updated>2014-04-13T03:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>DigitalOceanがArchの提供をやめるらしい</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html"/>
+    <id>http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html</id>
+    <published>2014-04-13T03:00:00Z</published>
+    <updated>2014-04-13T04:54:07+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img alt="snap" src="/blog/2014/04/13/digitalocean-are-deprecating-arch/snapshot.png" /&gt;&lt;/p&gt;
+
+&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://www.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt;が&lt;code&gt;Arch&lt;/code&gt;イメージの提供を廃止予定だそうです。その理由ですが&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使っているユーザがそれほど多くない&lt;/li&gt;
+  &lt;li&gt;ローリングアップデートに対応する労力を避けない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;とのこと。&lt;code&gt;Arch&lt;/code&gt;の素晴らしさが世間に十分認知されず、とても残念です。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;私見&lt;/h2&gt;
+
+&lt;p&gt;個人的には&lt;code&gt;Docker&lt;/code&gt;が安定すればその上で&lt;code&gt;Arch&lt;/code&gt;を動かせばいいやと思っているので、すぐ代替先を探そう！とはなりません。が、&lt;code&gt;Docker 0.10&lt;/code&gt;では&lt;code&gt;systemd&lt;/code&gt;がうまく動作しない問題があるため、そちらが早く治ってくれるといいなぁ。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/dotcloud/docker/issues/3629"&gt;running systemd inside docker arch container hangs or segfaults · Issue #3629 · dotcloud/docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最近は複数の&lt;code&gt;Docker&lt;/code&gt;コンテナでクラスタを構築できる&lt;code&gt;CoreOS&lt;/code&gt;も気になってはいるので、そういうものも&lt;code&gt;DigitalOcean&lt;/code&gt;上で動かしたい欲求があります。&lt;/p&gt;
+
+&lt;p&gt;独自イメージのアップロード機能や、&lt;code&gt;CoreOS&lt;/code&gt;イメージの提供を求める声も多いのですが、その辺もあまり進捗はないみたいですね。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="http://digitalocean.uservoice.com/forums/136585-digitalocean/suggestions/3276477-allow-custom-images"&gt;Allow Custom Images – Customer Feedback for Digital Ocean&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href="http://digitalocean.uservoice.com/forums/136585-digital-ocean/suggestions/4250154-suport-coreos-as-a-deployment-platform"&gt;Suport CoreOS as a deployment platform – Customer Feedback for Digital Ocean&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一時期は&lt;code&gt;AWS&lt;/code&gt;型の重厚なサービスではなく、&lt;code&gt;DigitalOcean&lt;/code&gt;のような軽量なサービスこそ次の主流になる、と思っていたのですが、サービス品質や姿勢についてはまだまだこれからかなという印象を抱いています。それでも価格を考えれば良いものを提供していることはわかります。ぜひとも頑張って欲しいです。&lt;/p&gt;
+
+&lt;p&gt;それにしても、イメージファイルのメンテや追加ってそんなに大変なのだろうか。もしかすると提供速度やスケールメリットを活かした独自構成がその辺りを犠牲にしているのかもしれないですね。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Objective-Cへ入門</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html"/>
     <id>http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html</id>
     <published>2014-04-10T14:00:00Z</published>
-    <updated>2014-04-10T14:48:40+00:00</updated>
+    <updated>2014-04-13T04:54:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -94,7 +142,7 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html"/>
     <id>http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html</id>
     <published>2014-03-30T13:00:00Z</published>
-    <updated>2014-04-10T14:48:40+00:00</updated>
+    <updated>2014-04-13T04:54:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -191,7 +239,7 @@ controllerに&lt;code&gt;@was_tapped&lt;/code&gt; がないと言われてしま
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/use-instant-click.html"/>
     <id>http://3100.github.io/blog/2014/03/30/use-instant-click.html</id>
     <published>2014-03-30T05:00:00Z</published>
-    <updated>2014-04-10T14:48:40+00:00</updated>
+    <updated>2014-04-13T04:54:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -254,7 +302,7 @@ script data-no-instant='' InstantClick.init();
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
     <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
     <published>2014-03-29T15:30:00Z</published>
-    <updated>2014-04-10T14:48:40+00:00</updated>
+    <updated>2014-04-13T04:54:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -300,7 +348,7 @@ script data-no-instant='' InstantClick.init();
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html</id>
     <published>2014-03-29T13:00:00Z</published>
-    <updated>2014-04-10T14:48:40+00:00</updated>
+    <updated>2014-04-13T04:54:07+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -411,135 +459,6 @@ sudo sysctl vm.vfs_cache_pressure=50
 
 &lt;p&gt;&lt;a href="https://www.digitalocean.com/community/articles/how-to-add-a-swap-file-on-an-arch-linux-cloud-server"&gt;How to Add a Swap File on an Arch Linux Cloud Server - DigitalOcean&lt;/a&gt;&lt;/p&gt;
 
-</content>
-  </entry>
-  <entry>
-    <title>MoinMoin WikiをNginxで動かす</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2013/11/16/moin-with-nginx.html"/>
-    <id>http://3100.github.io/blog/2013/11/16/moin-with-nginx.html</id>
-    <published>2013-11-15T15:00:00Z</published>
-    <updated>2014-04-10T14:48:40+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;さくらVPSで動かしていた&lt;a href="http://moinmo.in/"&gt;MoinMoin Wiki&lt;/a&gt;を&lt;a href="https://www.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt;に移行することにしました。
-これを機に、WebサーバもApacheからNginxに移行しました。&lt;/p&gt;
-
-&lt;p&gt;DigitalOceanのdroplet(仮想インスタンス)はArch Linux 64bit版です。とりあえず使うだけなら、512MBで問題ないでしょう。&lt;/p&gt;
-
-&lt;h2 id="moinmoin"&gt;MoinMoinのインストール&lt;/h2&gt;
-
-&lt;p&gt;まずMoinMoinをインストールします。公式サイトからソースを落としてきてもいいですが、
-今回は以下のパッケージを利用しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://www.archlinux.org/packages/community/any/moinmoin/"&gt;Arch Linux - moinmoin 1.9.7-1 (any)&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ sudo pacman -S moin
-&lt;/pre&gt;
-
-&lt;p&gt;デフォルトのインストール先は/usr/share/moinになります。&lt;/p&gt;
-
-&lt;h2 id="nginx"&gt;Nginxのインストール&lt;/h2&gt;
-
-&lt;p&gt;同様にNginxもインストールします。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ sudo pacman -S nginx
-&lt;/pre&gt;
-
-&lt;h2 id="uwsgi"&gt;uWSGIのインストール&lt;/h2&gt;
-
-&lt;p&gt;今回、MoinMoinはWSGIを利用します。
-&lt;a href="http://projects.unbit.it/uwsgi/"&gt;uWSGI&lt;/a&gt;をNginxと組み合わせることで、MoinMoinをNginx上で動かすことができるようになります。&lt;/p&gt;
-
-&lt;p&gt;uWSGIについてもう少し知りたい方は以下のブログ記事が参考になります。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://d.hatena.ne.jp/m-hiyama/20120312/1331513519"&gt;便利で超強力なWSGIサーバー uWSGI を使ってみよう - 檜山正幸のキマイラ飼育記&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;話を戻して、uWSGIをインストールします。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ sudo pacman -S uwsgi uwsgi-plugin-python
-&lt;/pre&gt;
-
-&lt;h2 id="section"&gt;設定&lt;/h2&gt;
-
-&lt;h3 id="uwsgi-1"&gt;uWSGI&lt;/h3&gt;
-
-&lt;p&gt;まず、uWSGIの設定を行います。uWSGIはini、xml、json等の形式で設定ファイルを記述できますが、今回はini形式で書きました。
-/etc/uwsgi/moin.iniに下記のような設定を記述しています。&lt;/p&gt;
-
-&lt;pre class="highlight ini"&gt;&lt;span class="nn"&gt;[uwsgi]&lt;/span&gt;
-&lt;span class="py"&gt;plugins&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;python2&lt;/span&gt;
-&lt;span class="err"&gt;ignore-script-name&lt;/span&gt;
-&lt;span class="py"&gt;processes&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;4&lt;/span&gt;
-&lt;span class="err"&gt;limit-&lt;/span&gt;&lt;span class="py"&gt;as&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;256&lt;/span&gt;
-&lt;span class="err"&gt;wsgi-&lt;/span&gt;&lt;span class="py"&gt;file&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/usr/share/moin/server/moin.wsgi&lt;/span&gt;
-&lt;span class="py"&gt;socket&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/tmp/moin.sock&lt;/span&gt;
-&lt;span class="err"&gt;chmod-&lt;/span&gt;&lt;span class="py"&gt;socket&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;777&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;chmod-socketのパーミションを777にしているのは、実行時にパーミションエラーが発生したためです。。
-もし、より良い解決法がある場合は、教えていただけると幸いです。&lt;/p&gt;
-
-&lt;p&gt;この設定をもとにuwsgiを立ち上げます。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ sudo systemctl enable uwsgi@moin.service
-$ sudo systemctl start uwsgi@moin.service
-&lt;/pre&gt;
-
-&lt;h3 id="nginx-1"&gt;Nginx&lt;/h3&gt;
-
-&lt;p&gt;続いて、Nginxの設定です。/etc/nginx/nginx.confを編集します。&lt;/p&gt;
-
-&lt;pre class="highlight nginx"&gt;&lt;span class="k"&gt;location&lt;/span&gt; &lt;span class="n"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="kn"&gt;include&lt;/span&gt; &lt;span class="s"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="kn"&gt;uwsgi_modifier1&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="kn"&gt;uwsgi_pass&lt;/span&gt; &lt;span class="s"&gt;unix:/tmp/moin.sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="k"&gt;location&lt;/span&gt; &lt;span class="n"&gt;/moin_static197/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="kn"&gt;alias&lt;/span&gt; &lt;span class="n"&gt;/usr/share/moin/htdocs&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;実際にはExpiresやCache-Control、Gzipなどの設定も必要でしょうが、とりあえず動かすだけならこれでよいと思います。&lt;/p&gt;
-
-&lt;p&gt;以下で、サービスを開始できるようになります。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;$ sudo systemctl enable nginx
-$ sudo systemctl start nginx
-&lt;/pre&gt;
-
-&lt;h3 id="moinmoin-1"&gt;MoinMoin&lt;/h3&gt;
-
-&lt;p&gt;あとはMoinMoinの設定をお好みに応じて変更するだけです。&lt;/p&gt;
-
-&lt;p&gt;/usr/share/moin/config/wikiconfig.pyを編集します。&lt;/p&gt;
-
-&lt;p&gt;とりあえず、以下だけ修正しておけば良いのではないでしょうか。&lt;/p&gt;
-
-&lt;pre class="highlight python"&gt;&lt;span class="n"&gt;sitename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;u'Your Wiki'&lt;/span&gt;
-&lt;span class="n"&gt;log_reverse_dns_lookups&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
-&lt;span class="n"&gt;tz_offset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;9.0&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;以下のページも読むと、どういったことを設定可能かわかりやすいでしょう。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://moinmo.in/HelpOnConfiguration"&gt;HelpOnConfiguration - MoinMoin&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;wikiconfig.pyを編集した場合は、uwsgiを再起動することで、反映されます。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;おわり&lt;/h2&gt;
-
-&lt;p&gt;ここまでで、無事にMoinMoinが立ち上がっていることと思います。
-最初のLanguageSetupを行うために、ユーザ登録をして、
-そのユーザ名をwikiconfig.pyに登録して、uwsgiを再起動することになります。&lt;/p&gt;
-
-&lt;p&gt;LanguageSetupも完了すれば、あとはMoinMoinを好きに弄っていくだけです！&lt;/p&gt;
-
-&lt;p&gt;尚、初期状態ではMoinの検索エンジンは遅いので、Xapianを導入するのも良いでしょう。
-これについてもそのうち記事を書きたいと思います。&lt;/p&gt;
-
-&lt;p&gt;お疲れ様でした。&lt;/p&gt;
 </content>
   </entry>
 </feed>
