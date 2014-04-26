@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html"/>
     <id>http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html</id>
     <published>2014-04-26T03:00:00Z</published>
-    <updated>2014-04-26T07:02:47+00:00</updated>
+    <updated>2014-04-26T07:15:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -110,11 +110,11 @@ nginxやvimのバージョンが上がったらしい。
 &lt;ul&gt;
   &lt;li&gt;Arch以外でもFedoraやopenSUSEなどで導入済&lt;/li&gt;
   &lt;li&gt;RHEL(つまるところCentOSも)でもVersion 7から導入予定&lt;/li&gt;
-  &lt;li&gt;Debianも次期メジャーリリースであるJessieからsystemdを採用&lt;/li&gt;
+  &lt;li&gt;Debianも次期メジャーリリースであるJessieから採用&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;といったように、次の時代のサービス管理ツールとしてほぼ絶対的な位置にいます。
-Ubuntuは以前Upstartですが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。&lt;/p&gt;
+Ubuntuは依然Upstartを採用していますが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。&lt;/p&gt;
 
 &lt;p&gt;最近はsystemdに関する日本語の資料も増えてきていますし、そろそろ触っておいても良いのではないかと思います。&lt;/p&gt;
 
@@ -185,7 +185,7 @@ Ubuntuは以前Upstartですが、移行を提案する人も出ているよう�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html"/>
     <id>http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html</id>
     <published>2014-04-13T03:00:00Z</published>
-    <updated>2014-04-26T07:02:47+00:00</updated>
+    <updated>2014-04-26T07:15:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -233,7 +233,7 @@ Ubuntuは以前Upstartですが、移行を提案する人も出ているよう�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html"/>
     <id>http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html</id>
     <published>2014-04-10T14:00:00Z</published>
-    <updated>2014-04-26T07:02:47+00:00</updated>
+    <updated>2014-04-26T07:15:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -313,7 +313,7 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html"/>
     <id>http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html</id>
     <published>2014-03-30T13:00:00Z</published>
-    <updated>2014-04-26T07:02:47+00:00</updated>
+    <updated>2014-04-26T07:15:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -410,7 +410,7 @@ controllerに&lt;code&gt;@was_tapped&lt;/code&gt; がないと言われてしま
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/use-instant-click.html"/>
     <id>http://3100.github.io/blog/2014/03/30/use-instant-click.html</id>
     <published>2014-03-30T05:00:00Z</published>
-    <updated>2014-04-26T07:02:47+00:00</updated>
+    <updated>2014-04-26T07:15:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -473,7 +473,7 @@ script data-no-instant='' InstantClick.init();
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
     <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
     <published>2014-03-29T15:30:00Z</published>
-    <updated>2014-04-26T07:02:47+00:00</updated>
+    <updated>2014-04-26T07:15:45+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
