@@ -92,10 +92,10 @@ nginxやvimのバージョンが上がったらしい。
 
 * Arch以外でもFedoraやopenSUSEなどで導入済
 * RHEL(つまるところCentOSも)でもVersion 7から導入予定
-* Debianも次期メジャーリリースであるJessieからsystemdを採用
+* Debianも次期メジャーリリースであるJessieから採用
 
 といったように、次の時代のサービス管理ツールとしてほぼ絶対的な位置にいます。
-Ubuntuは以前Upstartですが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。
+Ubuntuは依然Upstartを採用していますが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。
 
 最近はsystemdに関する日本語の資料も増えてきていますし、そろそろ触っておいても良いのではないかと思います。
 
