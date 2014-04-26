@@ -5,16 +5,187 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-04-13T03:00:00Z</updated>
+  <updated>2014-04-26T03:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>サーバOSとしてのArch Linux</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html"/>
+    <id>http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html</id>
+    <published>2014-04-26T03:00:00Z</published>
+    <updated>2014-04-26T07:02:47+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Arch&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;個人的には一番使いやすいLinuxディストロだと思うのですが、2014年現在、世間的にはUbuntuやCentOS、Debianなどの後塵を拝し、Gentooなどと共にキワモノ的なカテゴリに分けられることが多いと感じています。
+ここでは、特にサーバ用途として考えた際に、なぜArchが選ばれないのか、調べてみることにしました。
+(といっても主にネットの声だけで)&lt;/p&gt;
+
+&lt;h2 id="arch8"&gt;Archが選ばれない理由8個&lt;/h2&gt;
+
+&lt;h3 id="update"&gt;その1。Updateで既存環境がいつどこで壊れるか予想がつかない&lt;/h3&gt;
+
+&lt;p&gt;Archは主要ディストロと異なり、メジャーバージョンというものがありません。つまりCentOS 5から6へのアップデートといったものはなく、常にどこかしこのパッケージがアップデートされています。(いわゆるローリングリリースモデル)&lt;/p&gt;
+
+&lt;p&gt;また、公式サイトでは約1ヶ月おきごとに、配布バイナリが更新されます。
+これは一見良さそうです。何しろ世間には&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 14.04へ移行したらXXが動かなくなった&lt;/li&gt;
+  &lt;li&gt;CentOS 6を導入したけど、XXXパッケージが古すぎる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;といった阿鼻叫喚が飛び交っています。Archならこういった問題とは大抵の場合無縁です。&lt;/p&gt;
+
+&lt;p&gt;しかし常にどこかしこでアップデートが起こっているということは、各パッケージの依存関係の問題で今動いているサービスが動かなくなるということもあり得るということです。
+この問題に対するArch利用者側のよくある反応については、以下の記事に素晴らしい例があったので、引用します。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;しかし、ローリングリリースは壊れやすいとからかうと、Arch上級者様は皆、まるで申し合わせたかのように言う。
+
+「何？　壊れる？　まさか？　ちゃんと公式から発行される変更情報や注意点を確認していれば、壊れるなどということはない。よしんばブート不可能なほど壊れたにせよだ。復旧用のArchを入れたUSBドライブからブートしてchrootとしてpackman -Syuすればたいてい直る。問題ない。設定ファイルもプレインテキストで書かれていて、とても簡単だ。恐れることなど何もない。むしろUbuntuのようなどうやって直していいのかわからない複雑なシステムの方が怖いわ」と。
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href="http://cpplover.blogspot.jp/2013/11/mac.html?m=1"&gt;本の虫: 技術屋にMac使いが多い理由ってなに？&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;いや、ほんとコレなんですけどね。他ディストロのような&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;バージョンXXからあの機能が廃止になって、新機能が追加された&lt;/li&gt;
+  &lt;li&gt;バージョンXXXにあるこの機能はバグだ。違うパッケージで対応しよう&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;みたいな方が個人的には恐ろしいし、そういったノウハウがやがて秘伝のタレ化していくんじゃないのかなという印象を受けます。&lt;/p&gt;
+
+&lt;h3 id="os"&gt;その2。俺達はOSを弄りまわしたいんじゃない。サービスを立ち上げたいだけなんだ&lt;/h3&gt;
+
+&lt;p&gt;ぐぅの音も出ません。&lt;/p&gt;
+
+&lt;p&gt;しかし、自分も割りと同様の理由でArchを採用しています。こうした意見はおそらくローリングリリースに関しての意見だと思いますが、良い所もあります。
+それは、メンテナのいるパッケージであれば大抵すぐに最新版が利用可能になるということです。
+nginxやvimのバージョンが上がったらしい。
+じゃ、ビルドするか。。とならないのは1つのメリットかなと思います。Archならすぐにパッケージマネージャから更新可能です。&lt;/p&gt;
+
+&lt;p&gt;もちろん、デフォルトで提供されているパッケージの設定では不満が出ることもありますし、そういう場合にはソースコードからビルドします。その辺りは他のディストロと同じです。&lt;/p&gt;
+
+&lt;p&gt;また、Archの公式Wikiは情報量が豊富で、一部は日本語に翻訳もされています。
+よく使われるようなものについてはここで導入方法やオプション、注意点などについての知見を得ることができるでしょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.archlinux.org/"&gt;Arch Linux 公式サイト&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id="section-1"&gt;その3。我々は長期の安定稼働を求めている。再現性も重要だ。&lt;/h3&gt;
+
+&lt;p&gt;バージョンがきちんと振られるディストロでは、関係者が増えても共通の環境を整備しやすく、また後々になってその環境を再現しなくならなければいけない状況になった場合でも、割りと楽に目的のイメージファイルなりを見つけることができます。&lt;/p&gt;
+
+&lt;p&gt;逆にArchの場合、導入タイミングなどで各サーバのパッケージが異なっているといった事態は容易に起こり得ますし、これがサポートの手間になるということもあるでしょう。(実際に&lt;code&gt;DigitalOcean&lt;/code&gt;がそんな感じの理由でサポートを廃止予定)
+ですので、Archを導入する場合にはどのパッケージをどのバージョンで採用するか、といった調整は必要になります。
+一見面倒くさいですし、他のディストロではやらなかった作業ですので、現場の不満は貯まるかもしれないですね。。&lt;/p&gt;
+
+&lt;p&gt;しかし、視点を数年後にずらして考えると、逆にバージョンごとに区切られていることが問題となることがあります。というか個人的にはよく見かけます。特に元プロジェクトから数度にわたって改良されてきたプロジェクトでは、改良の度に最小限の修正しか行われないことがあります。
+よくあるのは&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使うパッケージが古いもので固定されてしまう(脆弱性や非互換の問題は黙殺)&lt;/li&gt;
+  &lt;li&gt;5年後くらいに唐突に納入物の更新要望が来るが、もちろんパッケージなどは更新できない&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;などといったもので、よく考えずとも明らかにお客さんと現場双方で不幸になっています。こうした事例は一般的ではないのかもしれませんが、官公庁でいまだにStruts1で構築されたサービスが動いているという話を見ても、決してレアケースではないと思います。&lt;/p&gt;
+
+&lt;p&gt;サービスの長期的なメンテナンスを考えると、ぱっと見のとっつきやすさが全体のためになるかどうかは別問題ではないでしょうか。&lt;/p&gt;
+
+&lt;h3 id="systemd"&gt;その4。systemdなんてよくわからない代物は使えない。&lt;/h3&gt;
+
+&lt;p&gt;よくあるLinuxの入門書ではCentOSやDebianを対象ディストロとしているものが多く、initやUpstartに慣れ親しんだ人が多いでしょう。しかしArchは2011年より&lt;code&gt;systemd&lt;/code&gt;を採用しています。&lt;/p&gt;
+
+&lt;p&gt;そのため、既存のLinuxサーバ管理者からすると、Archを利用する場合には「余計な」学習コストが発生します。「今すでに動いているものがあるのに、何故わざわざ違うものを勉強し直す必要があるんだ」といった感じの意見は割りとよく聞きますし、個人的には色々とツッコミを入れたい考え方でもありますが、そのお気持ち自体はわかります。&lt;/p&gt;
+
+&lt;p&gt;しかし、時代は変わっていきます。systemdは&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Arch以外でもFedoraやopenSUSEなどで導入済&lt;/li&gt;
+  &lt;li&gt;RHEL(つまるところCentOSも)でもVersion 7から導入予定&lt;/li&gt;
+  &lt;li&gt;Debianも次期メジャーリリースであるJessieからsystemdを採用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;といったように、次の時代のサービス管理ツールとしてほぼ絶対的な位置にいます。
+Ubuntuは以前Upstartですが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。&lt;/p&gt;
+
+&lt;p&gt;最近はsystemdに関する日本語の資料も増えてきていますし、そろそろ触っておいても良いのではないかと思います。&lt;/p&gt;
+
+&lt;h3 id="section-2"&gt;その5。インストールが大変&lt;/h3&gt;
+
+&lt;p&gt;公式Wikiには日本語でも丁寧な導入ガイドがあり、それに従えば何ら問題なくインストールできます。
+が、CentOSやDebianなどのインストールのしやすさに比べれば、色々と設定しなくてはいけない部分が多い気がします。&lt;/p&gt;
+
+&lt;p&gt;しかし、そういった部分にもきちんと触れることで、Linuxユーザとしても成長しますし、OSへの深い理解も得られるのではないでしょうか。&lt;/p&gt;
+
+&lt;p&gt;本音ベースですと、やっぱり面倒くさいです。ですが、実際問題としては気になりません。というのも&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;インストール直後の状態を仮想イメージで持っておけば良い&lt;/li&gt;
+  &lt;li&gt;最近ではchefやansibleがある&lt;/li&gt;
+  &lt;li&gt;docker用コンテナのイメージもdocker側で用意されている&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ので、今後いちから人が手動でインストーラを叩いて設定するなんてことは減っていくからです。むしろ、現状そうした環境になっていない場合は猛省して、速やかに環境整備して自動化へと移行すべきかと思います。&lt;/p&gt;
+
+&lt;p&gt;100台近いサーバを日々手作業でOSインストールして
+構築するお仕事、というのを実際に聞いたことがありますが、それは人のやる仕事ではありません。。&lt;/p&gt;
+
+&lt;h3 id="pacman"&gt;その6。pacmanなんて独自ツールは覚えたくない&lt;/h3&gt;
+
+&lt;p&gt;そんなことより、個人的には商標権とか大丈夫なのかなって思ったりしています。これが&lt;code&gt;micky&lt;/code&gt;ていう名前だったら間違いなく訴えられていると思います。&lt;/p&gt;
+
+&lt;p&gt;pacman、たしかにapptitudeとかと比べて最初は良くわかりませんし、できることも多いですが、個人的には好きです。&lt;/p&gt;
+
+&lt;h3 id="haskell"&gt;その7。Haskellを簡単に導入できない&lt;/h3&gt;
+
+&lt;p&gt;サーバサイドHaskellとか胸熱ですが、完全に門外漢です。Archにはユーザが独自に作成、登録したパッケージを導入する仕組みがあり、そこにHaskellの各種ライブラリも登録されています。&lt;/p&gt;
+
+&lt;p&gt;が、これは罠です。実際に&lt;code&gt;pandoc&lt;/code&gt;を入れようとしてかなりハマりました。諦めてHaskell公式からソースコードを入手し、手動でセットアップしましょう。&lt;/p&gt;
+
+&lt;h3 id="arch"&gt;その8。そもそもArchなんて誰も使っていない&lt;/h3&gt;
+
+&lt;p&gt;(´・ω:;.:…&lt;/p&gt;
+
+&lt;h2 id="section-3"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;ここまで見てきて、ArchをサーバOSにしないのは、単に&lt;strong&gt;趣味&lt;/strong&gt;や&lt;strong&gt;主義主張&lt;/strong&gt;の問題か、あとは単に担当者や責任者の理解不足であるような気がしてきました。&lt;/p&gt;
+
+&lt;p&gt;ArchはGentoo同様、とっつきづらいイメージがありますが、最初のインストールさえ乗り越えられれば、比較的メンテナンスのしやすいディストロだと思います。
+ネット上を探せば、仮想環境向けにも色々とイメージファイルが公開されているので、そうしたものを使えばインストールさえ不要です。&lt;/p&gt;
+
+&lt;p&gt;何より軽量軽快で、ディスクサイズやメモリサイズも主要ディストロに比べて小さくて済みます。&lt;/p&gt;
+
+&lt;p&gt;ぜひ、気軽に触ってもらいたいと思います。&lt;/p&gt;
+
+&lt;h2 id="section-4"&gt;参考になった記事など&lt;/h2&gt;
+
+&lt;p&gt;記事で言及したもの、しなかったもの含めて。最後のやつはネタですね。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://serverfault.com/questions/173286/is-arch-linux-suitable-for-server-environment"&gt;Is Arch Linux suitable for server environment? - Server Fault&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://gihyo.jp/admin/clip/01/ubuntu-topics/201402/21"&gt;2014年2月21日号　systemdへの移行、Ubuntu Phoneの採用状況、UWN#355:Ubuntu Weekly Topics - gihyo.jp … 技術評論社&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://www.reddit.com/r/archlinux/comments/1f26hg/why_does_haskell_suck_on_arch/"&gt;Why does Haskell suck on Arch? : archlinux&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://fomori.org/blog/?p=468"&gt;Why arch linux sucks for servers - SLEIPNIR&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://springfieldpc.dyndns.org/gcopypasta/116-gnulinux/archlinux/418-top-5-reasons-why-arch-linux-sucks"&gt;Top 5 Reasons why Arch Linux suck&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>DigitalOceanがArchの提供をやめるらしい</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html"/>
     <id>http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html</id>
     <published>2014-04-13T03:00:00Z</published>
-    <updated>2014-04-13T04:54:07+00:00</updated>
+    <updated>2014-04-26T07:02:47+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -62,7 +233,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html"/>
     <id>http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html</id>
     <published>2014-04-10T14:00:00Z</published>
-    <updated>2014-04-13T04:54:07+00:00</updated>
+    <updated>2014-04-26T07:02:47+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -142,7 +313,7 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html"/>
     <id>http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html</id>
     <published>2014-03-30T13:00:00Z</published>
-    <updated>2014-04-13T04:54:07+00:00</updated>
+    <updated>2014-04-26T07:02:47+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -239,7 +410,7 @@ controllerに&lt;code&gt;@was_tapped&lt;/code&gt; がないと言われてしま
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/use-instant-click.html"/>
     <id>http://3100.github.io/blog/2014/03/30/use-instant-click.html</id>
     <published>2014-03-30T05:00:00Z</published>
-    <updated>2014-04-13T04:54:07+00:00</updated>
+    <updated>2014-04-26T07:02:47+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -302,7 +473,7 @@ script data-no-instant='' InstantClick.init();
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
     <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
     <published>2014-03-29T15:30:00Z</published>
-    <updated>2014-04-13T04:54:07+00:00</updated>
+    <updated>2014-04-26T07:02:47+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -341,124 +512,6 @@ script data-no-instant='' InstantClick.init();
 
 &lt;p&gt;上画像のように、masterブランチ自動生成後のビルドはスキップされるようになりました。
 今まで、実害はあまりないもののエラービルドが出ることで気持ちがブルーになっていましたが、そうした気分からはようやく解放されそうです。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>DigitalOceanにMinecraftサーバを建てる</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html"/>
-    <id>http://3100.github.io/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html</id>
-    <published>2014-03-29T13:00:00Z</published>
-    <updated>2014-04-13T04:54:07+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="Minecraft画像" src="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean/minecraft.png" /&gt;&lt;/p&gt;
-
-&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;急にMinecraftで遊びたくなることがあるのですが、複数PCにデータが散ってしまっていて、どこに目的のワールドがあるのかわかりません。
-そこで、これを機にどのマシンからでも同じワールドにアクセスできるようにしようと思いました。&lt;/p&gt;
-
-&lt;p&gt;今回は最近お世話になっているDigitalOcean上にMinecraftサーバを構築してみます。契約プランは最安($5/月)です。だいたい5人程度までなら遊べるそうです。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;手順&lt;/h2&gt;
-
-&lt;h3 id="droplet"&gt;dropletの作成&lt;/h3&gt;
-
-&lt;p&gt;まずDigitalOceanで新しいdropletを作成します。自分が選択したのは&lt;code&gt;Arch Linux 2013.05 x64&lt;/code&gt;ですが、
-jreが導入できればなんでも良いと思います。&lt;/p&gt;
-
-&lt;h3 id="section-2"&gt;サーバの初期設定&lt;/h3&gt;
-
-&lt;p&gt;rootのままではセキュリティ上懸念も多いので、専用ユーザを作ると良いでしょう。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;sshdの設定ファイルを弄ってパスワードログインをやめ、鍵交換方式にする&lt;/li&gt;
-  &lt;li&gt;sshのポートをデフォルトポートから変更しておく&lt;/li&gt;
-  &lt;li&gt;必要なポート以外閉じる&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;といったことをしておくと良いのではないかと思います。&lt;/p&gt;
-
-&lt;h3 id="jre"&gt;jreの導入&lt;/h3&gt;
-
-&lt;p&gt;大抵のLinuxには公式リポジトリからjreパッケージが利用可能になっているのではないかと思います。&lt;/p&gt;
-
-&lt;p&gt;Archの場合は、以下で利用可能です。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;sudo pacman -Sy
-sudo pacman -S jre7-openjdk
-&lt;/pre&gt;
-
-&lt;h3 id="minecraft"&gt;minecraftサーバ用ソフトの導入&lt;/h3&gt;
-
-&lt;p&gt;サーバ用ファイルは現時点の最新版を利用しました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://s3.amazonaws.com/Minecraft.Download/versions/1.7.5/minecraft_server.1.7.5.jar"&gt;https://s3.amazonaws.com/Minecraft.Download/versions/1.7.5/minecraft_server.1.7.5.jar&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;上記ファイルを適当なフォルダに配置し、以下のコマンドでMinecraftサーバが起動します。(-d64オプションで64bit版Javaも指定可能)&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;java -Xms512M -Xmx512M -jar minecraft_server.1.7.5.jar
-&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;最小確保メモリが512MB&lt;/li&gt;
-  &lt;li&gt;最大確保メモリも512MB&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;の設定ですが、構成によって変えて良いと思います。&lt;/p&gt;
-
-&lt;p&gt;毎回このコマンドを実行するのは面倒くさいので、適当なshファイルに上記コマンドをコピペします。(たとえばstart_server.sh)&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;chmod +x start_server.sh
-&lt;/pre&gt;
-
-&lt;p&gt;これで、start_serverと呼ぶだけでMinecraftサーバが立ち上がるようになりました。&lt;/p&gt;
-
-&lt;h3 id="section-3"&gt;スワップ領域の作成&lt;/h3&gt;
-
-&lt;p&gt;DigitalOceanの最小構成プランではこのままだと不安定なので、別途スワップ領域を作成する必要があります。&lt;/p&gt;
-
-&lt;p&gt;メモリが不足した場合にSSDを仮想メモリとみなすように設定していきます。/swapfileをスワップ領域として最大512MB確保できるようにします。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;sudo fallocate -l 512M /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-&lt;/pre&gt;
-
-&lt;p&gt;また、&lt;code&gt;/etc/fstab&lt;/code&gt;を編集し、以下を追加します。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;/swapfile none  swap  defaults  0 0
-&lt;/pre&gt;
-
-&lt;p&gt;ここまででスワップ領域が利用可能になりました。
-このままでも良いですが、メモリが余っている時にスワップ領域を使い続けることはパフォーマンス上あまり嬉しくないので、そのあたりもいい感じに設定します。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;sudo sysctl vm.swappiness=10
-sudo sysctl vm.vfs_cache_pressure=50
-&lt;/pre&gt;
-
-&lt;h2 id="minecraft-1"&gt;Minecraftサーバ設定&lt;/h2&gt;
-
-&lt;p&gt;特定ユーザを管理者登録するなどの設定は公式他、日本語の情報がたくさんあるので割愛します。自分は以下のサイトを参考にしました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://nasutan.net/minecraft/server-win/serverproperties/"&gt;【サルでもわかる！初めてのマインクラフト講座】- サーバ設定 - なす探！&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="section-4"&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;意外と簡単にMinecraftサーバを建てることが出来ました。DigitalOceanは転送料制限がある(超えると課金される)ので心配をしていましたが、Minecraftの通信料は気にするほどではなさそうです。&lt;/p&gt;
-
-&lt;p&gt;まだ同時接続人数が2人以上を経験していませんが、CPU使用率は30%程度です。参考にした記事にも5人から8人くらいが限度と書かれていましたが、だいたいそのくらいの人数までは遊ぶことができそうです。&lt;/p&gt;
-
-&lt;p&gt;$5/月くらいなら仲間うちで割り勘しても良いくらいのコストですし、Minecraftサーバ、結構オススメです。&lt;/p&gt;
-
-&lt;h2 id="section-5"&gt;参考&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="http://otoris.com/host-your-own-minecraft-and-mumble-server-for-5month/"&gt;Host your own Minecraft server for $5/month&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://www.digitalocean.com/community/articles/how-to-add-a-swap-file-on-an-arch-linux-cloud-server"&gt;How to Add a Swap File on an Arch Linux Cloud Server - DigitalOcean&lt;/a&gt;&lt;/p&gt;
-
 </content>
   </entry>
 </feed>

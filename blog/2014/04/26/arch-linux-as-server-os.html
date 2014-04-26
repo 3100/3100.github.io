@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>サーバOSとしてのArch Linux - Room 3100</title><data class="site description"></data>
+  </head>
+  <body>
+    <div class="container">
+      <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
+      <div class="row">
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      サーバOSとしてのArch Linux
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/arch.html">arch</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
+
+<p><code>Arch</code>。</p>
+
+<p>個人的には一番使いやすいLinuxディストロだと思うのですが、2014年現在、世間的にはUbuntuやCentOS、Debianなどの後塵を拝し、Gentooなどと共にキワモノ的なカテゴリに分けられることが多いと感じています。
+ここでは、特にサーバ用途として考えた際に、なぜArchが選ばれないのか、調べてみることにしました。
+(といっても主にネットの声だけで)</p>
+
+<h2 id="arch8">Archが選ばれない理由8個</h2>
+
+<h3 id="update">その1。Updateで既存環境がいつどこで壊れるか予想がつかない</h3>
+
+<p>Archは主要ディストロと異なり、メジャーバージョンというものがありません。つまりCentOS 5から6へのアップデートといったものはなく、常にどこかしこのパッケージがアップデートされています。(いわゆるローリングリリースモデル)</p>
+
+<p>また、公式サイトでは約1ヶ月おきごとに、配布バイナリが更新されます。
+これは一見良さそうです。何しろ世間には</p>
+
+<ul>
+  <li>Ubuntu 14.04へ移行したらXXが動かなくなった</li>
+  <li>CentOS 6を導入したけど、XXXパッケージが古すぎる</li>
+</ul>
+
+<p>といった阿鼻叫喚が飛び交っています。Archならこういった問題とは大抵の場合無縁です。</p>
+
+<p>しかし常にどこかしこでアップデートが起こっているということは、各パッケージの依存関係の問題で今動いているサービスが動かなくなるということもあり得るということです。
+この問題に対するArch利用者側のよくある反応については、以下の記事に素晴らしい例があったので、引用します。</p>
+
+<pre class="highlight plaintext">しかし、ローリングリリースは壊れやすいとからかうと、Arch上級者様は皆、まるで申し合わせたかのように言う。
+
+「何？　壊れる？　まさか？　ちゃんと公式から発行される変更情報や注意点を確認していれば、壊れるなどということはない。よしんばブート不可能なほど壊れたにせよだ。復旧用のArchを入れたUSBドライブからブートしてchrootとしてpackman -Syuすればたいてい直る。問題ない。設定ファイルもプレインテキストで書かれていて、とても簡単だ。恐れることなど何もない。むしろUbuntuのようなどうやって直していいのかわからない複雑なシステムの方が怖いわ」と。
+</pre>
+
+<p><a href="http://cpplover.blogspot.jp/2013/11/mac.html?m=1">本の虫: 技術屋にMac使いが多い理由ってなに？</a></p>
+
+<p>いや、ほんとコレなんですけどね。他ディストロのような</p>
+
+<ul>
+  <li>バージョンXXからあの機能が廃止になって、新機能が追加された</li>
+  <li>バージョンXXXにあるこの機能はバグだ。違うパッケージで対応しよう</li>
+</ul>
+
+<p>みたいな方が個人的には恐ろしいし、そういったノウハウがやがて秘伝のタレ化していくんじゃないのかなという印象を受けます。</p>
+
+<h3 id="os">その2。俺達はOSを弄りまわしたいんじゃない。サービスを立ち上げたいだけなんだ</h3>
+
+<p>ぐぅの音も出ません。</p>
+
+<p>しかし、自分も割りと同様の理由でArchを採用しています。こうした意見はおそらくローリングリリースに関しての意見だと思いますが、良い所もあります。
+それは、メンテナのいるパッケージであれば大抵すぐに最新版が利用可能になるということです。
+nginxやvimのバージョンが上がったらしい。
+じゃ、ビルドするか。。とならないのは1つのメリットかなと思います。Archならすぐにパッケージマネージャから更新可能です。</p>
+
+<p>もちろん、デフォルトで提供されているパッケージの設定では不満が出ることもありますし、そういう場合にはソースコードからビルドします。その辺りは他のディストロと同じです。</p>
+
+<p>また、Archの公式Wikiは情報量が豊富で、一部は日本語に翻訳もされています。
+よく使われるようなものについてはここで導入方法やオプション、注意点などについての知見を得ることができるでしょう。</p>
+
+<p><a href="https://www.archlinux.org/">Arch Linux 公式サイト</a></p>
+
+<p><a href="https://wiki.archlinux.org/">ArchWiki</a></p>
+
+<h3 id="section-1">その3。我々は長期の安定稼働を求めている。再現性も重要だ。</h3>
+
+<p>バージョンがきちんと振られるディストロでは、関係者が増えても共通の環境を整備しやすく、また後々になってその環境を再現しなくならなければいけない状況になった場合でも、割りと楽に目的のイメージファイルなりを見つけることができます。</p>
+
+<p>逆にArchの場合、導入タイミングなどで各サーバのパッケージが異なっているといった事態は容易に起こり得ますし、これがサポートの手間になるということもあるでしょう。(実際に<code>DigitalOcean</code>がそんな感じの理由でサポートを廃止予定)
+ですので、Archを導入する場合にはどのパッケージをどのバージョンで採用するか、といった調整は必要になります。
+一見面倒くさいですし、他のディストロではやらなかった作業ですので、現場の不満は貯まるかもしれないですね。。</p>
+
+<p>しかし、視点を数年後にずらして考えると、逆にバージョンごとに区切られていることが問題となることがあります。というか個人的にはよく見かけます。特に元プロジェクトから数度にわたって改良されてきたプロジェクトでは、改良の度に最小限の修正しか行われないことがあります。
+よくあるのは</p>
+
+<ul>
+  <li>使うパッケージが古いもので固定されてしまう(脆弱性や非互換の問題は黙殺)</li>
+  <li>5年後くらいに唐突に納入物の更新要望が来るが、もちろんパッケージなどは更新できない</li>
+</ul>
+
+<p>などといったもので、よく考えずとも明らかにお客さんと現場双方で不幸になっています。こうした事例は一般的ではないのかもしれませんが、官公庁でいまだにStruts1で構築されたサービスが動いているという話を見ても、決してレアケースではないと思います。</p>
+
+<p>サービスの長期的なメンテナンスを考えると、ぱっと見のとっつきやすさが全体のためになるかどうかは別問題ではないでしょうか。</p>
+
+<h3 id="systemd">その4。systemdなんてよくわからない代物は使えない。</h3>
+
+<p>よくあるLinuxの入門書ではCentOSやDebianを対象ディストロとしているものが多く、initやUpstartに慣れ親しんだ人が多いでしょう。しかしArchは2011年より<code>systemd</code>を採用しています。</p>
+
+<p>そのため、既存のLinuxサーバ管理者からすると、Archを利用する場合には「余計な」学習コストが発生します。「今すでに動いているものがあるのに、何故わざわざ違うものを勉強し直す必要があるんだ」といった感じの意見は割りとよく聞きますし、個人的には色々とツッコミを入れたい考え方でもありますが、そのお気持ち自体はわかります。</p>
+
+<p>しかし、時代は変わっていきます。systemdは</p>
+
+<ul>
+  <li>Arch以外でもFedoraやopenSUSEなどで導入済</li>
+  <li>RHEL(つまるところCentOSも)でもVersion 7から導入予定</li>
+  <li>Debianも次期メジャーリリースであるJessieからsystemdを採用</li>
+</ul>
+
+<p>といったように、次の時代のサービス管理ツールとしてほぼ絶対的な位置にいます。
+Ubuntuは以前Upstartですが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。</p>
+
+<p>最近はsystemdに関する日本語の資料も増えてきていますし、そろそろ触っておいても良いのではないかと思います。</p>
+
+<h3 id="section-2">その5。インストールが大変</h3>
+
+<p>公式Wikiには日本語でも丁寧な導入ガイドがあり、それに従えば何ら問題なくインストールできます。
+が、CentOSやDebianなどのインストールのしやすさに比べれば、色々と設定しなくてはいけない部分が多い気がします。</p>
+
+<p>しかし、そういった部分にもきちんと触れることで、Linuxユーザとしても成長しますし、OSへの深い理解も得られるのではないでしょうか。</p>
+
+<p>本音ベースですと、やっぱり面倒くさいです。ですが、実際問題としては気になりません。というのも</p>
+
+<ul>
+  <li>インストール直後の状態を仮想イメージで持っておけば良い</li>
+  <li>最近ではchefやansibleがある</li>
+  <li>docker用コンテナのイメージもdocker側で用意されている</li>
+</ul>
+
+<p>ので、今後いちから人が手動でインストーラを叩いて設定するなんてことは減っていくからです。むしろ、現状そうした環境になっていない場合は猛省して、速やかに環境整備して自動化へと移行すべきかと思います。</p>
+
+<p>100台近いサーバを日々手作業でOSインストールして
+構築するお仕事、というのを実際に聞いたことがありますが、それは人のやる仕事ではありません。。</p>
+
+<h3 id="pacman">その6。pacmanなんて独自ツールは覚えたくない</h3>
+
+<p>そんなことより、個人的には商標権とか大丈夫なのかなって思ったりしています。これが<code>micky</code>ていう名前だったら間違いなく訴えられていると思います。</p>
+
+<p>pacman、たしかにapptitudeとかと比べて最初は良くわかりませんし、できることも多いですが、個人的には好きです。</p>
+
+<h3 id="haskell">その7。Haskellを簡単に導入できない</h3>
+
+<p>サーバサイドHaskellとか胸熱ですが、完全に門外漢です。Archにはユーザが独自に作成、登録したパッケージを導入する仕組みがあり、そこにHaskellの各種ライブラリも登録されています。</p>
+
+<p>が、これは罠です。実際に<code>pandoc</code>を入れようとしてかなりハマりました。諦めてHaskell公式からソースコードを入手し、手動でセットアップしましょう。</p>
+
+<h3 id="arch">その8。そもそもArchなんて誰も使っていない</h3>
+
+<p>(´・ω:;.:…</p>
+
+<h2 id="section-3">まとめ</h2>
+
+<p>ここまで見てきて、ArchをサーバOSにしないのは、単に<strong>趣味</strong>や<strong>主義主張</strong>の問題か、あとは単に担当者や責任者の理解不足であるような気がしてきました。</p>
+
+<p>ArchはGentoo同様、とっつきづらいイメージがありますが、最初のインストールさえ乗り越えられれば、比較的メンテナンスのしやすいディストロだと思います。
+ネット上を探せば、仮想環境向けにも色々とイメージファイルが公開されているので、そうしたものを使えばインストールさえ不要です。</p>
+
+<p>何より軽量軽快で、ディスクサイズやメモリサイズも主要ディストロに比べて小さくて済みます。</p>
+
+<p>ぜひ、気軽に触ってもらいたいと思います。</p>
+
+<h2 id="section-4">参考になった記事など</h2>
+
+<p>記事で言及したもの、しなかったもの含めて。最後のやつはネタですね。</p>
+
+<p><a href="http://serverfault.com/questions/173286/is-arch-linux-suitable-for-server-environment">Is Arch Linux suitable for server environment? - Server Fault</a></p>
+
+<p><a href="http://gihyo.jp/admin/clip/01/ubuntu-topics/201402/21">2014年2月21日号　systemdへの移行、Ubuntu Phoneの採用状況、UWN#355:Ubuntu Weekly Topics - gihyo.jp … 技術評論社</a></p>
+
+<p><a href="http://www.reddit.com/r/archlinux/comments/1f26hg/why_does_haskell_suck_on_arch/">Why does Haskell suck on Arch? : archlinux</a></p>
+
+<p><a href="http://fomori.org/blog/?p=468">Why arch linux sucks for servers - SLEIPNIR</a></p>
+
+<p><a href="http://springfieldpc.dyndns.org/gcopypasta/116-gnulinux/archlinux/418-top-5-reasons-why-arch-linux-sucks">Top 5 Reasons why Arch Linux suck</a></p>
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
+        </div>
+        <div id="sidebar" class="col-md-3">
+          <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            <h3>
+              Profile
+            </h3>
+            <section class="namecard">
+              <h4 class="name" itemprop="name">
+                3100
+              </h4>
+            </section>
+            <ul class="contact horizontal">
+              <li>
+                <a class="no-color" href="//twitter.com/zero310"><i class="fa fa-twitter fa-2x"></i></a>
+              </li>
+              <li>
+                <a class="no-color" href="//github.com/3100"><i class="fa fa-github fa-2x"></i></a>
+              </li>
+              <li>
+                <a class="no-color" href="//bitbucket.org/3100"><i class="fa fa-bitbucket fa-2x"></i></a>
+              </li>
+            </ul>
+            <p>
+              開発者
+            </p>
+          </article><article id="subscribe">
+            <h3>
+              Subscribe
+            </h3>
+            <ul class="horizontal">
+              <li>
+                <a class="no-color" href="/blog/feed.xml"><i class="fa fa-rss fa-2x"></i></a>
+              </li>
+            </ul>
+          </article><article id="recent_articles">
+            <h3>
+              Recent Articles
+            </h3>
+            <ul>
+              <li>
+                <a href="/blog/2014/04/26/arch-linux-as-server-os.html">サーバOSとしてのArch Linux</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/13/digitalocean-are-deprecating-arch.html">DigitalOceanがArchの提供をやめるらしい</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-13T12:00:00+09:00" datetime="2014-04-13T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">13</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/10/learn-objective-c-again.html">Objective-Cへ入門</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-10T23:00:00+09:00" datetime="2014-04-10T23:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">10</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/03/30/issues-in-ruby-motion-tutorial.html">RubyMotionのチュートリアルでハマったところ</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-03-30T22:00:00+09:00" datetime="2014-03-30T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/03/30/use-instant-click.html">ページ読み込みを高速化するInstantClickを導入しました</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-03-30T14:00:00+09:00" datetime="2014-03-30T14:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/03/30/skip-ci.html">Travis CIのビルドスキップ機能について</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-03-30T00:30:00+09:00" datetime="2014-03-30T00:30:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/03/29/deploy-your-own-minecraft-server-on-digital-ocean.html">DigitalOceanにMinecraftサーバを建てる</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-03-29T22:00:00+09:00" datetime="2014-03-29T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">29</span><span class="year">2014</span></time>
+              </li>
+            </ul>
+          </article><h3>
+            Tags
+          </h3>
+          <ul class="tags holizontal">
+            <li>
+              <a href="/blog/tags/digitalocean.html">digitalocean</a> (2)
+            </li>
+            <li>
+              <a href="/blog/tags/arch.html">arch</a> (2)
+            </li>
+            <li>
+              <a href="/blog/tags/travis-ci.html">travis-ci</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/middleman.html">middleman</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/monokai.html">monokai</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/objective-c.html">objective-c</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/moin.html">moin</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/nginx.html">nginx</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/vim.html">vim</a> (2)
+            </li>
+            <li>
+              <a href="/blog/tags/minecraft.html">minecraft</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/instantclick.html">instantclick</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/performance.html">performance</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/ruby.html">ruby</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/os-x.html">os x</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rbenv.html">rbenv</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rubymotion.html">rubymotion</a> (1)
+            </li>
+          </ul><h3>
+            By Year
+          </h3>
+          <ul class="holizontal">
+            <li>
+              <a href="/blog/2014.html">2014</a> (7)
+            </li>
+            <li>
+              <a href="/blog/2013.html">2013</a> (6)
+            </li>
+          </ul><h3>
+            Built with
+          </h3>
+          <ul class="holizontal">
+            <li>
+              <a href="http://middlemanapp.com/">Middleman</a>
+            </li>
+            <li>
+              <a href="http://getbootstrap.com/">Bootstrap</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="license" class="row">
+        <div class="col-md-12">
+          <p>
+            &copy; 2014 3100 - All code snippets on this site is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script><script src="/javascripts/instantclick.min.js" type="text/javascript"></script>
+    <script data-no-instant="">
+      InstantClick.init();
+    </script>
+  </body>
+</html>
