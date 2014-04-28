@@ -5,16 +5,58 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-04-26T03:00:00Z</updated>
+  <updated>2014-04-28T13:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>XVimをXCodeに導入した</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/04/28/begin-using-xvim.html"/>
+    <id>http://3100.github.io/blog/2014/04/28/begin-using-xvim.html</id>
+    <published>2014-04-28T13:00:00Z</published>
+    <updated>2014-04-28T12:58:41+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;XCodeを触っていると、いつもの癖でVim用のキーを入力してしまい、なかなか慣れません。
+どうしたものかと調べてみたところ、&lt;code&gt;XVim&lt;/code&gt;なるものがあるらしいと知り、早速導入してみました。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;導入&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/Jugglershu/XVim"&gt;https://github.com/Jugglershu/XVim&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;導入の仕方は上記URLに書いてある通りです。
+一見するとmasterブランチの更新が止まっているように見えますが、XCode5向けの開発はブランチで行われているようです。
+XCode5向けに導入する場合は、ブランチを変更するなどの操作が必要となりますので注意して読みましょう。&lt;/p&gt;
+
+&lt;p&gt;設定ファイルは$HOME/.xvimrcになるようです。.vimrcと100%互換があるわけではなく、使用可能な書式は制限されています。
+が、とりあえずvim風に使えるようになったことでも、満足です。
+VisualStudioの&lt;code&gt;VsVim&lt;/code&gt;と同様に、欠かせないプラグインになりそうです。&lt;/p&gt;
+
+&lt;p&gt;尚、XVimについては、以下の記事で知りました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://blog.lciel.jp/blog/2014/03/17/installation-of-xvim/"&gt;XVim を Xcode 5.1 にインストール - Unmotivated&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="xvim"&gt;おまけ(XVimで満足できない方向け)&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="http://ap4y.github.io/2013/11/10/vim-for-ios-developers.html"&gt;Vim for iOS developers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Rakeなどを用いてvim上で全部やろうという記事です。去年の11月に書かれたものなので、そんなに古くなさそうです。
+ざっと目を通した感じ、&lt;code&gt;Dash&lt;/code&gt;なんかも&lt;code&gt;dash.vim&lt;/code&gt;を使ったり、補完もclang向けのライブラリを使ったり、&lt;code&gt;ag.vim&lt;/code&gt;まで持ち出したりと
+結構ガチな内容です。&lt;/p&gt;
+
+&lt;p&gt;そこまで試せていませんが、とことん突き詰めたい方向けの記事なのではないかと思います。
+誰もはてブしてないので、とりあえずしておきました。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>サーバOSとしてのArch Linux</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html"/>
     <id>http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html</id>
     <published>2014-04-26T03:00:00Z</published>
-    <updated>2014-04-26T07:37:26+00:00</updated>
+    <updated>2014-04-28T12:58:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -185,7 +227,7 @@ Ubuntuは依然Upstartを採用していますが、移行を提案する人も�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html"/>
     <id>http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html</id>
     <published>2014-04-13T03:00:00Z</published>
-    <updated>2014-04-26T07:37:26+00:00</updated>
+    <updated>2014-04-28T12:58:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -233,7 +275,7 @@ Ubuntuは依然Upstartを採用していますが、移行を提案する人も�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html"/>
     <id>http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html</id>
     <published>2014-04-10T14:00:00Z</published>
-    <updated>2014-04-26T07:37:26+00:00</updated>
+    <updated>2014-04-28T12:58:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -313,7 +355,7 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html"/>
     <id>http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html</id>
     <published>2014-03-30T13:00:00Z</published>
-    <updated>2014-04-26T07:37:26+00:00</updated>
+    <updated>2014-04-28T12:58:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -410,7 +452,7 @@ controllerに&lt;code&gt;@was_tapped&lt;/code&gt; がないと言われてしま
     <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/use-instant-click.html"/>
     <id>http://3100.github.io/blog/2014/03/30/use-instant-click.html</id>
     <published>2014-03-30T05:00:00Z</published>
-    <updated>2014-04-26T07:37:26+00:00</updated>
+    <updated>2014-04-28T12:58:41+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -466,52 +508,6 @@ script data-no-instant='' InstantClick.init();
 &lt;p&gt;InstantClickを用いることで、同一Webサイト内のコンテンツを先読みすることができるようになりました。&lt;/p&gt;
 
 &lt;p&gt;MoinMoinや他に管理しているサイトなんかでも、がんばって数十ミリ秒での応答などをやっているので、先読みができればさらに嬉しいなと思います。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Travis CIのビルドスキップ機能について</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/skip-ci.html"/>
-    <id>http://3100.github.io/blog/2014/03/30/skip-ci.html</id>
-    <published>2014-03-29T15:30:00Z</published>
-    <updated>2014-04-26T07:37:26+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;Travis CIにいつの間にかビルドスキップ機能が追加されていたので、
-早速MiddlemanのビルドでもGithub Pages生成後の処理をスキップするようにしました。&lt;/p&gt;
-
-&lt;h2 id="middleman"&gt;Middlemanのビルドについて&lt;/h2&gt;
-
-&lt;p&gt;このblogはMiddlemanを用いていますが、編集用ブランチとサイト生成先ブランチ(master)を分けています。
-編集用ブランチをローカルでコミットしてGithubにプッシュすると、Travis CIが自動的にmasterブランチへ静的ファイルを配置するという仕組みです。&lt;/p&gt;
-
-&lt;p&gt;その実態はRakefileを用意して、Travis CIに叩かせるというもので、以下の記事で紹介されていたものを利用しています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://tricknotes.hateblo.jp/entry/2013/06/17/020229"&gt;Middleman で作った web サイトを Travis + GitHub pages でお手軽に運用する - tricknotesのぼうけんのしょ&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;今までの問題点&lt;/h2&gt;
-
-&lt;p&gt;Travis CIのビルドはmasterブランチのコミット時にも動作してしまい、.travis.ymlが見つからないためにエラーが発生していました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="error log" src="/blog/2014/03/30/skip-ci/errorlog.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;上画像のように、成功ビルドの後に失敗ビルドがつくられています。&lt;/p&gt;
-
-&lt;p&gt;しかし、ビルドスキップを設定することで、この問題を回避できるようになりました。&lt;/p&gt;
-
-&lt;h2 id="section-2"&gt;スキップの設定&lt;/h2&gt;
-
-&lt;p&gt;Travis CIに特定のビルドをスキップさせる方法は単純で、コミットメッセージに&lt;code&gt;[skip ci]&lt;/code&gt;などとあれば良いということです。
-上記の自動ビルドではRakefileにてコミットメッセージも設定しているので、その中に&lt;code&gt;[skip ci]&lt;/code&gt;という文字列を含むようにしました。&lt;/p&gt;
-
-&lt;p&gt;この変更をコミットし、プッシュしたところ、無事にmaster生成後のビルドはスキップされるようになりました。&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="success log" src="/blog/2014/03/30/skip-ci/successlog.png" /&gt;&lt;/p&gt;
-
-&lt;p&gt;上画像のように、masterブランチ自動生成後のビルドはスキップされるようになりました。
-今まで、実害はあまりないもののエラービルドが出ることで気持ちがブルーになっていましたが、そうした気分からはようやく解放されそうです。&lt;/p&gt;
 </content>
   </entry>
 </feed>
