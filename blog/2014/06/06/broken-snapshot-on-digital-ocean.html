@@ -4,21 +4,76 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>DigitalOceanのSnapshotが壊れる？ - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9">
-          <h1>
-            Articles tagged rubymotion
-          </h1>
-          <ul>
-            <li>
-              <a href="/blog/2014/03/30/issues-in-ruby-motion-tutorial.html">RubyMotionのチュートリアルでハマったところ</a><span> Mar 30, 2014</span>
-            </li>
-          </ul>
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      DigitalOceanのSnapshotが壊れる？
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/digitalocean.html">digitalocean</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
+
+<p><a href="https://cloud.digitalocean.com/">DigitalOcean</a>で
+<code>snapshot</code>から<code>droplet</code>を作ろうとしたら
+うまくいっていないというお話。</p>
+
+<h2 id="section-1">経緯</h2>
+
+<p>DigitalOceanで動かしているMinecraftサーバーは
+サンフランシスコリージョンにあります。
+これをシンガポールに移したらネットワーク遅延が減って、
+体感速度も速くならないかな？ということで
+実際にスナップショットを取って試してみました。</p>
+
+<h2 id="section-2">試行1</h2>
+
+<p>スナップショットをリージョン転送して
+新規にドロップレットを作成するだけの簡単なお仕事、のはず。
+しかし、ドロップレット作成最後の15秒で何度やってもエラーとなりました。</p>
+
+<p>もしかして<code>Power Off</code>を使うのはダメで、きちんと<code>shutdown</code>する必要があるのかな。。</p>
+
+<p><a href="https://groups.google.com/forum/#!topic/packer-tool/bSlP8dELiM">DigitalOcean - file content disappears after image and new droplet creation - Google グループ</a></p>
+
+<p>尚、各処理にかかる時間ですが</p>
+
+<ul>
+  <li>スナップショット作成は使い方にもよるだろうけど、今回は数分で完了。</li>
+  <li>サンフランシスコからシンガポールへのスナップショット転送は、30分程度かかる。</li>
+</ul>
+
+<h2 id="section-3">試行2</h2>
+
+<p>今度はきちんとシャットダウンしてからスナップショットを作成し、現在リージョン転送中。</p>
+
+<p>しかし、結果は変わらず。</p>
+
+<h2 id="section-4">試行3</h2>
+
+<p>生成先をサンフランシスコにして試してみた。ら、動きました。
+どうやらスナップショットが壊れているわけではなさそうですね。</p>
+
+<p>結局サポートからチケットを作成して、現在質問中。</p>
+
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
