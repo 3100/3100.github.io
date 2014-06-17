@@ -48,3 +48,27 @@ DigitalOceanで動かしているMinecraftサーバーは
 
 結局サポートからチケットを作成して、現在質問中。
 
+## 正解(2014/06/18追記)
+
+技術スタッフにイシュー投げとくと言われた後、ずっと放置だったのですが、2週間弱して反応がありました。
+
+~~~
+# touch /etc/network.d/ethernet-static
+~~~
+
+をしてから、再度スナップショットを作って、試して欲しい、と。
+
+指示どおりに行ったところ、無事dropletの作成に成功しました。
+しかし、`ssh`はできないので、Webコンソールから各種ネットワーク設定を見直します。その際には以下の記事が大いに役に立ちました。
+
+[Network Configuration (日本語) - ArchWiki](https://wiki.archlinux.org/index.php/Network_Configuration_(%E6%97%A5%E6%9C%AC%E8%AA%9E))
+
+今回のケースでは、`/etc/conf.d/network@eth0`の中身が古いIPのままだったので、これを最新のものに変更する必要がありました。
+netmask値も24から18に変わったり。
+このあたりはリージョンによるのか、dropletによるのか、興味深いです。
+
+~~~
+# systemctl restart network@eth0
+~~~
+
+以上で、無事に外部からも接続できるようになりました。
