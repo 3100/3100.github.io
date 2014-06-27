@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>middleman-blogのハイライトにMonokaiテーマを使う - Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Slackを使ってみた感想 - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
@@ -12,125 +12,114 @@
       <div class="row">
         <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
     <h1 class="title" itemprop="name">
-      middleman-blogのハイライトにMonokaiテーマを使う
+      Slackを使ってみた感想
     </h1>
     <div class="meta">
-      <time class="date" itemprop="datePublished" content="2013-10-31T00:00:00+09:00" datetime="2013-10-31T00:00:00+09:00" pubdate=""><span class="month">Oct</span><span class="day">31</span><span class="year">2013</span></time>
+      <time class="date" itemprop="datePublished" content="2014-06-27T22:00:00+09:00" datetime="2014-06-27T22:00:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">27</span><span class="year">2014</span></time>
       <div class="article-tag">
         <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
           <li>
-            <a href="/blog/tags/middleman.html">middleman</a>
-          </li>
-          <li>
-            <a href="/blog/tags/monokai.html">monokai</a>
+            <a href="/blog/tags/slack.html">slack</a>
           </li>
         </ul>
       </div>
     </div>
   </header>
-  <div class="body markdown" itemprop="articleBody"><p>middleman-blogには、コードをシンタックスハイライトする機能があります。
-middleman-syntaxをGemfileに加えて、必要な設定をconfig.rbに書くだけです。</p>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">経緯</h2>
 
-<p><a href="https://github.com/middleman/middleman-syntax">middleman/middleman-syntax</a></p>
+<p>いまだに<code>IP Messenger</code>が幅をきかす社内ですが、技術的興味が似ている若手社員の間では色々チャットサービスを試しています。</p>
 
-<p>kramdownを使う場合は</p>
+<p>過去の変遷は<a href="http://lingr.com/">lingr</a> → <a href="http://www.codefirst.org/AsakusaSatellite/">AsakusaSatellite</a> → <a href="http://kato.im/">kato.im</a>で、ここ数ヶ月ほどは<code>kato.im</code>がお気に入りでした。
+検討したサービスには<a href="https://www.hipchat.com/">hipchat</a>や<a href="http://www.chatwork.com/ja/">chatwork</a>などもありましたが、見た目が<code>kato.im</code>ほどではないことなどから、食指が動きません。</p>
 
-<pre class="highlight ruby"><span class="n">set</span> <span class="ss">:markdown_engine</span><span class="p">,</span> <span class="ss">:kramdown</span>
-</pre>
+<p><code>kato.im</code>の欠点は<code>hipchat</code>が人数無制限無料となった今も10人を超えると課金対象になることです。($5ppmなので課金開始額は$50pm。)
+<code>AsakusaSatellite</code>から導入していた<a href="https://hubot.github.com/">hubot</a>も立派に1人としてカウントされるため、実質9人までしか同じログを共有することができません。
+利用者が10人を超えていたので、結果としてログイン頻度や発言数などによって人が2つのグループを行き来するという運用になっていました。</p>
 
-<p>redcarpetなら</p>
+<p>一方、最近巷で話題の<a href="https://slack.com/">slack</a>は<code>hipchat</code>を意識してなのかそうでないのか、人数無制限無料です。また、ビジュアル的にもいい感じであることが事前に確認されていました。
+そこで、今回試験的に導入してみることにしました。</p>
 
-<pre class="highlight ruby"><span class="n">set</span> <span class="ss">:markdown_engine</span><span class="p">,</span> <span class="ss">:redcarpet</span>
-<span class="n">set</span> <span class="ss">:markdown</span><span class="p">,</span> <span class="ss">:fenced_code_blocks</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:smartypants</span> <span class="o">=&gt;</span> <span class="kp">true</span>
-</pre>
-
-<p>ですかね。</p>
-
-<p>middleman-syntaxは内部でrougeというruby製pygmentsを目指しているハイライトパーサを使用しています。</p>
-
-<p><a href="https://github.com/jayferd/rouge">jayferd/rouge</a></p>
-
-<p>これを利用して、rougeに用意されているハイライトテーマを利用することができるようです。具体的には</p>
+<h2 id="section-1">個人的に重視する部分</h2>
 
 <ul>
-  <li>ThankfulEyes</li>
-  <li>Colorful</li>
-  <li>Github</li>
-  <li>Base16</li>
-  <li>Base16::Solarized (Octopress風らしいです)</li>
-  <li>Base16::Monokai</li>
+  <li>使いやすいチャット機能</li>
+  <li>Wikiを置き換えたい</li>
+  <li>見た目</li>
 </ul>
 
-<p>があります。(Base16::Monokaiは基本色を使っているせいか？地味です。。)</p>
+<p>7年近く運用している<code>moinmoin</code>をそろそろ違うWikiに置き換えたい機運が高まっています。
+似たような用途で、<a href="https://github.com/volpe28v/DevHub">devhub</a>を運用しているチームもいますが、できれば長期にわたる使用に耐えられるようなものが望ましいです。</p>
 
-<p>これをmiddlemanで利用するには、stylesheets/highlight.css.erbなどというcss生成ファイルを作って以下のように書き込み</p>
+<hr />
 
-<pre class="highlight ruby"><span class="o">&lt;</span><span class="sx">%= Rouge::Themes::Github.render(:scope =</span><span class="o">&gt;</span> <span class="s1">'.highlight'</span><span class="p">)</span> <span class="sx">%&gt;
-</span></pre>
+<h2 id="section-2">いいところ</h2>
 
-<p>あとはHTML上でhighlight.cssを読み込むようにします。</p>
+<h3 id="ui">UIが変態的だけどなかなか爽快</h3>
 
-<h3 id="section">ところで(割りと無駄話)</h3>
+<p>初めてログインすると、画面のあちこちに円形のマーキングがされたりして、今っぽさを感じます。
+決して使いやすい素直なUIではありませんが、デザインにこだわりを感じます。</p>
 
-<p>ざっと見た感じ、あまりいい感じのハイライトが見つかりません。
-そこで、pygments-cssを参考にして作ったMonokaiをrougeに加えてもらいました。
-何気に内輪じゃないOSSへは初のプルリクでしたが、無事取り込まれました。</p>
+<h3 id="section-3">スニペット機能や記事投稿機能が便利</h3>
 
-<p>まだ、gemには反映されていなので、middleman-syntaxをフォークして中のGemfileを修正する必要があります。</p>
+<p>コードスニペットや記事投稿機能のあるチャットシステムというのが意外性あります。<code>Devhub</code>で経験している機能ですが、より洗練された印象を受けます。</p>
 
-<pre class="highlight ruby"><span class="n">gem</span> <span class="s2">"rouge"</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s2">"git://github.com/jayferd/rouge.git"</span>
-</pre>
+<h3 id="section-4">過去に遡って発言を訂正できる</h3>
 
-<p>これをさらに、middlemanのGemfileで指定します。</p>
+<p><code>kato.im</code>では直前の発言のみ1分間だけ修正可能という仕様でした。
+このルール内でネタ発言を歴史に刻むかどうかの壮大なチキンレースが繰り広げられたりすることもありましたが、やはり不便です。</p>
 
-<pre class="highlight ruby"><span class="n">gem</span> <span class="s2">"middleman-syntax"</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s2">"git://github.com/&lt;あなたのid&gt;/middleman-syntax.git"</span>
-</pre>
+<p>いつでも発言を訂正できるというのは、言質を重視する開発現場では欠点かもしれませんが、やはり必要な機能だと思います。</p>
 
-<p>あとはbundle updateすれば良いはずです。これで無事Monokaiを使えるようになりました。</p>
+<h3 id="hubot">hubot対応</h3>
 
-<pre class="highlight ruby"><span class="o">&lt;</span><span class="sx">%= Rouge::Themes::Monokai.render(:scope =</span><span class="o">&gt;</span> <span class="s1">'.highlight'</span><span class="p">)</span> <span class="sx">%&gt;
-</span></pre>
+<p><code>hubot</code>に何をさせているかといえば、本当に大したことはさせていませんが、僕達には必要不可欠なおもちゃです。</p>
 
-<h3 id="section-1">もっとシンプルな方法</h3>
+<p><img alt="slack" src="/blog/2014/06/27/first-impression-of-slack/slack.png" /></p>
 
-<p>実はmiddleman-syntaxはpygments用cssファイルを取り込めるらしいです。
-ですので、stylesheets/highlight.css.erbを作る代わりに、
-目的のテーマ用cssを直接HTMLから指定するだけで済むようです。</p>
+<hr />
 
-<p>試してはいませんが、monokai.cssというものも見つかりました。若干直せば使えそうに見えます。</p>
+<h2 id="section-5">悪いところ</h2>
 
-<p><a href="https://github.com/richleland/pygments-css/blob/master/monokai.css">pygments-css/monokai.css at master · richleland/pygments-css</a></p>
+<h3 id="section-6">利用料金は高め</h3>
 
-<h3 id="section-2">というわけで</h3>
+<p>基本無料ではありますが、課金段階においてはユーザ単価が高め($8ppm〜)なのが気になります。</p>
 
-<p>以下、Monokaiのサンプルになります。</p>
+<p>また、他のサービスとの連携も無料版は5種類に制限されているので、やや不便です。</p>
 
-<pre class="highlight ruby"><span class="c1"># The Greeter class</span>
-<span class="k">class</span> <span class="nc">Greeter</span>
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-    <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span><span class="p">.</span><span class="nf">capitalize</span>
-  <span class="k">end</span>
+<h3 id="ui-1">UIに慣れるまで目的のことをするのが難しい</h3>
 
-  <span class="k">def</span> <span class="nf">salute</span>
-    <span class="nb">puts</span> <span class="s2">"Hello </span><span class="si">#{</span><span class="vi">@name</span><span class="si">}</span><span class="s2">!"</span>
-  <span class="k">end</span>
-<span class="k">end</span>
+<p>驚き最小の原則には反している気がします。例えば、ユーザやチャンネルの右側にある☓ボタンは、自分から見えなくするだけです。削除ボタンかな？という印象を受けます。
+チームのホーム画面とチャット画面の行き来も最初はとまどいます。</p>
 
-<span class="c1"># Create a new object</span>
-<span class="n">g</span> <span class="o">=</span> <span class="no">Greeter</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"world"</span><span class="p">)</span>
+<h3 id="gfmgithub-flavored-markdown">GFM(Github Flavored Markdown)ではない</h3>
 
-<span class="c1"># Output "Hello World!"</span>
-<span class="n">g</span><span class="p">.</span><span class="nf">salute</span>
-</pre>
+<p>なぜだ。</p>
 
-<p>Happy highlighting!</p>
+<h3 id="section-7">スニペットや記事にタグ付けできない</h3>
 
-<h3 id="section-3">余談</h3>
+<p>あくまでチャットの補助機能という位置づけなのでしょうか。
+個人的にはここが拡充されれば色々なサービスを喰う存在になると予想します。</p>
 
-<p>元々SublimeText2風のテーマが欲しくてMonokaiに辿り着いたのですが、
-よく見ると色パレットは似ていても配色パターンが違いますね。。
-個人的にはhighlight.jsのmonokaiがST2っぽいなと思っています。
-これは、ST2風も作るべきか。。</p>
+<h3 id="section-8">1画面に複数チャンネルを表示できない</h3>
+
+<p><code>hootsuite</code>や<code>kato.im</code>に慣れている人間にはやや不便です。</p>
+
+<h3 id="huboturlheroku">hubotにURLが必要なのでherokuなどを使うことになる</h3>
+
+<p>使用上の制限なんでしょうか。従来は<code>digitalocean</code>上で動かしていましたが、仕方なく<code>heroku</code>へ移行させました。</p>
+
+<p>話がずれますが、<a href="http://wercker.com/">wercker</a>は便利ですね。githubへのプッシュからの自動デプロイが簡単です。<code>travis-ci</code>の時はもうちょっと面倒だった記憶があります。</p>
+
+<h2 id="section-9">まとめ</h2>
+
+<p>残念だったのは記事機能です。現時点ではタグやカテゴリといった機能は存在せず、キーワード検索か最新記事一覧から閲覧せざるを得ません。慣れの問題かもしれませんが、検索性や俯瞰性に難ありでしょう。</p>
+
+<p>結論としては、<code>kato.im</code>から移行して引き続き利用していくことになったものの、Wikiを完全に代替できるわけではなく、機能改良が望まれるかあるいは諦めるかという感じになりました。</p>
+
+<p>尚、運用中のhubotは以下に公開されています。少しだけ独自スクリプトもあります。</p>
+
+<p><a href="https://github.com/3100/slack-hubot">3100/slack-hubot</a></p>
+
 
   </div>
   <div class="clearfix"></div>

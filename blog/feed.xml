@@ -5,16 +5,122 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-06-05T23:30:00Z</updated>
+  <updated>2014-06-27T13:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Slackを使ってみた感想</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
+    <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
+    <published>2014-06-27T13:00:00Z</published>
+    <updated>2014-06-27T13:50:55+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;経緯&lt;/h2&gt;
+
+&lt;p&gt;いまだに&lt;code&gt;IP Messenger&lt;/code&gt;が幅をきかす社内ですが、技術的興味が似ている若手社員の間では色々チャットサービスを試しています。&lt;/p&gt;
+
+&lt;p&gt;過去の変遷は&lt;a href="http://lingr.com/"&gt;lingr&lt;/a&gt; → &lt;a href="http://www.codefirst.org/AsakusaSatellite/"&gt;AsakusaSatellite&lt;/a&gt; → &lt;a href="http://kato.im/"&gt;kato.im&lt;/a&gt;で、ここ数ヶ月ほどは&lt;code&gt;kato.im&lt;/code&gt;がお気に入りでした。
+検討したサービスには&lt;a href="https://www.hipchat.com/"&gt;hipchat&lt;/a&gt;や&lt;a href="http://www.chatwork.com/ja/"&gt;chatwork&lt;/a&gt;などもありましたが、見た目が&lt;code&gt;kato.im&lt;/code&gt;ほどではないことなどから、食指が動きません。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;kato.im&lt;/code&gt;の欠点は&lt;code&gt;hipchat&lt;/code&gt;が人数無制限無料となった今も10人を超えると課金対象になることです。($5ppmなので課金開始額は$50pm。)
+&lt;code&gt;AsakusaSatellite&lt;/code&gt;から導入していた&lt;a href="https://hubot.github.com/"&gt;hubot&lt;/a&gt;も立派に1人としてカウントされるため、実質9人までしか同じログを共有することができません。
+利用者が10人を超えていたので、結果としてログイン頻度や発言数などによって人が2つのグループを行き来するという運用になっていました。&lt;/p&gt;
+
+&lt;p&gt;一方、最近巷で話題の&lt;a href="https://slack.com/"&gt;slack&lt;/a&gt;は&lt;code&gt;hipchat&lt;/code&gt;を意識してなのかそうでないのか、人数無制限無料です。また、ビジュアル的にもいい感じであることが事前に確認されていました。
+そこで、今回試験的に導入してみることにしました。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;個人的に重視する部分&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使いやすいチャット機能&lt;/li&gt;
+  &lt;li&gt;Wikiを置き換えたい&lt;/li&gt;
+  &lt;li&gt;見た目&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;7年近く運用している&lt;code&gt;moinmoin&lt;/code&gt;をそろそろ違うWikiに置き換えたい機運が高まっています。
+似たような用途で、&lt;a href="https://github.com/volpe28v/DevHub"&gt;devhub&lt;/a&gt;を運用しているチームもいますが、できれば長期にわたる使用に耐えられるようなものが望ましいです。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id="section-2"&gt;いいところ&lt;/h2&gt;
+
+&lt;h3 id="ui"&gt;UIが変態的だけどなかなか爽快&lt;/h3&gt;
+
+&lt;p&gt;初めてログインすると、画面のあちこちに円形のマーキングがされたりして、今っぽさを感じます。
+決して使いやすい素直なUIではありませんが、デザインにこだわりを感じます。&lt;/p&gt;
+
+&lt;h3 id="section-3"&gt;スニペット機能や記事投稿機能が便利&lt;/h3&gt;
+
+&lt;p&gt;コードスニペットや記事投稿機能のあるチャットシステムというのが意外性あります。&lt;code&gt;Devhub&lt;/code&gt;で経験している機能ですが、より洗練された印象を受けます。&lt;/p&gt;
+
+&lt;h3 id="section-4"&gt;過去に遡って発言を訂正できる&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;kato.im&lt;/code&gt;では直前の発言のみ1分間だけ修正可能という仕様でした。
+このルール内でネタ発言を歴史に刻むかどうかの壮大なチキンレースが繰り広げられたりすることもありましたが、やはり不便です。&lt;/p&gt;
+
+&lt;p&gt;いつでも発言を訂正できるというのは、言質を重視する開発現場では欠点かもしれませんが、やはり必要な機能だと思います。&lt;/p&gt;
+
+&lt;h3 id="hubot"&gt;hubot対応&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;hubot&lt;/code&gt;に何をさせているかといえば、本当に大したことはさせていませんが、僕達には必要不可欠なおもちゃです。&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="slack" src="/blog/2014/06/27/first-impression-of-slack/slack.png" /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id="section-5"&gt;悪いところ&lt;/h2&gt;
+
+&lt;h3 id="section-6"&gt;利用料金は高め&lt;/h3&gt;
+
+&lt;p&gt;基本無料ではありますが、課金段階においてはユーザ単価が高め($8ppm〜)なのが気になります。&lt;/p&gt;
+
+&lt;p&gt;また、他のサービスとの連携も無料版は5種類に制限されているので、やや不便です。&lt;/p&gt;
+
+&lt;h3 id="ui-1"&gt;UIに慣れるまで目的のことをするのが難しい&lt;/h3&gt;
+
+&lt;p&gt;驚き最小の原則には反している気がします。例えば、ユーザやチャンネルの右側にある☓ボタンは、自分から見えなくするだけです。削除ボタンかな？という印象を受けます。
+チームのホーム画面とチャット画面の行き来も最初はとまどいます。&lt;/p&gt;
+
+&lt;h3 id="gfmgithub-flavored-markdown"&gt;GFM(Github Flavored Markdown)ではない&lt;/h3&gt;
+
+&lt;p&gt;なぜだ。&lt;/p&gt;
+
+&lt;h3 id="section-7"&gt;スニペットや記事にタグ付けできない&lt;/h3&gt;
+
+&lt;p&gt;あくまでチャットの補助機能という位置づけなのでしょうか。
+個人的にはここが拡充されれば色々なサービスを喰う存在になると予想します。&lt;/p&gt;
+
+&lt;h3 id="section-8"&gt;1画面に複数チャンネルを表示できない&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;hootsuite&lt;/code&gt;や&lt;code&gt;kato.im&lt;/code&gt;に慣れている人間にはやや不便です。&lt;/p&gt;
+
+&lt;h3 id="huboturlheroku"&gt;hubotにURLが必要なのでherokuなどを使うことになる&lt;/h3&gt;
+
+&lt;p&gt;使用上の制限なんでしょうか。従来は&lt;code&gt;digitalocean&lt;/code&gt;上で動かしていましたが、仕方なく&lt;code&gt;heroku&lt;/code&gt;へ移行させました。&lt;/p&gt;
+
+&lt;p&gt;話がずれますが、&lt;a href="http://wercker.com/"&gt;wercker&lt;/a&gt;は便利ですね。githubへのプッシュからの自動デプロイが簡単です。&lt;code&gt;travis-ci&lt;/code&gt;の時はもうちょっと面倒だった記憶があります。&lt;/p&gt;
+
+&lt;h2 id="section-9"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;残念だったのは記事機能です。現時点ではタグやカテゴリといった機能は存在せず、キーワード検索か最新記事一覧から閲覧せざるを得ません。慣れの問題かもしれませんが、検索性や俯瞰性に難ありでしょう。&lt;/p&gt;
+
+&lt;p&gt;結論としては、&lt;code&gt;kato.im&lt;/code&gt;から移行して引き続き利用していくことになったものの、Wikiを完全に代替できるわけではなく、機能改良が望まれるかあるいは諦めるかという感じになりました。&lt;/p&gt;
+
+&lt;p&gt;尚、運用中のhubotは以下に公開されています。少しだけ独自スクリプトもあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/3100/slack-hubot"&gt;3100/slack-hubot&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <title>DigitalOceanのSnapshotが壊れる？</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html</id>
     <published>2014-06-05T23:30:00Z</published>
-    <updated>2014-06-18T00:00:54+00:00</updated>
+    <updated>2014-06-27T13:50:55+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -91,7 +197,7 @@ netmask値も24から18に変わったり。
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/28/begin-using-xvim.html"/>
     <id>http://3100.github.io/blog/2014/04/28/begin-using-xvim.html</id>
     <published>2014-04-28T13:00:00Z</published>
-    <updated>2014-06-18T00:00:54+00:00</updated>
+    <updated>2014-06-27T13:50:55+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -133,7 +239,7 @@ VisualStudioの&lt;code&gt;VsVim&lt;/code&gt;と同様に、欠かせないプ�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html"/>
     <id>http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html</id>
     <published>2014-04-26T03:00:00Z</published>
-    <updated>2014-06-18T00:00:54+00:00</updated>
+    <updated>2014-06-27T13:50:55+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -304,7 +410,7 @@ Ubuntuは依然Upstartを採用していますが、移行を提案する人も�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html"/>
     <id>http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html</id>
     <published>2014-04-13T03:00:00Z</published>
-    <updated>2014-06-18T00:00:54+00:00</updated>
+    <updated>2014-06-27T13:50:55+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -352,7 +458,7 @@ Ubuntuは依然Upstartを採用していますが、移行を提案する人も�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html"/>
     <id>http://3100.github.io/blog/2014/04/10/learn-objective-c-again.html</id>
     <published>2014-04-10T14:00:00Z</published>
-    <updated>2014-06-18T00:00:54+00:00</updated>
+    <updated>2014-06-27T13:50:55+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -425,103 +531,6 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
 これと『&lt;a href="http://www.amazon.co.jp/exec/obidos/ASIN/4800710227/unplu-22/ref=nosim/"&gt;iPhoneアプリ開発入門ノート&lt;/a&gt;』があれば、とりあえず簡単なアプリケーションは開発できるようになるのではないかなと思います。&lt;/p&gt;
 
 &lt;p&gt;自分も試行錯誤しながら開発手法を検討していきたいなと思いました。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>RubyMotionのチュートリアルでハマったところ</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html"/>
-    <id>http://3100.github.io/blog/2014/03/30/issues-in-ruby-motion-tutorial.html</id>
-    <published>2014-03-30T13:00:00Z</published>
-    <updated>2014-06-18T00:00:54+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="http://www.rubymotion.com/"&gt;RubyMotion&lt;/a&gt;の&lt;a href="http://tutorial.rubymotion.jp/"&gt;チュートリアルサイト&lt;/a&gt;を進めています。
-しかし、チュートリアルが書かれてからだいぶ経つせいか
-ところどころハマりそうな部分がありましたので、ここにメモとして残しておきます。&lt;/p&gt;
-
-&lt;h2 id="uilabel"&gt;UILabelの背景色&lt;/h2&gt;
-
-&lt;p&gt;7章でUILabelにModelの値変更を反映させるのですが、iOS7で変更があったのかどうなのか
-指示どおりに作ってもラベルが見えません。&lt;/p&gt;
-
-&lt;p&gt;実は背景色が黒になっていることが原因なので、明示的に白を指定することで解決しました。&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;didFinishLaunchingWithOptions&lt;/span&gt;&lt;span class="ss"&gt;:launchOptions&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="c1"&gt;#..&lt;/span&gt;
-    &lt;span class="vi"&gt;@name_label&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;backgroundColor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;whiteColor&lt;/span&gt;
-    &lt;span class="c1"&gt;#..&lt;/span&gt;
-    &lt;span class="vi"&gt;@email_label&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;backgroundColor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;whiteColor&lt;/span&gt;
-    &lt;span class="c1"&gt;#..&lt;/span&gt;
-    &lt;span class="vi"&gt;@id_label&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;backgroundColor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;UIColor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;whiteColor&lt;/span&gt;
-    &lt;span class="c1"&gt;#..&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;h2 id="specuibuttontap"&gt;SpecでUIButtonのtapができない&lt;/h2&gt;
-
-&lt;p&gt;こちらはよく原因がわからないのですが、8章でコントローラのspecを書く際に、
-うまくタップイベントが発生してくれないという問題があります。&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ButtonController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;UIViewController&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;viewDidLoad&lt;/span&gt;
-    &lt;span class="k"&gt;super&lt;/span&gt;
-
-    &lt;span class="vi"&gt;@button&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;UIButton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;buttonWithType&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;UIButtonTypeRoundedRect&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@button&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;setTitle&lt;/span&gt; &lt;span class="s2"&gt;"Test me title!"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;forState&lt;/span&gt;&lt;span class="ss"&gt;:UIControlStateNormal&lt;/span&gt;
-    &lt;span class="vi"&gt;@button&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;accessibilityLabel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"Test me!"&lt;/span&gt;
-    &lt;span class="vi"&gt;@button&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;sizeToFit&lt;/span&gt;
-    &lt;span class="vi"&gt;@button&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;addTarget&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="ss"&gt;:'tapped'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;forControlEvents&lt;/span&gt;&lt;span class="ss"&gt;:UIControlEventTouchUpInside&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="nb"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;view&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;addSubview&lt;/span&gt; &lt;span class="vi"&gt;@button&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;tapped&lt;/span&gt;
-    &lt;span class="nb"&gt;p&lt;/span&gt; &lt;span class="s2"&gt;"I'm tapped!"&lt;/span&gt;
-    &lt;span class="vi"&gt;@was_tapped&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;こうしたコントローラを作成し、&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;ButtonController&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="n"&gt;tests&lt;/span&gt; &lt;span class="no"&gt;ButtonController&lt;/span&gt;
-
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;"changes instance variable when button is tapped"&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;tap&lt;/span&gt; &lt;span class="s1"&gt;'Test me!'&lt;/span&gt;
-      &lt;span class="n"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;instance_variable_get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"@was_tapped"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;should&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;上記のようなspecがあったとします。ここで&lt;code&gt;rake spec&lt;/code&gt;を実行すると、
-controllerに&lt;code&gt;@was_tapped&lt;/code&gt; がないと言われてしまいます。
-(おそらくtapできていないため)&lt;/p&gt;
-
-&lt;p&gt;これについてはtwitterで公式アカウント(@RubyMotion)に質問している人もいました。が、解決になってないような。。&lt;/p&gt;
-
-&lt;div&gt;
-&lt;blockquote class="twitter-tweet" lang="ja"&gt;&lt;p&gt;&lt;a href="https://twitter.com/gaelian"&gt;@gaelian&lt;/a&gt; &lt;a href="https://twitter.com/clayallsopp"&gt;@clayallsopp&lt;/a&gt; &lt;a href="https://twitter.com/alloy"&gt;@alloy&lt;/a&gt; is working on it, setting app.deployment_target to &amp;quot;6.1&amp;quot; should work around the problem.&lt;/p&gt;&amp;mdash; RubyMotion (@RubyMotion) &lt;a href="https://twitter.com/RubyMotion/statuses/409621868178857984"&gt;2013, 12月 8&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;p&gt;また、PragProgのRubyMotion本に関するフォーラムでもこの問題は指摘されています。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://forums.pragprog.com/forums/279/topics/11365"&gt;Pragmatic Forums - Section 6.2 Testing App UI and Controllers problem&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;いまいち根本的な解決には至っていないようですが、暫定的な対処法としてUIButtonのframeに以下のような設定をすると良いと書かれていました。&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;&lt;span class="vi"&gt;@button&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;frame&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;CGRect&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;70&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="vi"&gt;@button&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;size&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;実際に試すと、本当にこれで問題が解決しました。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;RubyMotionは書いていて楽しいですが、あまり情報が多くないためこういったハマりポイントがあると辛そうです。&lt;/p&gt;
-
 </content>
   </entry>
 </feed>
