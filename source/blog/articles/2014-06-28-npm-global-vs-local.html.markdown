@@ -1,6 +1,6 @@
 ---
 title: "npm:globalとlocal"
-published: false
+published: true
 date: 2014-06-28 11:07
 comments: true
 tags: node.js
