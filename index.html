@@ -13,6 +13,36 @@
         <div id="main" class="col-md-9">
 <header>
   <h1 class="title" itemprop="name">
+    vue.jsとDate
+  </h1>
+  <div class="meta">
+    <time class="date" itemprop="datePublished" content="2014-06-30T01:50:00+09:00" datetime="2014-06-30T01:50:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+    <div class="article-tag">
+      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+        <li>
+          <a href="/blog/tags/vue-js.html">vue.js</a>
+        </li>
+        <li>
+          <a href="/blog/tags/javascript.html">javascript</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header><p>最近<a href="http://vuejs.org/">vue.js</a>が良いと聞いたので、サンプルサイトを作って遊んでいます。</p>
+
+<p><code>vue.js</code>は所謂ViewModel的なオブジェクトを生成してあげるのですが
+そこで管理するデータは<code>json</code>で表現できるものでなければなりません。</p>
+
+<p>それで困ったのがjavascriptの<code>Date</code>。
+そのままDateオブジェクトを管理しようとすると、うまくいきませんでした。</p>
+
+<p>そこで、以下のように一旦ミリ秒(int)として管理して
+必要な値を<code>computed</code>(必要なときに計算する)として持つようにしました。</p>
+
+<pre class="highlight coffeescript"><span class="nx">sample</span></pre><a href="/blog/2014/06/30/vue-js-with-date.html">続きを読む</a>
+<hr>
+<header>
+  <h1 class="title" itemprop="name">
     npm:globalとlocal
   </h1>
   <div class="meta">
@@ -135,34 +165,6 @@
 一見するとmasterブランチの更新が止まっているように見えますが、XCode5向けの開発はブランチで行われているようです。
 XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2014/04/28/begin-using-xvim.html">続きを読む</a>
 <hr>
-<header>
-  <h1 class="title" itemprop="name">
-    サーバOSとしてのArch Linux
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/arch.html">arch</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><h2 id="section">概要</h2>
-
-<p><code>Arch</code>。</p>
-
-<p>個人的には一番使いやすいLinuxディストロだと思うのですが、2014年現在、世間的にはUbuntuやCentOS、Debianなどの後塵を拝し、Gentooなどと共にキワモノ的なカテゴリに分けられることが多いと感じています。
-ここでは、特にサーバ用途として考えた際に、なぜArchが選ばれないのか、調べてみることにしました。
-(といっても主にネットの声だけで)</p>
-
-<h2 id="arch8">Archが選ばれない理由8個</h2>
-
-<h3 id="update">その1。Updateで既存環境がいつどこで壊れるか予想がつかない</h3>
-
-<p>Arch...</p><a href="/blog/2014/04/26/arch-linux-as-server-os.html">続きを読む</a>
-<hr>
 <p>
   <a href="/page/2/">次へ</a>
 </p>
@@ -206,6 +208,9 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
             </h3>
             <ul>
               <li>
+                <a href="/blog/2014/06/30/vue-js-with-date.html">vue.jsとDate</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T01:50:00+09:00" datetime="2014-06-30T01:50:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
                 <a href="/blog/2014/06/28/npm-global-vs-local.html">npm:globalとlocal</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-28T11:07:00+09:00" datetime="2014-06-28T11:07:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">28</span><span class="year">2014</span></time>
               </li>
               <li>
@@ -223,20 +228,11 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
               <li>
                 <a href="/blog/2014/04/13/digitalocean-are-deprecating-arch.html">DigitalOceanがArchの提供をやめるらしい</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-13T12:00:00+09:00" datetime="2014-04-13T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">13</span><span class="year">2014</span></time>
               </li>
-              <li>
-                <a href="/blog/2014/04/10/learn-objective-c-again.html">Objective-Cへ入門</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-10T23:00:00+09:00" datetime="2014-04-10T23:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">10</span><span class="year">2014</span></time>
-              </li>
             </ul>
           </article><h3>
             Tags
           </h3>
           <ul class="tags holizontal">
-            <li>
-              <a href="/blog/tags/moin.html">moin</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/nginx.html">nginx</a> (1)
-            </li>
             <li>
               <a href="/blog/tags/vim.html">vim</a> (3)
             </li>
@@ -247,22 +243,16 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
               <a href="/blog/tags/digitalocean.html">digitalocean</a> (3)
             </li>
             <li>
-              <a href="/blog/tags/middleman.html">middleman</a> (3)
-            </li>
-            <li>
-              <a href="/blog/tags/arch.html">arch</a> (2)
+              <a href="/blog/tags/minecraft.html">minecraft</a> (1)
             </li>
             <li>
               <a href="/blog/tags/travis-ci.html">travis-ci</a> (1)
             </li>
             <li>
-              <a href="/blog/tags/objective-c.html">objective-c</a> (1)
+              <a href="/blog/tags/middleman.html">middleman</a> (3)
             </li>
             <li>
-              <a href="/blog/tags/slack.html">slack</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/minecraft.html">minecraft</a> (1)
+              <a href="/blog/tags/arch.html">arch</a> (2)
             </li>
             <li>
               <a href="/blog/tags/ruby.html">ruby</a> (1)
@@ -277,13 +267,31 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
               <a href="/blog/tags/rubymotion.html">rubymotion</a> (1)
             </li>
             <li>
+              <a href="/blog/tags/moin.html">moin</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/nginx.html">nginx</a> (1)
+            </li>
+            <li>
               <a href="/blog/tags/node-js.html">node.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/objective-c.html">objective-c</a> (1)
             </li>
             <li>
               <a href="/blog/tags/instantclick.html">instantclick</a> (1)
             </li>
             <li>
               <a href="/blog/tags/performance.html">performance</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/slack.html">slack</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/vue-js.html">vue.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/javascript.html">javascript</a> (1)
             </li>
             <li>
               <a href="/blog/tags/monokai.html">monokai</a> (1)
@@ -293,7 +301,7 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
           </h3>
           <ul class="holizontal">
             <li>
-              <a href="/blog/2014.html">2014</a> (11)
+              <a href="/blog/2014.html">2014</a> (12)
             </li>
             <li>
               <a href="/blog/2013.html">2013</a> (6)

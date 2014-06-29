@@ -5,16 +5,100 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-06-28T02:07:00Z</updated>
+  <updated>2014-06-29T16:50:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>vue.jsとDate</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
+    <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
+    <published>2014-06-29T16:50:00Z</published>
+    <updated>2014-06-29T17:18:16+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;最近&lt;a href="http://vuejs.org/"&gt;vue.js&lt;/a&gt;が良いと聞いたので、サンプルサイトを作って遊んでいます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;vue.js&lt;/code&gt;は所謂ViewModel的なオブジェクトを生成してあげるのですが
+そこで管理するデータは&lt;code&gt;json&lt;/code&gt;で表現できるものでなければなりません。&lt;/p&gt;
+
+&lt;p&gt;それで困ったのがjavascriptの&lt;code&gt;Date&lt;/code&gt;。
+そのままDateオブジェクトを管理しようとすると、うまくいきませんでした。&lt;/p&gt;
+
+&lt;p&gt;そこで、以下のように一旦ミリ秒(int)として管理して
+必要な値を&lt;code&gt;computed&lt;/code&gt;(必要なときに計算する)として持つようにしました。&lt;/p&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;sample&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Vue&lt;/span&gt;
+  &lt;span class="na"&gt;el&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;'#sample'&lt;/span&gt;
+  &lt;span class="na"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;# うまくいかない
+&lt;/span&gt;    &lt;span class="c1"&gt;#date: new Date()
+&lt;/span&gt;    &lt;span class="c1"&gt;# 代わりにミリ秒で管理
+&lt;/span&gt;    &lt;span class="na"&gt;dateMs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="na"&gt;computed&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;year&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;getFullYear&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="na"&gt;month&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;getMonth&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="na"&gt;ym&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="c1"&gt;# これはうまくいかない
+&lt;/span&gt;      &lt;span class="c1"&gt;# "#{@year}年#{@month}月"
+&lt;/span&gt;      &lt;span class="nx"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="nx"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getMonth&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;m&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+        &lt;span class="nx"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'0'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+      &lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getFullYear&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s"&gt;年&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="nx"&gt;m&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s"&gt;月"&lt;/span&gt;
+  &lt;span class="na"&gt;methods&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;nextMonth&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="nx"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt; &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt;
+      &lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setMonth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getMonth&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getTime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="na"&gt;prevMonth&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="nx"&gt;date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt; &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt;
+      &lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setMonth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getMonth&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;dateMs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getTime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;すごい間抜け感があります。。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://momentjs.com/"&gt;Moment.js&lt;/a&gt;とか使えばもう少し綺麗になるかもしれないけど
+これだけのことに10kb近いライブラリを使いするのもどうかな。。&lt;/p&gt;
+
+&lt;p&gt;今回の例に関して言えば、使っているのは年と月だけなので、以下のほうが良かったかもですね。(拡張には弱そう)&lt;/p&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;sample&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nx"&gt;Vue&lt;/span&gt;
+  &lt;span class="na"&gt;el&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;'#sample'&lt;/span&gt;
+  &lt;span class="na"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;year&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="na"&gt;getFullYear&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="na"&gt;month&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="na"&gt;getMonth&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+  &lt;span class="na"&gt;computed&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;ym&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;year&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s"&gt;年&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s"&gt;月"&lt;/span&gt;
+  &lt;span class="na"&gt;methods&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;nextMonth&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;
+        &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;year&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="na"&gt;prevMonth&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;year&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;
+      &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="vi"&gt;@&lt;/span&gt;&lt;span class="na"&gt;month&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;なんかもっとスマートな方法はないものか。。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>npm:globalとlocal</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
     <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
     <published>2014-06-28T02:07:00Z</published>
-    <updated>2014-06-28T02:41:11+00:00</updated>
+    <updated>2014-06-29T17:18:16+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -82,7 +166,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
     <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
     <published>2014-06-27T13:00:00Z</published>
-    <updated>2014-06-28T02:41:11+00:00</updated>
+    <updated>2014-06-29T17:18:16+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -188,7 +272,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html</id>
     <published>2014-06-05T23:30:00Z</published>
-    <updated>2014-06-28T02:41:11+00:00</updated>
+    <updated>2014-06-29T17:18:16+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -265,7 +349,7 @@ netmask値も24から18に変わったり。
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/28/begin-using-xvim.html"/>
     <id>http://3100.github.io/blog/2014/04/28/begin-using-xvim.html</id>
     <published>2014-04-28T13:00:00Z</published>
-    <updated>2014-06-28T02:41:11+00:00</updated>
+    <updated>2014-06-29T17:18:16+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -307,7 +391,7 @@ VisualStudioの&lt;code&gt;VsVim&lt;/code&gt;と同様に、欠かせないプ�
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html"/>
     <id>http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html</id>
     <published>2014-04-26T03:00:00Z</published>
-    <updated>2014-06-28T02:41:11+00:00</updated>
+    <updated>2014-06-29T17:18:16+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -471,54 +555,6 @@ Ubuntuは依然Upstartを採用していますが、移行を提案する人も�
 &lt;p&gt;&lt;a href="http://fomori.org/blog/?p=468"&gt;Why arch linux sucks for servers - SLEIPNIR&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://springfieldpc.dyndns.org/gcopypasta/116-gnulinux/archlinux/418-top-5-reasons-why-arch-linux-sucks"&gt;Top 5 Reasons why Arch Linux suck&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>DigitalOceanがArchの提供をやめるらしい</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html"/>
-    <id>http://3100.github.io/blog/2014/04/13/digitalocean-are-deprecating-arch.html</id>
-    <published>2014-04-13T03:00:00Z</published>
-    <updated>2014-06-28T02:41:11+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;&lt;img alt="snap" src="/blog/2014/04/13/digitalocean-are-deprecating-arch/snapshot.png" /&gt;&lt;/p&gt;
-
-&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://www.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt;が&lt;code&gt;Arch&lt;/code&gt;イメージの提供を廃止予定だそうです。その理由ですが&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使っているユーザがそれほど多くない&lt;/li&gt;
-  &lt;li&gt;ローリングアップデートに対応する労力を避けない&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;とのこと。&lt;code&gt;Arch&lt;/code&gt;の素晴らしさが世間に十分認知されず、とても残念です。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;私見&lt;/h2&gt;
-
-&lt;p&gt;個人的には&lt;code&gt;Docker&lt;/code&gt;が安定すればその上で&lt;code&gt;Arch&lt;/code&gt;を動かせばいいやと思っているので、すぐ代替先を探そう！とはなりません。が、&lt;code&gt;Docker 0.10&lt;/code&gt;では&lt;code&gt;systemd&lt;/code&gt;がうまく動作しない問題があるため、そちらが早く治ってくれるといいなぁ。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://github.com/dotcloud/docker/issues/3629"&gt;running systemd inside docker arch container hangs or segfaults · Issue #3629 · dotcloud/docker&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;最近は複数の&lt;code&gt;Docker&lt;/code&gt;コンテナでクラスタを構築できる&lt;code&gt;CoreOS&lt;/code&gt;も気になってはいるので、そういうものも&lt;code&gt;DigitalOcean&lt;/code&gt;上で動かしたい欲求があります。&lt;/p&gt;
-
-&lt;p&gt;独自イメージのアップロード機能や、&lt;code&gt;CoreOS&lt;/code&gt;イメージの提供を求める声も多いのですが、その辺もあまり進捗はないみたいですね。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://digitalocean.uservoice.com/forums/136585-digitalocean/suggestions/3276477-allow-custom-images"&gt;Allow Custom Images – Customer Feedback for Digital Ocean&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href="http://digitalocean.uservoice.com/forums/136585-digital-ocean/suggestions/4250154-suport-coreos-as-a-deployment-platform"&gt;Suport CoreOS as a deployment platform – Customer Feedback for Digital Ocean&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;一時期は&lt;code&gt;AWS&lt;/code&gt;型の重厚なサービスではなく、&lt;code&gt;DigitalOcean&lt;/code&gt;のような軽量なサービスこそ次の主流になる、と思っていたのですが、サービス品質や姿勢についてはまだまだこれからかなという印象を抱いています。それでも価格を考えれば良いものを提供していることはわかります。ぜひとも頑張って欲しいです。&lt;/p&gt;
-
-&lt;p&gt;それにしても、イメージファイルのメンテや追加ってそんなに大変なのだろうか。もしかすると提供速度やスケールメリットを活かした独自構成がその辺りを犠牲にしているのかもしれないですね。&lt;/p&gt;
 </content>
   </entry>
 </feed>

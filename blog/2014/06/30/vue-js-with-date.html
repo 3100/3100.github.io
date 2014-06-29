@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>vue.jsとDate - Room 3100</title><data class="site description"></data>
+  </head>
+  <body>
+    <div class="container">
+      <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
+      <div class="row">
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      vue.jsとDate
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-06-30T01:50:00+09:00" datetime="2014-06-30T01:50:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/vue-js.html">vue.js</a>
+          </li>
+          <li>
+            <a href="/blog/tags/javascript.html">javascript</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><p>最近<a href="http://vuejs.org/">vue.js</a>が良いと聞いたので、サンプルサイトを作って遊んでいます。</p>
+
+<p><code>vue.js</code>は所謂ViewModel的なオブジェクトを生成してあげるのですが
+そこで管理するデータは<code>json</code>で表現できるものでなければなりません。</p>
+
+<p>それで困ったのがjavascriptの<code>Date</code>。
+そのままDateオブジェクトを管理しようとすると、うまくいきませんでした。</p>
+
+<p>そこで、以下のように一旦ミリ秒(int)として管理して
+必要な値を<code>computed</code>(必要なときに計算する)として持つようにしました。</p>
+
+<pre class="highlight coffeescript"><span class="nx">sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span>
+  <span class="na">el</span><span class="o">:</span> <span class="s">'#sample'</span>
+  <span class="na">data</span><span class="o">:</span>
+    <span class="c1"># うまくいかない
+</span>    <span class="c1">#date: new Date()
+</span>    <span class="c1"># 代わりにミリ秒で管理
+</span>    <span class="na">dateMs</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="na">now</span><span class="p">()</span>
+  <span class="na">computed</span><span class="o">:</span>
+    <span class="na">year</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="vi">@</span><span class="na">dateMs</span><span class="p">).</span><span class="na">getFullYear</span><span class="p">()</span>
+    <span class="na">month</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="vi">@</span><span class="na">dateMs</span><span class="p">).</span><span class="na">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="na">ym</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="c1"># これはうまくいかない
+</span>      <span class="c1"># "#{@year}年#{@month}月"
+</span>      <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="vi">@</span><span class="na">dateMs</span><span class="p">)</span>
+      <span class="nx">m</span> <span class="o">=</span> <span class="nx">date</span><span class="p">.</span><span class="na">getMonth</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span>
+      <span class="k">if</span> <span class="nx">m</span> <span class="o">&lt;</span> <span class="mi">10</span>
+        <span class="nx">m</span> <span class="o">=</span> <span class="s">'0'</span> <span class="o">+</span> <span class="nx">m</span><span class="p">;</span>
+      <span class="s">"</span><span class="si">#{</span><span class="nx">date</span><span class="p">.</span><span class="na">getFullYear</span><span class="p">()</span><span class="si">}</span><span class="s">年</span><span class="si">#{</span><span class="nx">m</span><span class="si">}</span><span class="s">月"</span>
+  <span class="na">methods</span><span class="o">:</span>
+    <span class="na">nextMonth</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="vi">@</span><span class="na">dateMs</span>
+      <span class="nx">date</span><span class="p">.</span><span class="na">setMonth</span><span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="na">getMonth</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+      <span class="vi">@</span><span class="na">dateMs</span> <span class="o">=</span> <span class="nx">date</span><span class="p">.</span><span class="na">getTime</span><span class="p">()</span>
+    <span class="na">prevMonth</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="vi">@</span><span class="na">dateMs</span>
+      <span class="nx">date</span><span class="p">.</span><span class="na">setMonth</span><span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="na">getMonth</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+      <span class="vi">@</span><span class="na">dateMs</span> <span class="o">=</span> <span class="nx">date</span><span class="p">.</span><span class="na">getTime</span><span class="p">()</span>
+</pre>
+
+<p>すごい間抜け感があります。。</p>
+
+<p><a href="http://momentjs.com/">Moment.js</a>とか使えばもう少し綺麗になるかもしれないけど
+これだけのことに10kb近いライブラリを使いするのもどうかな。。</p>
+
+<p>今回の例に関して言えば、使っているのは年と月だけなので、以下のほうが良かったかもですね。(拡張には弱そう)</p>
+
+<pre class="highlight coffeescript"><span class="nx">sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span>
+  <span class="na">el</span><span class="o">:</span> <span class="s">'#sample'</span>
+  <span class="na">data</span><span class="o">:</span>
+    <span class="na">year</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="na">getFullYear</span><span class="p">()</span>
+    <span class="na">month</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="na">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="na">computed</span><span class="o">:</span>
+    <span class="na">ym</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="s">"</span><span class="si">#{</span><span class="vi">@</span><span class="na">year</span><span class="si">}</span><span class="s">年</span><span class="si">#{</span><span class="vi">@</span><span class="na">month</span><span class="si">}</span><span class="s">月"</span>
+  <span class="na">methods</span><span class="o">:</span>
+    <span class="na">nextMonth</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="vi">@</span><span class="na">month</span> <span class="o">==</span> <span class="mi">12</span>
+        <span class="vi">@</span><span class="na">year</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="vi">@</span><span class="na">month</span> <span class="o">=</span> <span class="mi">1</span>
+      <span class="k">else</span>
+        <span class="vi">@</span><span class="na">month</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="na">prevMonth</span><span class="o">:</span> <span class="p">()</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="vi">@</span><span class="na">month</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="vi">@</span><span class="na">year</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="vi">@</span><span class="na">month</span> <span class="o">=</span> <span class="mi">12</span>
+      <span class="k">else</span>
+        <span class="vi">@</span><span class="na">month</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre>
+
+<p>なんかもっとスマートな方法はないものか。。</p>
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
+        </div>
+        <div id="sidebar" class="col-md-3">
+          <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            <h3>
+              Profile
+            </h3>
+            <section class="namecard">
+              <h4 class="name" itemprop="name">
+                3100
+              </h4>
+            </section>
+            <ul class="contact horizontal">
+              <li>
+                <a class="no-color" href="//twitter.com/zero310"><i class="fa fa-twitter fa-2x"></i></a>
+              </li>
+              <li>
+                <a class="no-color" href="//github.com/3100"><i class="fa fa-github fa-2x"></i></a>
+              </li>
+              <li>
+                <a class="no-color" href="//bitbucket.org/3100"><i class="fa fa-bitbucket fa-2x"></i></a>
+              </li>
+            </ul>
+            <p>
+              開発者
+            </p>
+          </article><article id="subscribe">
+            <h3>
+              Subscribe
+            </h3>
+            <ul class="horizontal">
+              <li>
+                <a class="no-color" href="/blog/feed.xml"><i class="fa fa-rss fa-2x"></i></a>
+              </li>
+            </ul>
+          </article><article id="recent_articles">
+            <h3>
+              Recent Articles
+            </h3>
+            <ul>
+              <li>
+                <a href="/blog/2014/06/30/vue-js-with-date.html">vue.jsとDate</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T01:50:00+09:00" datetime="2014-06-30T01:50:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/28/npm-global-vs-local.html">npm:globalとlocal</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-28T11:07:00+09:00" datetime="2014-06-28T11:07:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">28</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/27/first-impression-of-slack.html">Slackを使ってみた感想</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-27T22:00:00+09:00" datetime="2014-06-27T22:00:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">27</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/06/broken-snapshot-on-digital-ocean.html">DigitalOceanのSnapshotが壊れる？</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/28/begin-using-xvim.html">XVimをXCodeに導入した</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-28T22:00:00+09:00" datetime="2014-04-28T22:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">28</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/26/arch-linux-as-server-os.html">サーバOSとしてのArch Linux</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/13/digitalocean-are-deprecating-arch.html">DigitalOceanがArchの提供をやめるらしい</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-13T12:00:00+09:00" datetime="2014-04-13T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">13</span><span class="year">2014</span></time>
+              </li>
+            </ul>
+          </article><h3>
+            Tags
+          </h3>
+          <ul class="tags holizontal">
+            <li>
+              <a href="/blog/tags/vim.html">vim</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/xcode.html">xcode</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/digitalocean.html">digitalocean</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/minecraft.html">minecraft</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/travis-ci.html">travis-ci</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/middleman.html">middleman</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/arch.html">arch</a> (2)
+            </li>
+            <li>
+              <a href="/blog/tags/ruby.html">ruby</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/os-x.html">os x</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rbenv.html">rbenv</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rubymotion.html">rubymotion</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/moin.html">moin</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/nginx.html">nginx</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/node-js.html">node.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/objective-c.html">objective-c</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/instantclick.html">instantclick</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/performance.html">performance</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/slack.html">slack</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/vue-js.html">vue.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/javascript.html">javascript</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/monokai.html">monokai</a> (1)
+            </li>
+          </ul><h3>
+            By Year
+          </h3>
+          <ul class="holizontal">
+            <li>
+              <a href="/blog/2014.html">2014</a> (12)
+            </li>
+            <li>
+              <a href="/blog/2013.html">2013</a> (6)
+            </li>
+          </ul><h3>
+            Built with
+          </h3>
+          <ul class="holizontal">
+            <li>
+              <a href="http://middlemanapp.com/">Middleman</a>
+            </li>
+            <li>
+              <a href="http://getbootstrap.com/">Bootstrap</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="license" class="row">
+        <div class="col-md-12">
+          <p>
+            &copy; 2014 3100 - All code snippets on this site is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script><script src="/javascripts/instantclick.min.js" type="text/javascript"></script>
+    <script data-no-instant="">
+      InstantClick.init();
+    </script>
+  </body>
+</html>
