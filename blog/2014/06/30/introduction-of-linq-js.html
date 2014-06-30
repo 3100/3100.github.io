@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>linq.jsを触ってみた - Room 3100</title><data class="site description"></data>
+  </head>
+  <body>
+    <div class="container">
+      <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
+      <div class="row">
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      linq.jsを触ってみた
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-06-30T21:36:00+09:00" datetime="2014-06-30T21:36:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/javascript.html">javascript</a>
+          </li>
+          <li>
+            <a href="/blog/tags/linq-js.html">linq.js</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
+
+<p><a href="http://linqjs.codeplex.com/">linq.js</a>という、データを汎用的に処理するクエリ機能を試してみました。</p>
+
+<h2 id="section-1">前置き</h2>
+
+<p>先日から<code>vue.js</code>という<code>MVVM</code>ライクな実装を可能にするライブラリを触っています。
+<code>MVVM</code>といえば<code>Silverlight</code>や<code>WPF</code>。
+元々Microsoftが流行らせようとしたパターンです。</p>
+
+<p>そのMicrosoftが開発したもう1つの便利ツールがあります。</p>
+
+<p><code>LINQ</code>です。
+あまりご存知でない方のために簡単に説明しますと、データの形態を気にせずに、汎用的に使えることを目指した強力なクエリ機能です。</p>
+
+<p><a href="http://msdn.microsoft.com/ja-jp/library/bb397926.aspx">統合言語クエリ (LINQ: Language-Integrated Query)</a></p>
+
+<p>この<code>LINQ</code>、<code>C#</code>や<code>VisualBasic</code>向けなんですが、
+有志が雰囲気そのままに<code>JavaScript</code>へ移植していることは以前から知っていました。</p>
+
+<p>今回<code>MVVM</code>もやるんだし、ちょうど良い機会だろうということで実際に触ってみることにしました。</p>
+
+<h2 id="section-2">導入方法</h2>
+
+<ul>
+  <li>//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js</li>
+  <li>//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js</li>
+</ul>
+
+<p>上記2ライブラリを組み込むのがとりあえず触るには簡単かと思います。</p>
+
+<hr />
+
+<h2 id="section-3">使い方</h2>
+
+<h3 id="json">JSON</h3>
+
+<pre class="highlight coffeescript"><span class="nx">demo</span> <span class="o">=</span> <span class="nx">Enumerable</span><span class="p">.</span><span class="na">From</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">Where</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">isSameMonth</span><span class="p">(</span><span class="nx">date</span><span class="p">,</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="na">date</span><span class="p">)))</span>
+  <span class="p">.</span><span class="na">Where</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">checkedMenu</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="na">menu</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">Select</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="na">name</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+</pre>
+
+<ul>
+  <li><code>Enumerable.From()</code>で<code>json</code>形式のオブジェクトを取り込むことが出来ます。</li>
+  <li><code>Where()</code>は条件節。該当するデータのみ次へ送ります。</li>
+  <li><code>Select()</code>は出力対象を指定します。</li>
+  <li><code>ToArray()</code>で実際に処理が実行されます。<code>LINQ</code>は遅延処理</li>
+</ul>
+
+<h3 id="dom">DOM</h3>
+
+<pre class="highlight coffeescript"><span class="nx">checked</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s">"input[id^=check]"</span><span class="p">).</span><span class="na">toEnumerable</span><span class="p">()</span>
+  <span class="p">.</span><span class="na">Where</span><span class="p">(</span><span class="s">"$.attr('checked') == 'checked'"</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+</pre>
+
+<ul>
+  <li><code>toEnumerable()</code>で<code>jQuery</code>のセレクタを取り込めます。</li>
+  <li><code>Where()</code>の中のような表現で書くことも出来ます。</li>
+</ul>
+
+<h3 id="section-4">注意点: クエリは遅延実行</h3>
+
+<p>上にもさらっと書きましたが、<code>LINQ</code>は実行されるまではただのクエリです。</p>
+
+<p><code>ToArray()</code>などで呼び出すことで、実際に処理が行われます。</p>
+
+<pre class="highlight coffeescript"><span class="c1"># ただのクエリ。処理はまだ行われない
+</span><span class="nx">query</span> <span class="o">=</span> <span class="nx">Enumerable</span><span class="p">.</span><span class="na">From</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">Where</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="na">price</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># ここで初めて処理が実行される
+</span><span class="nx">arr</span> <span class="o">=</span> <span class="nx">query</span><span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+
+<span class="c1"># やはり、まだ処理は行われない
+</span><span class="nx">query2</span> <span class="o">=</span> <span class="nx">query</span><span class="p">.</span><span class="na">OrderBy</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="na">price</span><span class="p">)</span>
+
+<span class="nx">arr2</span> <span class="o">=</span> <span class="nx">query2</span><span class="p">.</span><span class="na">Select</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="na">name</span><span class="o">:</span> <span class="nx">x</span><span class="p">.</span><span class="na">name</span><span class="p">,</span> <span class="na">price</span><span class="o">:</span> <span class="nx">x</span><span class="p">.</span><span class="na">price</span> <span class="p">})</span>
+         <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span> <span class="c1"># ここで処理が行われる
+</span></pre>
+
+<hr />
+
+<h2 id="section-5">クエリの種類</h2>
+
+<p>その数なんと90種類！
+<code>LINQ</code>にあるものは大抵用意されているようです。独自のものもあります。</p>
+
+<p>少しだけ紹介します。</p>
+
+<h3 id="groupby">GroupBy</h3>
+
+<pre class="highlight coffeescript"><span class="nx">Enumerable</span><span class="p">.</span><span class="na">From</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">GroupBy</span><span class="p">(</span><span class="s">"$.menu"</span><span class="p">,</span> <span class="no">null</span><span class="p">,</span>
+    <span class="s">"{ y: $$.Count(), name: $}"</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+</pre>
+
+<p><code>GroupBy()</code>は集計用によく用いられる関数です。</p>
+
+<ul>
+  <li>第1引数はキー</li>
+  <li>第2引数は中間データを加工する際に使用？</li>
+  <li>第3引数で出力データを指定。<code>$$</code>は集計関数用</li>
+</ul>
+
+<h3 id="join">Join</h3>
+
+<pre class="highlight coffeescript"><span class="nx">Enumerable</span><span class="p">.</span><span class="na">From</span><span class="p">(</span><span class="nx">jsonA</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">Join</span><span class="p">(</span><span class="nx">jsonB</span><span class="p">,</span> <span class="s">"$.id"</span><span class="p">,</span> <span class="s">"$.id"</span><span class="p">,</span> <span class="s">"{idA: $.id, valA: $.val, valB: $$.val}"</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+</pre>
+
+<p>2つのデータを紐付けする関数です。</p>
+
+<ul>
+  <li>第1引数に別データ</li>
+  <li>第2引数と第3引数にキー</li>
+  <li>第4引数に出力形式。<code>$$</code>は2番めのデータ。</li>
+</ul>
+
+<h3 id="orderby">OrderBy</h3>
+
+<pre class="highlight coffeescript"><span class="nx">Enumerable</span><span class="p">.</span><span class="na">From</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">OrderByDescending</span><span class="p">(</span><span class="s">"$.y"</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+</pre>
+
+<p>これはわかりますよね。順序付けを行う関数です。<code>OrderByDescending()</code>は降順。</p>
+
+<h3 id="take">Take</h3>
+
+<pre class="highlight coffeescript"><span class="nx">Enumerable</span><span class="p">.</span><span class="na">From</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">Take</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">ToArray</span><span class="p">()</span>
+</pre>
+
+<p>先頭から指定件数だけ取得する関数です。</p>
+
+<h3 id="section-6">その他</h3>
+
+<p>公式サイトにもサンプルがあるので、そちらもどうぞ。</p>
+
+<p><a href="http://linqjs.codeplex.com/wikipage?title=linq.js%20Samples">http://linqjs.codeplex.com/wikipage?title=linq.js%20Samples</a></p>
+
+<h2 id="section-7">感想</h2>
+
+<p>さらっと上辺をなぞっただけですが、いかがでしたでしょうか。
+<code>JavaScript</code>上でのデータ操作や集計が、とても簡単になりそうな印象を受けました。
+<code>LINQ</code>自体に慣れ親しんでいる方からすると、
+割りと直感的に使えるのではないかと思います。</p>
+
+<p><code>linq.js</code>、なかなかオススメです。</p>
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
+        </div>
+        <div id="sidebar" class="col-md-3">
+          <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            <h3>
+              Profile
+            </h3>
+            <section class="namecard">
+              <h4 class="name" itemprop="name">
+                3100
+              </h4>
+            </section>
+            <ul class="contact horizontal">
+              <li>
+                <a class="no-color" href="//twitter.com/zero310"><i class="fa fa-twitter fa-2x"></i></a>
+              </li>
+              <li>
+                <a class="no-color" href="//github.com/3100"><i class="fa fa-github fa-2x"></i></a>
+              </li>
+              <li>
+                <a class="no-color" href="//bitbucket.org/3100"><i class="fa fa-bitbucket fa-2x"></i></a>
+              </li>
+            </ul>
+            <p>
+              開発者
+            </p>
+          </article><article id="subscribe">
+            <h3>
+              Subscribe
+            </h3>
+            <ul class="horizontal">
+              <li>
+                <a class="no-color" href="/blog/feed.xml"><i class="fa fa-rss fa-2x"></i></a>
+              </li>
+            </ul>
+          </article><article id="recent_articles">
+            <h3>
+              Recent Articles
+            </h3>
+            <ul>
+              <li>
+                <a href="/blog/2014/06/30/introduction-of-linq-js.html">linq.jsを触ってみた</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T21:36:00+09:00" datetime="2014-06-30T21:36:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/30/vue-js-with-date.html">vue.jsとDate</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T01:50:00+09:00" datetime="2014-06-30T01:50:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/28/npm-global-vs-local.html">npm:globalとlocal</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-28T11:07:00+09:00" datetime="2014-06-28T11:07:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">28</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/27/first-impression-of-slack.html">Slackを使ってみた感想</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-27T22:00:00+09:00" datetime="2014-06-27T22:00:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">27</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/06/06/broken-snapshot-on-digital-ocean.html">DigitalOceanのSnapshotが壊れる？</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/28/begin-using-xvim.html">XVimをXCodeに導入した</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-28T22:00:00+09:00" datetime="2014-04-28T22:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">28</span><span class="year">2014</span></time>
+              </li>
+              <li>
+                <a href="/blog/2014/04/26/arch-linux-as-server-os.html">サーバOSとしてのArch Linux</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
+              </li>
+            </ul>
+          </article><h3>
+            Tags
+          </h3>
+          <ul class="tags holizontal">
+            <li>
+              <a href="/blog/tags/digitalocean.html">digitalocean</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/arch.html">arch</a> (2)
+            </li>
+            <li>
+              <a href="/blog/tags/slack.html">slack</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/travis-ci.html">travis-ci</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/middleman.html">middleman</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/monokai.html">monokai</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/objective-c.html">objective-c</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/javascript.html">javascript</a> (2)
+            </li>
+            <li>
+              <a href="/blog/tags/linq-js.html">linq.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/moin.html">moin</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/nginx.html">nginx</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/node-js.html">node.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/vim.html">vim</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/xcode.html">xcode</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/minecraft.html">minecraft</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/vue-js.html">vue.js</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/instantclick.html">instantclick</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/performance.html">performance</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/ruby.html">ruby</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/os-x.html">os x</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rbenv.html">rbenv</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/rubymotion.html">rubymotion</a> (1)
+            </li>
+          </ul><h3>
+            By Year
+          </h3>
+          <ul class="holizontal">
+            <li>
+              <a href="/blog/2014.html">2014</a> (13)
+            </li>
+            <li>
+              <a href="/blog/2013.html">2013</a> (6)
+            </li>
+          </ul><h3>
+            Built with
+          </h3>
+          <ul class="holizontal">
+            <li>
+              <a href="http://middlemanapp.com/">Middleman</a>
+            </li>
+            <li>
+              <a href="http://getbootstrap.com/">Bootstrap</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="license" class="row">
+        <div class="col-md-12">
+          <p>
+            &copy; 2014 3100 - All code snippets on this site is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script><script src="/javascripts/instantclick.min.js" type="text/javascript"></script>
+    <script data-no-instant="">
+      InstantClick.init();
+    </script>
+  </body>
+</html>

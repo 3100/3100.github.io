@@ -5,16 +5,182 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-06-29T16:50:00Z</updated>
+  <updated>2014-06-30T12:36:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>linq.jsを触ってみた</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
+    <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
+    <published>2014-06-30T12:36:00Z</published>
+    <updated>2014-06-30T12:38:46+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="http://linqjs.codeplex.com/"&gt;linq.js&lt;/a&gt;という、データを汎用的に処理するクエリ機能を試してみました。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;前置き&lt;/h2&gt;
+
+&lt;p&gt;先日から&lt;code&gt;vue.js&lt;/code&gt;という&lt;code&gt;MVVM&lt;/code&gt;ライクな実装を可能にするライブラリを触っています。
+&lt;code&gt;MVVM&lt;/code&gt;といえば&lt;code&gt;Silverlight&lt;/code&gt;や&lt;code&gt;WPF&lt;/code&gt;。
+元々Microsoftが流行らせようとしたパターンです。&lt;/p&gt;
+
+&lt;p&gt;そのMicrosoftが開発したもう1つの便利ツールがあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;LINQ&lt;/code&gt;です。
+あまりご存知でない方のために簡単に説明しますと、データの形態を気にせずに、汎用的に使えることを目指した強力なクエリ機能です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://msdn.microsoft.com/ja-jp/library/bb397926.aspx"&gt;統合言語クエリ (LINQ: Language-Integrated Query)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;この&lt;code&gt;LINQ&lt;/code&gt;、&lt;code&gt;C#&lt;/code&gt;や&lt;code&gt;VisualBasic&lt;/code&gt;向けなんですが、
+有志が雰囲気そのままに&lt;code&gt;JavaScript&lt;/code&gt;へ移植していることは以前から知っていました。&lt;/p&gt;
+
+&lt;p&gt;今回&lt;code&gt;MVVM&lt;/code&gt;もやるんだし、ちょうど良い機会だろうということで実際に触ってみることにしました。&lt;/p&gt;
+
+&lt;h2 id="section-2"&gt;導入方法&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js&lt;/li&gt;
+  &lt;li&gt;//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上記2ライブラリを組み込むのがとりあえず触るには簡単かと思います。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id="section-3"&gt;使い方&lt;/h2&gt;
+
+&lt;h3 id="json"&gt;JSON&lt;/h3&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;demo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;isSameMonth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;checkedMenu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Select&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;Enumerable.From()&lt;/code&gt;で&lt;code&gt;json&lt;/code&gt;形式のオブジェクトを取り込むことが出来ます。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Where()&lt;/code&gt;は条件節。該当するデータのみ次へ送ります。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Select()&lt;/code&gt;は出力対象を指定します。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;ToArray()&lt;/code&gt;で実際に処理が実行されます。&lt;code&gt;LINQ&lt;/code&gt;は遅延処理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="dom"&gt;DOM&lt;/h3&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;checked&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"input[id^=check]"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;toEnumerable&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"$.attr('checked') == 'checked'"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;toEnumerable()&lt;/code&gt;で&lt;code&gt;jQuery&lt;/code&gt;のセレクタを取り込めます。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Where()&lt;/code&gt;の中のような表現で書くことも出来ます。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="section-4"&gt;注意点: クエリは遅延実行&lt;/h3&gt;
+
+&lt;p&gt;上にもさらっと書きましたが、&lt;code&gt;LINQ&lt;/code&gt;は実行されるまではただのクエリです。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ToArray()&lt;/code&gt;などで呼び出すことで、実際に処理が行われます。&lt;/p&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="c1"&gt;# ただのクエリ。処理はまだ行われない
+&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;price&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# ここで初めて処理が実行される
+&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# やはり、まだ処理は行われない
+&lt;/span&gt;&lt;span class="nx"&gt;query2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderBy&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;price&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nx"&gt;arr2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;query2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Select&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;price&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;price&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
+         &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# ここで処理が行われる
+&lt;/span&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id="section-5"&gt;クエリの種類&lt;/h2&gt;
+
+&lt;p&gt;その数なんと90種類！
+&lt;code&gt;LINQ&lt;/code&gt;にあるものは大抵用意されているようです。独自のものもあります。&lt;/p&gt;
+
+&lt;p&gt;少しだけ紹介します。&lt;/p&gt;
+
+&lt;h3 id="groupby"&gt;GroupBy&lt;/h3&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;GroupBy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"$.menu"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s"&gt;"{ y: $$.Count(), name: $}"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;GroupBy()&lt;/code&gt;は集計用によく用いられる関数です。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第1引数はキー&lt;/li&gt;
+  &lt;li&gt;第2引数は中間データを加工する際に使用？&lt;/li&gt;
+  &lt;li&gt;第3引数で出力データを指定。&lt;code&gt;$$&lt;/code&gt;は集計関数用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="join"&gt;Join&lt;/h3&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;jsonA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;jsonB&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"$.id"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"$.id"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"{idA: $.id, valA: $.val, valB: $$.val}"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;2つのデータを紐付けする関数です。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第1引数に別データ&lt;/li&gt;
+  &lt;li&gt;第2引数と第3引数にキー&lt;/li&gt;
+  &lt;li&gt;第4引数に出力形式。&lt;code&gt;$$&lt;/code&gt;は2番めのデータ。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="orderby"&gt;OrderBy&lt;/h3&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderByDescending&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"$.y"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;これはわかりますよね。順序付けを行う関数です。&lt;code&gt;OrderByDescending()&lt;/code&gt;は降順。&lt;/p&gt;
+
+&lt;h3 id="take"&gt;Take&lt;/h3&gt;
+
+&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Take&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;先頭から指定件数だけ取得する関数です。&lt;/p&gt;
+
+&lt;h3 id="section-6"&gt;その他&lt;/h3&gt;
+
+&lt;p&gt;公式サイトにもサンプルがあるので、そちらもどうぞ。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://linqjs.codeplex.com/wikipage?title=linq.js%20Samples"&gt;http://linqjs.codeplex.com/wikipage?title=linq.js%20Samples&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="section-7"&gt;感想&lt;/h2&gt;
+
+&lt;p&gt;さらっと上辺をなぞっただけですが、いかがでしたでしょうか。
+&lt;code&gt;JavaScript&lt;/code&gt;上でのデータ操作や集計が、とても簡単になりそうな印象を受けました。
+&lt;code&gt;LINQ&lt;/code&gt;自体に慣れ親しんでいる方からすると、
+割りと直感的に使えるのではないかと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;linq.js&lt;/code&gt;、なかなかオススメです。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>vue.jsとDate</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
     <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
     <published>2014-06-29T16:50:00Z</published>
-    <updated>2014-06-29T17:18:16+00:00</updated>
+    <updated>2014-06-30T12:38:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -98,7 +264,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
     <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
     <published>2014-06-28T02:07:00Z</published>
-    <updated>2014-06-29T17:18:16+00:00</updated>
+    <updated>2014-06-30T12:38:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -166,7 +332,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
     <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
     <published>2014-06-27T13:00:00Z</published>
-    <updated>2014-06-29T17:18:16+00:00</updated>
+    <updated>2014-06-30T12:38:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -272,7 +438,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html</id>
     <published>2014-06-05T23:30:00Z</published>
-    <updated>2014-06-29T17:18:16+00:00</updated>
+    <updated>2014-06-30T12:38:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -349,7 +515,7 @@ netmask値も24から18に変わったり。
     <link rel="alternate" href="http://3100.github.io/blog/2014/04/28/begin-using-xvim.html"/>
     <id>http://3100.github.io/blog/2014/04/28/begin-using-xvim.html</id>
     <published>2014-04-28T13:00:00Z</published>
-    <updated>2014-06-29T17:18:16+00:00</updated>
+    <updated>2014-06-30T12:38:46+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -384,177 +550,6 @@ VisualStudioの&lt;code&gt;VsVim&lt;/code&gt;と同様に、欠かせないプ�
 
 &lt;p&gt;そこまで試せていませんが、とことん突き詰めたい方向けの記事なのではないかと思います。
 誰もはてブしてないので、とりあえずしておきました。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>サーバOSとしてのArch Linux</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html"/>
-    <id>http://3100.github.io/blog/2014/04/26/arch-linux-as-server-os.html</id>
-    <published>2014-04-26T03:00:00Z</published>
-    <updated>2014-06-29T17:18:16+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;Arch&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;個人的には一番使いやすいLinuxディストロだと思うのですが、2014年現在、世間的にはUbuntuやCentOS、Debianなどの後塵を拝し、Gentooなどと共にキワモノ的なカテゴリに分けられることが多いと感じています。
-ここでは、特にサーバ用途として考えた際に、なぜArchが選ばれないのか、調べてみることにしました。
-(といっても主にネットの声だけで)&lt;/p&gt;
-
-&lt;h2 id="arch8"&gt;Archが選ばれない理由8個&lt;/h2&gt;
-
-&lt;h3 id="update"&gt;その1。Updateで既存環境がいつどこで壊れるか予想がつかない&lt;/h3&gt;
-
-&lt;p&gt;Archは主要ディストロと異なり、メジャーバージョンというものがありません。つまりCentOS 5から6へのアップデートといったものはなく、常にどこかしこのパッケージがアップデートされています。(いわゆるローリングリリースモデル)&lt;/p&gt;
-
-&lt;p&gt;また、公式サイトでは約1ヶ月おきごとに、配布バイナリが更新されます。
-これは一見良さそうです。何しろ世間には&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Ubuntu 14.04へ移行したらXXが動かなくなった&lt;/li&gt;
-  &lt;li&gt;CentOS 6を導入したけど、XXXパッケージが古すぎる&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;といった阿鼻叫喚が飛び交っています。Archならこういった問題とは大抵の場合無縁です。&lt;/p&gt;
-
-&lt;p&gt;しかし常にどこかしこでアップデートが起こっているということは、各パッケージの依存関係の問題で今動いているサービスが動かなくなるということもあり得るということです。
-この問題に対するArch利用者側のよくある反応については、以下の記事に素晴らしい例があったので、引用します。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;しかし、ローリングリリースは壊れやすいとからかうと、Arch上級者様は皆、まるで申し合わせたかのように言う。
-
-「何？　壊れる？　まさか？　ちゃんと公式から発行される変更情報や注意点を確認していれば、壊れるなどということはない。よしんばブート不可能なほど壊れたにせよだ。復旧用のArchを入れたUSBドライブからブートしてchrootとしてpackman -Syuすればたいてい直る。問題ない。設定ファイルもプレインテキストで書かれていて、とても簡単だ。恐れることなど何もない。むしろUbuntuのようなどうやって直していいのかわからない複雑なシステムの方が怖いわ」と。
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href="http://cpplover.blogspot.jp/2013/11/mac.html?m=1"&gt;本の虫: 技術屋にMac使いが多い理由ってなに？&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;いや、ほんとコレなんですけどね。他ディストロのような&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;バージョンXXからあの機能が廃止になって、新機能が追加された&lt;/li&gt;
-  &lt;li&gt;バージョンXXXにあるこの機能はバグだ。違うパッケージで対応しよう&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;みたいな方が個人的には恐ろしいし、そういったノウハウがやがて秘伝のタレ化していくんじゃないのかなという印象を受けます。&lt;/p&gt;
-
-&lt;h3 id="os"&gt;その2。俺達はOSを弄りまわしたいんじゃない。サービスを立ち上げたいだけなんだ&lt;/h3&gt;
-
-&lt;p&gt;ぐぅの音も出ません。&lt;/p&gt;
-
-&lt;p&gt;しかし、自分も割りと同様の理由でArchを採用しています。こうした意見はおそらくローリングリリースに関しての意見だと思いますが、良い所もあります。
-それは、メンテナのいるパッケージであれば大抵すぐに最新版が利用可能になるということです。
-nginxやvimのバージョンが上がったらしい。
-じゃ、ビルドするか。。とならないのは1つのメリットかなと思います。Archならすぐにパッケージマネージャから更新可能です。&lt;/p&gt;
-
-&lt;p&gt;もちろん、デフォルトで提供されているパッケージの設定では不満が出ることもありますし、そういう場合にはソースコードからビルドします。その辺りは他のディストロと同じです。&lt;/p&gt;
-
-&lt;p&gt;また、Archの公式Wikiは情報量が豊富で、一部は日本語に翻訳もされています。
-よく使われるようなものについてはここで導入方法やオプション、注意点などについての知見を得ることができるでしょう。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://www.archlinux.org/"&gt;Arch Linux 公式サイト&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://wiki.archlinux.org/"&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id="section-1"&gt;その3。我々は長期の安定稼働を求めている。再現性も重要だ。&lt;/h3&gt;
-
-&lt;p&gt;バージョンがきちんと振られるディストロでは、関係者が増えても共通の環境を整備しやすく、また後々になってその環境を再現しなくならなければいけない状況になった場合でも、割りと楽に目的のイメージファイルなりを見つけることができます。&lt;/p&gt;
-
-&lt;p&gt;逆にArchの場合、導入タイミングなどで各サーバのパッケージが異なっているといった事態は容易に起こり得ますし、これがサポートの手間になるということもあるでしょう。(実際に&lt;code&gt;DigitalOcean&lt;/code&gt;がそんな感じの理由でサポートを廃止予定)
-ですので、Archを導入する場合にはどのパッケージをどのバージョンで採用するか、といった調整は必要になります。
-一見面倒くさいですし、他のディストロではやらなかった作業ですので、現場の不満は貯まるかもしれないですね。。&lt;/p&gt;
-
-&lt;p&gt;しかし、視点を数年後にずらして考えると、逆にバージョンごとに区切られていることが問題となることがあります。というか個人的にはよく見かけます。特に元プロジェクトから数度にわたって改良されてきたプロジェクトでは、改良の度に最小限の修正しか行われないことがあります。
-よくあるのは&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使うパッケージが古いもので固定されてしまう(脆弱性や非互換の問題は黙殺)&lt;/li&gt;
-  &lt;li&gt;5年後くらいに唐突に納入物の更新要望が来るが、もちろんパッケージなどは更新できない&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;などといったもので、よく考えずとも明らかにお客さんと現場双方で不幸になっています。こうした事例は一般的ではないのかもしれませんが、官公庁でいまだにStruts1で構築されたサービスが動いているという話を見ても、決してレアケースではないと思います。&lt;/p&gt;
-
-&lt;p&gt;サービスの長期的なメンテナンスを考えると、ぱっと見のとっつきやすさが全体のためになるかどうかは別問題ではないでしょうか。&lt;/p&gt;
-
-&lt;h3 id="systemd"&gt;その4。systemdなんてよくわからない代物は使えない。&lt;/h3&gt;
-
-&lt;p&gt;よくあるLinuxの入門書ではCentOSやDebianを対象ディストロとしているものが多く、initやUpstartに慣れ親しんだ人が多いでしょう。しかしArchは2012年より&lt;code&gt;systemd&lt;/code&gt;を採用しています。&lt;/p&gt;
-
-&lt;p&gt;そのため、既存のLinuxサーバ管理者からすると、Archを利用する場合には「余計な」学習コストが発生します。「今すでに動いているものがあるのに、何故わざわざ違うものを勉強し直す必要があるんだ」といった感じの意見は割りとよく聞きますし、個人的には色々とツッコミを入れたい考え方でもありますが、そのお気持ち自体はわかります。&lt;/p&gt;
-
-&lt;p&gt;しかし、時代は変わっていきます。systemdは&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Arch以外でもFedoraやopenSUSEなどで導入済&lt;/li&gt;
-  &lt;li&gt;RHEL(つまるところCentOSも)でもVersion 7から導入予定&lt;/li&gt;
-  &lt;li&gt;Debianも次期メジャーリリースであるJessieから採用&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;といったように、次の時代のサービス管理ツールとしてほぼ絶対的な位置にいます。
-Ubuntuは依然Upstartを採用していますが、移行を提案する人も出ているようですし、次のLTSまでにsystemdを採用するかもしれません。&lt;/p&gt;
-
-&lt;p&gt;最近はsystemdに関する日本語の資料も増えてきていますし、そろそろ触っておいても良いのではないかと思います。&lt;/p&gt;
-
-&lt;h3 id="section-2"&gt;その5。インストールが大変&lt;/h3&gt;
-
-&lt;p&gt;公式Wikiには日本語でも丁寧な導入ガイドがあり、それに従えば何ら問題なくインストールできます。
-が、CentOSやDebianなどのインストールのしやすさに比べれば、色々と設定しなくてはいけない部分が多い気がします。&lt;/p&gt;
-
-&lt;p&gt;しかし、そういった部分にもきちんと触れることで、Linuxユーザとしても成長しますし、OSへの深い理解も得られるのではないでしょうか。&lt;/p&gt;
-
-&lt;p&gt;本音ベースですと、やっぱり面倒くさいです。ですが、実際問題としては気になりません。というのも&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;インストール直後の状態を仮想イメージで持っておけば良い&lt;/li&gt;
-  &lt;li&gt;最近ではchefやansibleがある&lt;/li&gt;
-  &lt;li&gt;docker用コンテナのイメージもdocker側で用意されている&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ので、今後いちから人が手動でインストーラを叩いて設定するなんてことは減っていくからです。むしろ、現状そうした環境になっていない場合は猛省して、速やかに環境整備して自動化へと移行すべきかと思います。&lt;/p&gt;
-
-&lt;p&gt;100台近いサーバを日々手作業でOSインストールして
-構築するお仕事、というのを実際に聞いたことがありますが、それは人のやる仕事ではありません。。&lt;/p&gt;
-
-&lt;h3 id="pacman"&gt;その6。pacmanなんて独自ツールは覚えたくない&lt;/h3&gt;
-
-&lt;p&gt;そんなことより、個人的には商標権とか大丈夫なのかなって思ったりしています。これが&lt;code&gt;micky&lt;/code&gt;ていう名前だったら間違いなく訴えられていると思います。&lt;/p&gt;
-
-&lt;p&gt;pacman、たしかにaptitudeとかと比べて最初は良くわかりませんし、できることも多いですが、個人的には好きです。&lt;/p&gt;
-
-&lt;h3 id="haskell"&gt;その7。Haskellを簡単に導入できない&lt;/h3&gt;
-
-&lt;p&gt;サーバサイドHaskellとか胸熱ですが、完全に門外漢です。Archにはユーザが独自に作成、登録したパッケージを導入する仕組みがあり、そこにHaskellの各種ライブラリも登録されています。&lt;/p&gt;
-
-&lt;p&gt;が、これは罠です。実際に&lt;code&gt;pandoc&lt;/code&gt;を入れようとしてかなりハマりました。諦めてHaskell公式からソースコードを入手し、手動でセットアップしましょう。&lt;/p&gt;
-
-&lt;h3 id="arch"&gt;その8。そもそもArchなんて誰も使っていない&lt;/h3&gt;
-
-&lt;p&gt;(´・ω:;.:…&lt;/p&gt;
-
-&lt;h2 id="section-3"&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;ここまで見てきて、ArchをサーバOSにしないのは、単に&lt;strong&gt;趣味&lt;/strong&gt;や&lt;strong&gt;主義主張&lt;/strong&gt;の問題か、あとは単に担当者や責任者の理解不足であるような気がしてきました。&lt;/p&gt;
-
-&lt;p&gt;ArchはGentoo同様、とっつきづらいイメージがありますが、最初のインストールさえ乗り越えられれば、比較的メンテナンスのしやすいディストロだと思います。
-ネット上を探せば、仮想環境向けにも色々とイメージファイルが公開されているので、そうしたものを使えばインストールさえ不要です。&lt;/p&gt;
-
-&lt;p&gt;何より軽量軽快で、ディスクサイズやメモリサイズも主要ディストロに比べて小さくて済みます。&lt;/p&gt;
-
-&lt;p&gt;ぜひ、気軽に触ってもらいたいと思います。&lt;/p&gt;
-
-&lt;h2 id="section-4"&gt;参考になった記事など&lt;/h2&gt;
-
-&lt;p&gt;記事で言及したもの、しなかったもの含めて。最後のやつはネタですね。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://serverfault.com/questions/173286/is-arch-linux-suitable-for-server-environment"&gt;Is Arch Linux suitable for server environment? - Server Fault&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://gihyo.jp/admin/clip/01/ubuntu-topics/201402/21"&gt;2014年2月21日号　systemdへの移行、Ubuntu Phoneの採用状況、UWN#355:Ubuntu Weekly Topics - gihyo.jp … 技術評論社&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://www.reddit.com/r/archlinux/comments/1f26hg/why_does_haskell_suck_on_arch/"&gt;Why does Haskell suck on Arch? : archlinux&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://fomori.org/blog/?p=468"&gt;Why arch linux sucks for servers - SLEIPNIR&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://springfieldpc.dyndns.org/gcopypasta/116-gnulinux/archlinux/418-top-5-reasons-why-arch-linux-sucks"&gt;Top 5 Reasons why Arch Linux suck&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>
