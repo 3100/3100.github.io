@@ -15,6 +15,40 @@
 </p>
 <header>
   <h1 class="title" itemprop="name">
+    DigitalOceanのSnapshotが壊れる？
+  </h1>
+  <div class="meta">
+    <time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
+    <div class="article-tag">
+      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+        <li>
+          <a href="/blog/tags/digitalocean.html">digitalocean</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header><h2 id="section">概要</h2>
+
+<p><a href="https://cloud.digitalocean.com/">DigitalOcean</a>で
+<code>snapshot</code>から<code>droplet</code>を作ろうとしたら
+うまくいっていないというお話。</p>
+
+<h2 id="section-1">経緯</h2>
+
+<p>DigitalOceanで動かしているMinecraftサーバーは
+サンフランシスコリージョンにあります。
+これをシンガポールに移したらネットワーク遅延が減って、
+体感速度も速くならないかな？ということで
+実際にスナップショットを取って試してみました。</p>
+
+<h2 id="section-2">試行1</h2>
+
+<p>スナップショットをリージョン転送して
+新規にドロップレットを作成するだけの簡単なお仕事、のはず。
+...</p><a href="/blog/2014/06/06/broken-snapshot-on-digital-ocean.html">続きを読む</a>
+<hr>
+<header>
+  <h1 class="title" itemprop="name">
     XVimをXCodeに導入した
   </h1>
   <div class="meta">
@@ -138,35 +172,6 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
 </div>
 </div><a href="/blog/2014/04/10/learn-objective-c-again.html">続きを読む</a>
 <hr>
-<header>
-  <h1 class="title" itemprop="name">
-    RubyMotionのチュートリアルでハマったところ
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-03-30T22:00:00+09:00" datetime="2014-03-30T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/rubymotion.html">rubymotion</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><h2 id="section">概要</h2>
-
-<p><a href="http://www.rubymotion.com/">RubyMotion</a>の<a href="http://tutorial.rubymotion.jp/">チュートリアルサイト</a>を進めています。
-しかし、チュートリアルが書かれてからだいぶ経つせいか
-ところどころハマりそうな部分がありましたので、ここにメモとして残しておきます。</p>
-
-<h2 id="uilabel">UILabelの背景色</h2>
-
-<p>7章でUILabelにModelの値変更を反映させるのですが、iOS7で変更があったのかどうなのか
-指示どおりに作ってもラベルが見えません。</p>
-
-<p>実は背景色が黒になっていることが原因なので、明示的に白を指定することで解決しました。</p>
-
-<pre class="highlight ruby">  <span class="k">def</span> <span class="nf">application</span></pre><a href="/blog/2014/03/30/issues-in-ruby-motion-tutorial.html">続きを読む</a>
-<hr>
 <p>
   <a href="/page/3/">次へ</a>
 </p>
@@ -210,6 +215,9 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
             </h3>
             <ul>
               <li>
+                <a href="/blog/2014/07/03/martini-and-gin.html">martiniとgin</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-07-03T22:00:00+09:00" datetime="2014-07-03T22:00:00+09:00" pubdate=""><span class="month">Jul</span><span class="day">03</span><span class="year">2014</span></time>
+              </li>
+              <li>
                 <a href="/blog/2014/06/30/introduction-of-linq-js.html">linq.jsを触ってみた</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T21:36:00+09:00" datetime="2014-06-30T21:36:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
               </li>
               <li>
@@ -226,9 +234,6 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
               </li>
               <li>
                 <a href="/blog/2014/04/28/begin-using-xvim.html">XVimをXCodeに導入した</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-28T22:00:00+09:00" datetime="2014-04-28T22:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">28</span><span class="year">2014</span></time>
-              </li>
-              <li>
-                <a href="/blog/2014/04/26/arch-linux-as-server-os.html">サーバOSとしてのArch Linux</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
               </li>
             </ul>
           </article><h3>
@@ -301,12 +306,21 @@ iOS SDKを勉強した方が良いなと思い始め、改めて再入門する�
             <li>
               <a href="/blog/tags/rubymotion.html">rubymotion</a> (1)
             </li>
+            <li>
+              <a href="/blog/tags/golang.html">golang</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/martini.html">martini</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/gin.html">gin</a> (1)
+            </li>
           </ul><h3>
             By Year
           </h3>
           <ul class="holizontal">
             <li>
-              <a href="/blog/2014.html">2014</a> (13)
+              <a href="/blog/2014.html">2014</a> (14)
             </li>
             <li>
               <a href="/blog/2013.html">2013</a> (6)

@@ -5,16 +5,117 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-06-30T12:36:00Z</updated>
+  <updated>2014-07-03T13:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>martiniとgin</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/07/03/martini-and-gin.html"/>
+    <id>http://3100.github.io/blog/2014/07/03/martini-and-gin.html</id>
+    <published>2014-07-03T13:00:00Z</published>
+    <updated>2014-07-03T14:16:09+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/go-martini/martini"&gt;martini&lt;/a&gt;という&lt;code&gt;Go&lt;/code&gt;向けのWebアプリケーションフレームワーク(WAF)があります。
+最近リリースされて、すぐに&lt;code&gt;Go&lt;/code&gt;コミュニティ界隈で話題になりましたね。&lt;/p&gt;
+
+&lt;p&gt;また、&lt;a href="https://github.com/gin-gonic/gin"&gt;gin&lt;/a&gt;という別のWAFも出て、
+こちらは&lt;code&gt;martini&lt;/code&gt;より40倍以上も速いぜと主張しています。&lt;/p&gt;
+
+&lt;p&gt;どちらか迷った挙句、速さは正義ということで、&lt;code&gt;gin&lt;/code&gt;を触ってみたのですが
+結局&lt;code&gt;martini&lt;/code&gt;を使うことにしました。&lt;/p&gt;
+
+&lt;h2 id="martini"&gt;martiniについて&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;martini&lt;/code&gt;は機能拡張を用意にするため、DIを利用しています。
+この実装として、リフレクションを利用しています。&lt;/p&gt;
+
+&lt;p&gt;一方、&lt;code&gt;Go&lt;/code&gt;の&lt;code&gt;net/http&lt;/code&gt;パッケージはそうした実装にはなっていません。
+リフレクションを利用することはパフォーマンス的にも2桁近く遅くなることがある他、
+ランタイムエラーの原因にもなるなどから、一部で批判を受けました。
+(そもそもDIは&lt;code&gt;Java&lt;/code&gt;での古き悪しきイメージが強いのかもしれません。)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://stephensearles.com/?p=254"&gt;Three reasons you should not use Martini - Stephen Searles&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;開発者のcodegangstaことJeremy Saenzはこうした批判に対して記事を書いていて、
+&lt;code&gt;martini&lt;/code&gt;のDI実装が完璧ではないことを率直に認め、
+&lt;a href="https://github.com/codegangsta/negroni"&gt;negroni&lt;/a&gt;という別のアプローチも試みるよと書いています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://codegangsta.io/blog/2014/05/19/my-thoughts-on-martini/"&gt;My Thoughts on Martini - Code Gangsta&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;既に&lt;code&gt;martini&lt;/code&gt;を使っている人向けには、ぜひ今後とも使い続けて欲しい、とコメントしています。&lt;/p&gt;
+
+&lt;h2 id="gin"&gt;ginについて&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;martini&lt;/code&gt;が批判を受け、かつそれより高速で同じように記述できる&lt;code&gt;gin&lt;/code&gt;が出てきた今
+&lt;code&gt;martini&lt;/code&gt;は無用の長物なのでしょうか。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://news.ycombinator.com/item?id=7966700"&gt;Show HN: Gin – Golang Martini-like web framework - Hacker News&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gin&lt;/code&gt;が登場すると、すぐにHacker News上などで反応がありましたが、
+実装はかなり薄くなっているため、その部分をどう捉えるかという選択の問題になりそうだなという感想を抱きました。
+(ささっと簡単なWebAPIを用意するくらいだったら、高速な&lt;code&gt;gin&lt;/code&gt;のが良いかもしれません。)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Go&lt;/code&gt;黎明期から積極的にブログなどで情報公開している@mattnさんも、以下のようにツイートしています。&lt;/p&gt;
+
+&lt;blockquote class="twitter-tweet" lang="ja"&gt;&lt;p&gt;gin が martini の40倍速いって話、コードを軽く読んだ感じだと gin は martini の rack like middleware 層を排除している反面、機能を最少しか持ってない。足りない感じもしなくないので同じ土俵で40倍速いってのはフェアじゃない気もする。&lt;/p&gt;&amp;mdash; mattn (@mattn_jp) &lt;a href="https://twitter.com/mattn_jp/statuses/483778677197373441"&gt;2014, 7月 1&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;また、個人的に使ってみた感想としては、&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;まだ連携ライブラリが少ない(逆に言えば貢献のチャンス？)&lt;/li&gt;
+  &lt;li&gt;まだまだ実装が変わりそう&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;な印象を受けました。&lt;/p&gt;
+
+&lt;p&gt;例えば、&lt;code&gt;redis&lt;/code&gt;と連携しようとして、&lt;a href="https://github.com/garyburd/redigo"&gt;redigo&lt;/a&gt;なんかを使おうとした場合、
+&lt;code&gt;martini&lt;/code&gt;ではMap機能があるので簡単に取り込んで利用できますが
+&lt;code&gt;gin&lt;/code&gt;ではそういった機能は用意されていません。(あくまで現時点では。)&lt;/p&gt;
+
+&lt;p&gt;もっとも、連携機能については、PRもあがっていて、それほど時間はかからずに、改善されるのではないかと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/gin-gonic/gin/pull/16"&gt;Wrap http.ResponseWriter to greatly increase middleware/logging accesibilty by zmarcantel · Pull Request #16 · gin-gonic/gin&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;あまり重要なポイントではないかもしれませんが、
+ルーティング用メソッドが&lt;code&gt;Get&lt;/code&gt;や&lt;code&gt;Post&lt;/code&gt;じゃなくて、&lt;code&gt;GET&lt;/code&gt;や&lt;code&gt;POST&lt;/code&gt;だというのも、気持ち悪いかもしれません。。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;将来的に&lt;code&gt;gin&lt;/code&gt;がどうなっていくのかは楽しみですが、現時点では&lt;code&gt;martini&lt;/code&gt;を使うのが、開発時には楽である気がします。&lt;/p&gt;
+
+&lt;p&gt;さらに、身も蓋もないことを書きますと、自分自身がそこまで高速であることが求められるようなプロジェクトに携われていません。&lt;/p&gt;
+
+&lt;p&gt;とはいえ、たとえば&lt;code&gt;redis&lt;/code&gt;が数万クエリ/秒を捌けるのに比べて&lt;code&gt;gin&lt;/code&gt;は約1500リクエスト/秒、&lt;code&gt;martini&lt;/code&gt;は約300リクエスト/秒(&lt;code&gt;rails&lt;/code&gt;とか&lt;code&gt;node.js&lt;/code&gt;級？)ですから、
+WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/p&gt;
+
+&lt;p&gt;今後&lt;code&gt;gin&lt;/code&gt;が高機能になった時点で、再度検討したいなと思います。&lt;/p&gt;
+
+&lt;h2 id="section-2"&gt;おまけ&lt;/h2&gt;
+
+&lt;p&gt;日本でも最近は&lt;code&gt;rebuild.fm&lt;/code&gt;に代表されるような開発者向けpodcastが増えてきましたが、
+割りと古くからある&lt;code&gt;The Changelog&lt;/code&gt;でも少し前に&lt;code&gt;martini&lt;/code&gt;を取り上げ、
+codegangstaがゲストとして、なぜこういった実装になったか、その思想を語っています。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://thechangelog.com/117/"&gt;#117: Go, Martini and Gophercasts with Jeremy Saenz - The Changelog&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;あとは、どうしてそんなHNになったのかとか、どうでもいい話題もあって楽しめます。&lt;/p&gt;
+
+&lt;p&gt;そんなに話す速度も速くないし、割りと日本の英語教育でも学ぶような言い回しが多いので、
+&lt;code&gt;martini&lt;/code&gt;が気になっている方は聴いてみると良いかもしれません。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>linq.jsを触ってみた</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
     <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
     <published>2014-06-30T12:36:00Z</published>
-    <updated>2014-06-30T12:38:46+00:00</updated>
+    <updated>2014-07-03T14:16:09+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -180,7 +281,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
     <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
     <published>2014-06-29T16:50:00Z</published>
-    <updated>2014-06-30T12:38:46+00:00</updated>
+    <updated>2014-07-03T14:16:09+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -264,7 +365,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
     <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
     <published>2014-06-28T02:07:00Z</published>
-    <updated>2014-06-30T12:38:46+00:00</updated>
+    <updated>2014-07-03T14:16:09+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -332,7 +433,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
     <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
     <published>2014-06-27T13:00:00Z</published>
-    <updated>2014-06-30T12:38:46+00:00</updated>
+    <updated>2014-07-03T14:16:09+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -438,7 +539,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html</id>
     <published>2014-06-05T23:30:00Z</published>
-    <updated>2014-06-30T12:38:46+00:00</updated>
+    <updated>2014-07-03T14:16:09+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -508,48 +609,6 @@ netmask値も24から18に変わったり。
 &lt;/pre&gt;
 
 &lt;p&gt;以上で、無事に外部からも接続できるようになりました。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>XVimをXCodeに導入した</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/04/28/begin-using-xvim.html"/>
-    <id>http://3100.github.io/blog/2014/04/28/begin-using-xvim.html</id>
-    <published>2014-04-28T13:00:00Z</published>
-    <updated>2014-06-30T12:38:46+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;XCodeを触っていると、いつもの癖でVim用のキーを入力してしまい、なかなか慣れません。
-どうしたものかと調べてみたところ、&lt;code&gt;XVim&lt;/code&gt;なるものがあるらしいと知り、早速導入してみました。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;導入&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/Jugglershu/XVim"&gt;https://github.com/Jugglershu/XVim&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;導入の仕方は上記URLに書いてある通りです。
-一見するとmasterブランチの更新が止まっているように見えますが、XCode5向けの開発はブランチで行われているようです。
-XCode5向けに導入する場合は、ブランチを変更するなどの操作が必要となりますので注意して読みましょう。&lt;/p&gt;
-
-&lt;p&gt;設定ファイルは$HOME/.xvimrcになるようです。.vimrcと100%互換があるわけではなく、使用可能な書式は制限されています。
-が、とりあえずvim風に使えるようになったことでも、満足です。
-VisualStudioの&lt;code&gt;VsVim&lt;/code&gt;と同様に、欠かせないプラグインになりそうです。&lt;/p&gt;
-
-&lt;p&gt;尚、XVimについては、以下の記事で知りました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://blog.lciel.jp/blog/2014/03/17/installation-of-xvim/"&gt;XVim を Xcode 5.1 にインストール - Unmotivated&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="xvim"&gt;おまけ(XVimで満足できない方向け)&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="http://ap4y.github.io/2013/11/10/vim-for-ios-developers.html"&gt;Vim for iOS developers&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Rakeなどを用いてvim上で全部やろうという記事です。去年の11月に書かれたものなので、そんなに古くなさそうです。
-ざっと目を通した感じ、&lt;code&gt;Dash&lt;/code&gt;なんかも&lt;code&gt;dash.vim&lt;/code&gt;を使ったり、補完もclang向けのライブラリを使ったり、&lt;code&gt;ag.vim&lt;/code&gt;まで持ち出したりと
-結構ガチな内容です。&lt;/p&gt;
-
-&lt;p&gt;そこまで試せていませんが、とことん突き詰めたい方向けの記事なのではないかと思います。
-誰もはてブしてないので、とりあえずしておきました。&lt;/p&gt;
 </content>
   </entry>
 </feed>

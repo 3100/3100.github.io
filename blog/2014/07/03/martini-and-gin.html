@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>DigitalOceanのSnapshotが壊れる？ - Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>martiniとgin - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
@@ -12,14 +12,20 @@
       <div class="row">
         <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
     <h1 class="title" itemprop="name">
-      DigitalOceanのSnapshotが壊れる？
+      martiniとgin
     </h1>
     <div class="meta">
-      <time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
+      <time class="date" itemprop="datePublished" content="2014-07-03T22:00:00+09:00" datetime="2014-07-03T22:00:00+09:00" pubdate=""><span class="month">Jul</span><span class="day">03</span><span class="year">2014</span></time>
       <div class="article-tag">
         <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
           <li>
-            <a href="/blog/tags/digitalocean.html">digitalocean</a>
+            <a href="/blog/tags/golang.html">golang</a>
+          </li>
+          <li>
+            <a href="/blog/tags/martini.html">martini</a>
+          </li>
+          <li>
+            <a href="/blog/tags/gin.html">gin</a>
           </li>
         </ul>
       </div>
@@ -27,70 +33,94 @@
   </header>
   <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
 
-<p><a href="https://cloud.digitalocean.com/">DigitalOcean</a>で
-<code>snapshot</code>から<code>droplet</code>を作ろうとしたら
-うまくいっていないというお話。</p>
+<p><a href="https://github.com/go-martini/martini">martini</a>という<code>Go</code>向けのWebアプリケーションフレームワーク(WAF)があります。
+最近リリースされて、すぐに<code>Go</code>コミュニティ界隈で話題になりましたね。</p>
 
-<h2 id="section-1">経緯</h2>
+<p>また、<a href="https://github.com/gin-gonic/gin">gin</a>という別のWAFも出て、
+こちらは<code>martini</code>より40倍以上も速いぜと主張しています。</p>
 
-<p>DigitalOceanで動かしているMinecraftサーバーは
-サンフランシスコリージョンにあります。
-これをシンガポールに移したらネットワーク遅延が減って、
-体感速度も速くならないかな？ということで
-実際にスナップショットを取って試してみました。</p>
+<p>どちらか迷った挙句、速さは正義ということで、<code>gin</code>を触ってみたのですが
+結局<code>martini</code>を使うことにしました。</p>
 
-<h2 id="section-2">試行1</h2>
+<h2 id="martini">martiniについて</h2>
 
-<p>スナップショットをリージョン転送して
-新規にドロップレットを作成するだけの簡単なお仕事、のはず。
-しかし、ドロップレット作成最後の15秒で何度やってもエラーとなりました。</p>
+<p><code>martini</code>は機能拡張を用意にするため、DIを利用しています。
+この実装として、リフレクションを利用しています。</p>
 
-<p>もしかして<code>Power Off</code>を使うのはダメで、きちんと<code>shutdown</code>する必要があるのかな。。</p>
+<p>一方、<code>Go</code>の<code>net/http</code>パッケージはそうした実装にはなっていません。
+リフレクションを利用することはパフォーマンス的にも2桁近く遅くなることがある他、
+ランタイムエラーの原因にもなるなどから、一部で批判を受けました。
+(そもそもDIは<code>Java</code>での古き悪しきイメージが強いのかもしれません。)</p>
 
-<p><a href="https://groups.google.com/forum/#!topic/packer-tool/bSlP8dELiM">DigitalOcean - file content disappears after image and new droplet creation - Google グループ</a></p>
+<p><a href="https://stephensearles.com/?p=254">Three reasons you should not use Martini - Stephen Searles</a></p>
 
-<p>尚、各処理にかかる時間ですが</p>
+<p>開発者のcodegangstaことJeremy Saenzはこうした批判に対して記事を書いていて、
+<code>martini</code>のDI実装が完璧ではないことを率直に認め、
+<a href="https://github.com/codegangsta/negroni">negroni</a>という別のアプローチも試みるよと書いています。</p>
+
+<p><a href="http://codegangsta.io/blog/2014/05/19/my-thoughts-on-martini/">My Thoughts on Martini - Code Gangsta</a></p>
+
+<p>既に<code>martini</code>を使っている人向けには、ぜひ今後とも使い続けて欲しい、とコメントしています。</p>
+
+<h2 id="gin">ginについて</h2>
+
+<p><code>martini</code>が批判を受け、かつそれより高速で同じように記述できる<code>gin</code>が出てきた今
+<code>martini</code>は無用の長物なのでしょうか。</p>
+
+<p><a href="https://news.ycombinator.com/item?id=7966700">Show HN: Gin – Golang Martini-like web framework - Hacker News</a></p>
+
+<p><code>gin</code>が登場すると、すぐにHacker News上などで反応がありましたが、
+実装はかなり薄くなっているため、その部分をどう捉えるかという選択の問題になりそうだなという感想を抱きました。
+(ささっと簡単なWebAPIを用意するくらいだったら、高速な<code>gin</code>のが良いかもしれません。)</p>
+
+<p><code>Go</code>黎明期から積極的にブログなどで情報公開している@mattnさんも、以下のようにツイートしています。</p>
+
+<blockquote class="twitter-tweet" lang="ja"><p>gin が martini の40倍速いって話、コードを軽く読んだ感じだと gin は martini の rack like middleware 層を排除している反面、機能を最少しか持ってない。足りない感じもしなくないので同じ土俵で40倍速いってのはフェアじゃない気もする。</p>&mdash; mattn (@mattn_jp) <a href="https://twitter.com/mattn_jp/statuses/483778677197373441">2014, 7月 1</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>また、個人的に使ってみた感想としては、</p>
 
 <ul>
-  <li>スナップショット作成は使い方にもよるだろうけど、今回は数分で完了。</li>
-  <li>サンフランシスコからシンガポールへのスナップショット転送は、30分程度かかる。</li>
+  <li>まだ連携ライブラリが少ない(逆に言えば貢献のチャンス？)</li>
+  <li>まだまだ実装が変わりそう</li>
 </ul>
 
-<h2 id="section-3">試行2</h2>
+<p>な印象を受けました。</p>
 
-<p>今度はきちんとシャットダウンしてからスナップショットを作成し、現在リージョン転送中。</p>
+<p>例えば、<code>redis</code>と連携しようとして、<a href="https://github.com/garyburd/redigo">redigo</a>なんかを使おうとした場合、
+<code>martini</code>ではMap機能があるので簡単に取り込んで利用できますが
+<code>gin</code>ではそういった機能は用意されていません。(あくまで現時点では。)</p>
 
-<p>しかし、結果は変わらず。</p>
+<p>もっとも、連携機能については、PRもあがっていて、それほど時間はかからずに、改善されるのではないかと思います。</p>
 
-<h2 id="section-4">試行3</h2>
+<p><a href="https://github.com/gin-gonic/gin/pull/16">Wrap http.ResponseWriter to greatly increase middleware/logging accesibilty by zmarcantel · Pull Request #16 · gin-gonic/gin</a></p>
 
-<p>生成先をサンフランシスコにして試してみた。ら、動きました。
-どうやらスナップショットが壊れているわけではなさそうですね。</p>
+<p>あまり重要なポイントではないかもしれませんが、
+ルーティング用メソッドが<code>Get</code>や<code>Post</code>じゃなくて、<code>GET</code>や<code>POST</code>だというのも、気持ち悪いかもしれません。。</p>
 
-<p>結局サポートからチケットを作成して、現在質問中。</p>
+<h2 id="section-1">まとめ</h2>
 
-<h2 id="section-5">正解(2014/06/18追記)</h2>
+<p>将来的に<code>gin</code>がどうなっていくのかは楽しみですが、現時点では<code>martini</code>を使うのが、開発時には楽である気がします。</p>
 
-<p>技術スタッフにイシュー投げとくと言われた後、ずっと放置だったのですが、2週間弱して反応がありました。</p>
+<p>さらに、身も蓋もないことを書きますと、自分自身がそこまで高速であることが求められるようなプロジェクトに携われていません。</p>
 
-<pre class="highlight plaintext"># touch /etc/network.d/ethernet-static
-</pre>
+<p>とはいえ、たとえば<code>redis</code>が数万クエリ/秒を捌けるのに比べて<code>gin</code>は約1500リクエスト/秒、<code>martini</code>は約300リクエスト/秒(<code>rails</code>とか<code>node.js</code>級？)ですから、
+WAFが高速化すると嬉しい部分はまだまだありそうです。</p>
 
-<p>をしてから、再度スナップショットを作って、試して欲しい、と。</p>
+<p>今後<code>gin</code>が高機能になった時点で、再度検討したいなと思います。</p>
 
-<p>指示どおりに行ったところ、無事dropletの作成に成功しました。
-しかし、<code>ssh</code>はできないので、Webコンソールから各種ネットワーク設定を見直します。その際には以下の記事が大いに役に立ちました。</p>
+<h2 id="section-2">おまけ</h2>
 
-<p><a href="https://wiki.archlinux.org/index.php/Network_Configuration_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">Network Configuration (日本語) - ArchWiki</a></p>
+<p>日本でも最近は<code>rebuild.fm</code>に代表されるような開発者向けpodcastが増えてきましたが、
+割りと古くからある<code>The Changelog</code>でも少し前に<code>martini</code>を取り上げ、
+codegangstaがゲストとして、なぜこういった実装になったか、その思想を語っています。</p>
 
-<p>今回のケースでは、<code>/etc/conf.d/network@eth0</code>の中身が古いIPのままだったので、これを最新のものに変更する必要がありました。
-netmask値も24から18に変わったり。
-このあたりはリージョンによるのか、dropletによるのか、興味深いです。</p>
+<p><a href="http://thechangelog.com/117/">#117: Go, Martini and Gophercasts with Jeremy Saenz - The Changelog</a></p>
 
-<pre class="highlight plaintext"># systemctl restart network@eth0
-</pre>
+<p>あとは、どうしてそんなHNになったのかとか、どうでもいい話題もあって楽しめます。</p>
 
-<p>以上で、無事に外部からも接続できるようになりました。</p>
+<p>そんなに話す速度も速くないし、割りと日本の英語教育でも学ぶような言い回しが多いので、
+<code>martini</code>が気になっている方は聴いてみると良いかもしれません。</p>
 
   </div>
   <div class="clearfix"></div>

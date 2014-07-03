@@ -13,6 +13,42 @@
         <div id="main" class="col-md-9">
 <header>
   <h1 class="title" itemprop="name">
+    martiniとgin
+  </h1>
+  <div class="meta">
+    <time class="date" itemprop="datePublished" content="2014-07-03T22:00:00+09:00" datetime="2014-07-03T22:00:00+09:00" pubdate=""><span class="month">Jul</span><span class="day">03</span><span class="year">2014</span></time>
+    <div class="article-tag">
+      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+        <li>
+          <a href="/blog/tags/golang.html">golang</a>
+        </li>
+        <li>
+          <a href="/blog/tags/martini.html">martini</a>
+        </li>
+        <li>
+          <a href="/blog/tags/gin.html">gin</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header><h2 id="section">概要</h2>
+
+<p><a href="https://github.com/go-martini/martini">martini</a>という<code>Go</code>向けのWebアプリケーションフレームワーク(WAF)があります。
+最近リリースされて、すぐに<code>Go</code>コミュニティ界隈で話題になりましたね。</p>
+
+<p>また、<a href="https://github.com/gin-gonic/gin">gin</a>という別のWAFも出て、
+こちらは<code>martini</code>より40倍以上も速いぜと主張しています。</p>
+
+<p>どちらか迷った挙句、速さは正義ということで、<code>gin</code>を触ってみたのですが
+結局<code>martini</code>を使うことにしました。</p>
+
+<h2 id="martini">martiniについて</h2>
+
+<p><code>martini</code>は機能拡張を用意にするため、DIを利用しています。
+この実装とし...</p><a href="/blog/2014/07/03/martini-and-gin.html">続きを読む</a>
+<hr>
+<header>
+  <h1 class="title" itemprop="name">
     linq.jsを触ってみた
   </h1>
   <div class="meta">
@@ -133,40 +169,6 @@
 
 <p><code>kato.im</code>の欠点は<code>hipchat</code>が人数無制限無料となった今も10人を超え...</p><a href="/blog/2014/06/27/first-impression-of-slack.html">続きを読む</a>
 <hr>
-<header>
-  <h1 class="title" itemprop="name">
-    DigitalOceanのSnapshotが壊れる？
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/digitalocean.html">digitalocean</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><h2 id="section">概要</h2>
-
-<p><a href="https://cloud.digitalocean.com/">DigitalOcean</a>で
-<code>snapshot</code>から<code>droplet</code>を作ろうとしたら
-うまくいっていないというお話。</p>
-
-<h2 id="section-1">経緯</h2>
-
-<p>DigitalOceanで動かしているMinecraftサーバーは
-サンフランシスコリージョンにあります。
-これをシンガポールに移したらネットワーク遅延が減って、
-体感速度も速くならないかな？ということで
-実際にスナップショットを取って試してみました。</p>
-
-<h2 id="section-2">試行1</h2>
-
-<p>スナップショットをリージョン転送して
-新規にドロップレットを作成するだけの簡単なお仕事、のはず。
-...</p><a href="/blog/2014/06/06/broken-snapshot-on-digital-ocean.html">続きを読む</a>
-<hr>
 <p>
   <a href="/page/2/">次へ</a>
 </p>
@@ -210,6 +212,9 @@
             </h3>
             <ul>
               <li>
+                <a href="/blog/2014/07/03/martini-and-gin.html">martiniとgin</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-07-03T22:00:00+09:00" datetime="2014-07-03T22:00:00+09:00" pubdate=""><span class="month">Jul</span><span class="day">03</span><span class="year">2014</span></time>
+              </li>
+              <li>
                 <a href="/blog/2014/06/30/introduction-of-linq-js.html">linq.jsを触ってみた</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T21:36:00+09:00" datetime="2014-06-30T21:36:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
               </li>
               <li>
@@ -226,9 +231,6 @@
               </li>
               <li>
                 <a href="/blog/2014/04/28/begin-using-xvim.html">XVimをXCodeに導入した</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-28T22:00:00+09:00" datetime="2014-04-28T22:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">28</span><span class="year">2014</span></time>
-              </li>
-              <li>
-                <a href="/blog/2014/04/26/arch-linux-as-server-os.html">サーバOSとしてのArch Linux</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-04-26T12:00:00+09:00" datetime="2014-04-26T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">26</span><span class="year">2014</span></time>
               </li>
             </ul>
           </article><h3>
@@ -301,12 +303,21 @@
             <li>
               <a href="/blog/tags/rubymotion.html">rubymotion</a> (1)
             </li>
+            <li>
+              <a href="/blog/tags/golang.html">golang</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/martini.html">martini</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/gin.html">gin</a> (1)
+            </li>
           </ul><h3>
             By Year
           </h3>
           <ul class="holizontal">
             <li>
-              <a href="/blog/2014.html">2014</a> (13)
+              <a href="/blog/2014.html">2014</a> (14)
             </li>
             <li>
               <a href="/blog/2013.html">2013</a> (6)
