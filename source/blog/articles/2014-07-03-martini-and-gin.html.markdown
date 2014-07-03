@@ -19,7 +19,7 @@ tags: golang, martini, gin
 
 ## martiniについて
 
-`martini`は機能拡張を用意にするため、DIを利用しています。
+`martini`は機能拡張を容易にするため、DIを利用しています。
 この実装として、リフレクションを利用しています。
 
 一方、`Go`の`net/http`パッケージはそうした実装にはなっていません。
@@ -29,7 +29,7 @@ tags: golang, martini, gin
 
 [Three reasons you should not use Martini - Stephen Searles](https://stephensearles.com/?p=254)
 
-開発者のcodegangstaことJeremy Saenzはこうした批判に対して記事を書いていて、
+開発者の[@codegangsta](https://twitter.com/codegangsta)ことJeremy Saenzはこうした批判に対して記事を書いていて、
 `martini`のDI実装が完璧ではないことを率直に認め、
 [negroni](https://github.com/codegangsta/negroni)という別のアプローチも試みるよと書いています。
 
@@ -86,7 +86,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。
 
 日本でも最近は`rebuild.fm`に代表されるような開発者向けpodcastが増えてきましたが、
 割りと古くからある`The Changelog`でも少し前に`martini`を取り上げ、
-codegangstaがゲストとして、なぜこういった実装になったか、その思想を語っています。
+@codegangstaがゲストとして、なぜこういった実装になったか、その思想を語っています。
 
 [#117: Go, Martini and Gophercasts with Jeremy Saenz - The Changelog](http://thechangelog.com/117/)
 
