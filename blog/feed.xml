@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/07/03/martini-and-gin.html"/>
     <id>http://3100.github.io/blog/2014/07/03/martini-and-gin.html</id>
     <published>2014-07-03T13:00:00Z</published>
-    <updated>2014-07-03T14:16:09+00:00</updated>
+    <updated>2014-07-03T14:28:22+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -31,7 +31,7 @@
 
 &lt;h2 id="martini"&gt;martiniについて&lt;/h2&gt;
 
-&lt;p&gt;&lt;code&gt;martini&lt;/code&gt;は機能拡張を用意にするため、DIを利用しています。
+&lt;p&gt;&lt;code&gt;martini&lt;/code&gt;は機能拡張を容易にするため、DIを利用しています。
 この実装として、リフレクションを利用しています。&lt;/p&gt;
 
 &lt;p&gt;一方、&lt;code&gt;Go&lt;/code&gt;の&lt;code&gt;net/http&lt;/code&gt;パッケージはそうした実装にはなっていません。
@@ -41,7 +41,7 @@
 
 &lt;p&gt;&lt;a href="https://stephensearles.com/?p=254"&gt;Three reasons you should not use Martini - Stephen Searles&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;開発者のcodegangstaことJeremy Saenzはこうした批判に対して記事を書いていて、
+&lt;p&gt;開発者の&lt;a href="https://twitter.com/codegangsta"&gt;@codegangsta&lt;/a&gt;ことJeremy Saenzはこうした批判に対して記事を書いていて、
 &lt;code&gt;martini&lt;/code&gt;のDI実装が完璧ではないことを率直に認め、
 &lt;a href="https://github.com/codegangsta/negroni"&gt;negroni&lt;/a&gt;という別のアプローチも試みるよと書いています。&lt;/p&gt;
 
@@ -100,7 +100,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
 
 &lt;p&gt;日本でも最近は&lt;code&gt;rebuild.fm&lt;/code&gt;に代表されるような開発者向けpodcastが増えてきましたが、
 割りと古くからある&lt;code&gt;The Changelog&lt;/code&gt;でも少し前に&lt;code&gt;martini&lt;/code&gt;を取り上げ、
-codegangstaがゲストとして、なぜこういった実装になったか、その思想を語っています。&lt;/p&gt;
+@codegangstaがゲストとして、なぜこういった実装になったか、その思想を語っています。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href="http://thechangelog.com/117/"&gt;#117: Go, Martini and Gophercasts with Jeremy Saenz - The Changelog&lt;/a&gt;&lt;/p&gt;
 
@@ -115,7 +115,7 @@ codegangstaがゲストとして、なぜこういった実装になったか、
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
     <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
     <published>2014-06-30T12:36:00Z</published>
-    <updated>2014-07-03T14:16:09+00:00</updated>
+    <updated>2014-07-03T14:28:22+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -281,7 +281,7 @@ codegangstaがゲストとして、なぜこういった実装になったか、
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
     <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
     <published>2014-06-29T16:50:00Z</published>
-    <updated>2014-07-03T14:16:09+00:00</updated>
+    <updated>2014-07-03T14:28:22+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -365,7 +365,7 @@ codegangstaがゲストとして、なぜこういった実装になったか、
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
     <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
     <published>2014-06-28T02:07:00Z</published>
-    <updated>2014-07-03T14:16:09+00:00</updated>
+    <updated>2014-07-03T14:28:22+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -433,7 +433,7 @@ codegangstaがゲストとして、なぜこういった実装になったか、
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
     <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
     <published>2014-06-27T13:00:00Z</published>
-    <updated>2014-07-03T14:16:09+00:00</updated>
+    <updated>2014-07-03T14:28:22+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -539,7 +539,7 @@ codegangstaがゲストとして、なぜこういった実装になったか、
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html"/>
     <id>http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html</id>
     <published>2014-06-05T23:30:00Z</published>
-    <updated>2014-07-03T14:16:09+00:00</updated>
+    <updated>2014-07-03T14:28:22+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
