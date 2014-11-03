@@ -4,28 +4,97 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>SwiftをVimから叩きたい - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9">
-          <h1>Archive for
-            
-              Nov 16 2013
-            
-          </h1>
-          
-          
-          <ul>
-            
-              <li><a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a> <span>Nov 16, 2013</span></li>
-            
-          </ul>
-          
-            
-          
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      SwiftをVimから叩きたい
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-11-03T12:00:00+09:00" datetime="2014-11-03T12:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">03</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/vim.html">vim</a>
+          </li>
+          <li>
+            <a href="/blog/tags/swift.html">swift</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><h2 id="section">概要</h2>
+
+<p>最近仕事は<code>R</code>だし興味あるのは1.4β版で盛り上がってる<code>Go</code>だし、
+覚える言語多すぎると挫折しそうなので、
+今までこじらせて<code>RubyMotion</code>に逃げたりしたけど、
+下の記事を読んで色々考えて、逆に<code>Swift</code>をやろうと思った。</p>
+
+<p>cf. <a href="http://blog.thefrontiergroup.com.au/2014/09/should-my-company-choose-rubymotion-or-swift/">Should my company choose RubyMotion or Swift? - The Frontier Group Journal</a></p>
+
+<p>まずは<code>Vim</code>から実行できるようにしました。
+<code>vim-quickrun</code>を<code>Neobundle</code>あたりで導入済みというのが前提です。</p>
+
+<h2 id="section-1">準備</h2>
+
+<p><code>Xcode6</code>はいずれにしても必要と思われるので、
+事前に<a href="https://itunes.apple.com/us/app/xcode/id497799835?ls=1&amp;amp;mt=12">AppStore</a>からインストールしておきます。</p>
+
+<p>手元環境ではなぜかインストールしたのに<code>Xcode5</code>になってるという悲しい事態もありましたが
+削除後再インストールで無事6が入りました。</p>
+
+<h2 id="swift">Swiftをコマンドラインから叩けるようにする</h2>
+
+<p>Webを見るとまだベータ版の頃の方法が多く見つかりますが、
+現時点では以下のようにするとよいでしょう。</p>
+
+<pre class="highlight plaintext"># xcode-select -switch /Applications/Xcode.app/Contents/Developer
+</pre>
+
+<p>とした後、</p>
+
+<pre class="highlight plaintext">$ xrun swift
+</pre>
+
+<p>でREPL環境に入れるようになります。引数にswiftファイルを渡せば、結果を返します。</p>
+
+<p>cf. <a href="http://stackoverflow.com/questions/24011120/how-can-i-use-swift-in-terminal">xcode - How can I use swift in Terminal? - Stack Overflow</a></p>
+
+<h2 id="vim">Vimの設定</h2>
+
+<ul>
+  <li>Swift用シンタックスハイライトとインデント</li>
+  <li><a href="https://github.com/thinca/vim-quickrun">vim-quickrun</a>で動かせるようにする</li>
+</ul>
+
+<p><code>$HOME/.vimrc</code>に以下を追加します。</p>
+
+<pre class="highlight shell"><span class="k">if </span>has<span class="o">(</span><span class="s2">"mac"</span><span class="o">)</span>
+   NeoBundle <span class="s1">'toyamarinyon/vim-swift'</span>
+
+   <span class="nb">let </span>g:quickrun_config[<span class="s1">'swift'</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
+   <span class="se">\ </span><span class="s1">'command'</span>: <span class="s1">'xcrun'</span>,
+   <span class="se">\ </span><span class="s1">'cmdopt'</span>: <span class="s1">'swift'</span>,
+   <span class="se">\ </span><span class="s1">'exec'</span>: <span class="s1">'%c %o %s'</span>,
+   <span class="se">\}</span>
+ endif
+</pre>
+
+<h2 id="section-2">参考</h2>
+
+<p><a href="http://oooooooo.hatenablog.com/entry/2014/10/04/23532">Swift をコマンドラインから使う - oooooooo</a></p>
+
+<p>後から見つけたのだけど、<code>Quick</code>など周辺ツールについても書かれていてオススメです。</p>
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">

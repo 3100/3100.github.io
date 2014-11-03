@@ -5,16 +5,89 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-07-03T13:00:00Z</updated>
+  <updated>2014-11-03T03:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>SwiftをVimから叩きたい</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/11/03/swift-with-vim.html"/>
+    <id>http://3100.github.io/blog/2014/11/03/swift-with-vim.html</id>
+    <published>2014-11-03T03:00:00Z</published>
+    <updated>2014-11-03T05:58:59+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
+
+&lt;p&gt;最近仕事は&lt;code&gt;R&lt;/code&gt;だし興味あるのは1.4β版で盛り上がってる&lt;code&gt;Go&lt;/code&gt;だし、
+覚える言語多すぎると挫折しそうなので、
+今までこじらせて&lt;code&gt;RubyMotion&lt;/code&gt;に逃げたりしたけど、
+下の記事を読んで色々考えて、逆に&lt;code&gt;Swift&lt;/code&gt;をやろうと思った。&lt;/p&gt;
+
+&lt;p&gt;cf. &lt;a href="http://blog.thefrontiergroup.com.au/2014/09/should-my-company-choose-rubymotion-or-swift/"&gt;Should my company choose RubyMotion or Swift? - The Frontier Group Journal&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;まずは&lt;code&gt;Vim&lt;/code&gt;から実行できるようにしました。
+&lt;code&gt;vim-quickrun&lt;/code&gt;を&lt;code&gt;Neobundle&lt;/code&gt;あたりで導入済みというのが前提です。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;準備&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;Xcode6&lt;/code&gt;はいずれにしても必要と思われるので、
+事前に&lt;a href="https://itunes.apple.com/us/app/xcode/id497799835?ls=1&amp;amp;amp;mt=12"&gt;AppStore&lt;/a&gt;からインストールしておきます。&lt;/p&gt;
+
+&lt;p&gt;手元環境ではなぜかインストールしたのに&lt;code&gt;Xcode5&lt;/code&gt;になってるという悲しい事態もありましたが
+削除後再インストールで無事6が入りました。&lt;/p&gt;
+
+&lt;h2 id="swift"&gt;Swiftをコマンドラインから叩けるようにする&lt;/h2&gt;
+
+&lt;p&gt;Webを見るとまだベータ版の頃の方法が多く見つかりますが、
+現時点では以下のようにするとよいでしょう。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;# xcode-select -switch /Applications/Xcode.app/Contents/Developer
+&lt;/pre&gt;
+
+&lt;p&gt;とした後、&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;$ xrun swift
+&lt;/pre&gt;
+
+&lt;p&gt;でREPL環境に入れるようになります。引数にswiftファイルを渡せば、結果を返します。&lt;/p&gt;
+
+&lt;p&gt;cf. &lt;a href="http://stackoverflow.com/questions/24011120/how-can-i-use-swift-in-terminal"&gt;xcode - How can I use swift in Terminal? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="vim"&gt;Vimの設定&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Swift用シンタックスハイライトとインデント&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/thinca/vim-quickrun"&gt;vim-quickrun&lt;/a&gt;で動かせるようにする&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;$HOME/.vimrc&lt;/code&gt;に以下を追加します。&lt;/p&gt;
+
+&lt;pre class="highlight shell"&gt;&lt;span class="k"&gt;if &lt;/span&gt;has&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"mac"&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+   NeoBundle &lt;span class="s1"&gt;'toyamarinyon/vim-swift'&lt;/span&gt;
+
+   &lt;span class="nb"&gt;let &lt;/span&gt;g:quickrun_config[&lt;span class="s1"&gt;'swift'&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+   &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="s1"&gt;'command'&lt;/span&gt;: &lt;span class="s1"&gt;'xcrun'&lt;/span&gt;,
+   &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="s1"&gt;'cmdopt'&lt;/span&gt;: &lt;span class="s1"&gt;'swift'&lt;/span&gt;,
+   &lt;span class="se"&gt;\ &lt;/span&gt;&lt;span class="s1"&gt;'exec'&lt;/span&gt;: &lt;span class="s1"&gt;'%c %o %s'&lt;/span&gt;,
+   &lt;span class="se"&gt;\}&lt;/span&gt;
+ endif
+&lt;/pre&gt;
+
+&lt;h2 id="section-2"&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href="http://oooooooo.hatenablog.com/entry/2014/10/04/23532"&gt;Swift をコマンドラインから使う - oooooooo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;後から見つけたのだけど、&lt;code&gt;Quick&lt;/code&gt;など周辺ツールについても書かれていてオススメです。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>martiniとgin</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/07/03/martini-and-gin.html"/>
     <id>http://3100.github.io/blog/2014/07/03/martini-and-gin.html</id>
     <published>2014-07-03T13:00:00Z</published>
-    <updated>2014-07-03T14:28:22+00:00</updated>
+    <updated>2014-11-03T05:58:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -115,7 +188,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
     <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
     <published>2014-06-30T12:36:00Z</published>
-    <updated>2014-07-03T14:28:22+00:00</updated>
+    <updated>2014-11-03T05:58:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -281,7 +354,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
     <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
     <published>2014-06-29T16:50:00Z</published>
-    <updated>2014-07-03T14:28:22+00:00</updated>
+    <updated>2014-11-03T05:58:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -365,7 +438,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
     <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
     <published>2014-06-28T02:07:00Z</published>
-    <updated>2014-07-03T14:28:22+00:00</updated>
+    <updated>2014-11-03T05:58:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -433,7 +506,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
     <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
     <published>2014-06-27T13:00:00Z</published>
-    <updated>2014-07-03T14:28:22+00:00</updated>
+    <updated>2014-11-03T05:58:59+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -532,83 +605,6 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
 
 &lt;p&gt;&lt;a href="https://github.com/3100/slack-hubot"&gt;3100/slack-hubot&lt;/a&gt;&lt;/p&gt;
 
-</content>
-  </entry>
-  <entry>
-    <title>DigitalOceanのSnapshotが壊れる？</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html"/>
-    <id>http://3100.github.io/blog/2014/06/06/broken-snapshot-on-digital-ocean.html</id>
-    <published>2014-06-05T23:30:00Z</published>
-    <updated>2014-07-03T14:28:22+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="https://cloud.digitalocean.com/"&gt;DigitalOcean&lt;/a&gt;で
-&lt;code&gt;snapshot&lt;/code&gt;から&lt;code&gt;droplet&lt;/code&gt;を作ろうとしたら
-うまくいっていないというお話。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;経緯&lt;/h2&gt;
-
-&lt;p&gt;DigitalOceanで動かしているMinecraftサーバーは
-サンフランシスコリージョンにあります。
-これをシンガポールに移したらネットワーク遅延が減って、
-体感速度も速くならないかな？ということで
-実際にスナップショットを取って試してみました。&lt;/p&gt;
-
-&lt;h2 id="section-2"&gt;試行1&lt;/h2&gt;
-
-&lt;p&gt;スナップショットをリージョン転送して
-新規にドロップレットを作成するだけの簡単なお仕事、のはず。
-しかし、ドロップレット作成最後の15秒で何度やってもエラーとなりました。&lt;/p&gt;
-
-&lt;p&gt;もしかして&lt;code&gt;Power Off&lt;/code&gt;を使うのはダメで、きちんと&lt;code&gt;shutdown&lt;/code&gt;する必要があるのかな。。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://groups.google.com/forum/#!topic/packer-tool/bSlP8dELiM"&gt;DigitalOcean - file content disappears after image and new droplet creation - Google グループ&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;尚、各処理にかかる時間ですが&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;スナップショット作成は使い方にもよるだろうけど、今回は数分で完了。&lt;/li&gt;
-  &lt;li&gt;サンフランシスコからシンガポールへのスナップショット転送は、30分程度かかる。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="section-3"&gt;試行2&lt;/h2&gt;
-
-&lt;p&gt;今度はきちんとシャットダウンしてからスナップショットを作成し、現在リージョン転送中。&lt;/p&gt;
-
-&lt;p&gt;しかし、結果は変わらず。&lt;/p&gt;
-
-&lt;h2 id="section-4"&gt;試行3&lt;/h2&gt;
-
-&lt;p&gt;生成先をサンフランシスコにして試してみた。ら、動きました。
-どうやらスナップショットが壊れているわけではなさそうですね。&lt;/p&gt;
-
-&lt;p&gt;結局サポートからチケットを作成して、現在質問中。&lt;/p&gt;
-
-&lt;h2 id="section-5"&gt;正解(2014/06/18追記)&lt;/h2&gt;
-
-&lt;p&gt;技術スタッフにイシュー投げとくと言われた後、ずっと放置だったのですが、2週間弱して反応がありました。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;# touch /etc/network.d/ethernet-static
-&lt;/pre&gt;
-
-&lt;p&gt;をしてから、再度スナップショットを作って、試して欲しい、と。&lt;/p&gt;
-
-&lt;p&gt;指示どおりに行ったところ、無事dropletの作成に成功しました。
-しかし、&lt;code&gt;ssh&lt;/code&gt;はできないので、Webコンソールから各種ネットワーク設定を見直します。その際には以下の記事が大いに役に立ちました。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://wiki.archlinux.org/index.php/Network_Configuration_(%E6%97%A5%E6%9C%AC%E8%AA%9E)"&gt;Network Configuration (日本語) - ArchWiki&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;今回のケースでは、&lt;code&gt;/etc/conf.d/network@eth0&lt;/code&gt;の中身が古いIPのままだったので、これを最新のものに変更する必要がありました。
-netmask値も24から18に変わったり。
-このあたりはリージョンによるのか、dropletによるのか、興味深いです。&lt;/p&gt;
-
-&lt;pre class="highlight plaintext"&gt;# systemctl restart network@eth0
-&lt;/pre&gt;
-
-&lt;p&gt;以上で、無事に外部からも接続できるようになりました。&lt;/p&gt;
 </content>
   </entry>
 </feed>

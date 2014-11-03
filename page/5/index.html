@@ -10,22 +10,43 @@
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9">
-          <h1>Archive for
-            
-              Nov 16 2013
-            
-          </h1>
-          
-          
-          <ul>
-            
-              <li><a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a> <span>Nov 16, 2013</span></li>
-            
-          </ul>
-          
-            
-          
+        <div id="main" class="col-md-9"><p>
+  <a href="/page/4/">前へ</a>
+</p>
+<header>
+  <h1 class="title" itemprop="name">
+    vimの起動速度を改善する
+  </h1>
+  <div class="meta">
+    <time class="date" itemprop="datePublished" content="2013-07-26T16:41:00+09:00" datetime="2013-07-26T16:41:00+09:00" pubdate=""><span class="month">Jul</span><span class="day">26</span><span class="year">2013</span></time>
+    <div class="article-tag">
+      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+        <li>
+          <a href="/blog/tags/vim.html">vim</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header><p>ふと気づいたら、vimの起動に2秒ほどかかるようになっていました。そこで、google先生を頼りに、原因の究明と解決策を調べてみました。</p>
+
+<h2 id="section">時間計測</h2>
+
+<h3 id="vim">とりあえずvimの標準機能で</h3>
+
+<p>vimにはstartuptimeという実行時オプションがあります。これを使ってみましょう。</p>
+
+<p>現在の起動時間を計測(hogeファイルにログ保存)</p>
+
+<pre class="highlight plaintext">$ vim --startuptime hoge
+</pre>
+
+<p>Xサーバへの接続を行わせずに起動時間を計測</p>
+
+<pre class="highlight plaintext">$ vim -X --startuptime hoge
+</pre>
+
+<p>空...</p><a href="/blog/2013/07/26/improve-your-vim-performance.html">続きを読む</a>
+<hr>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
