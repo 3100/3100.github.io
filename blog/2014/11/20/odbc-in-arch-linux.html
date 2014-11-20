@@ -4,21 +4,117 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Room 3100</title><data class="site description"></data>
+    <link href="/stylesheets/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" /><link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" /><title>Arch LinuxからODBC経由でMS SQLServerにアクセスする - Room 3100</title><data class="site description"></data>
   </head>
   <body>
     <div class="container">
       <a class="tk-learning-curve" href="/" title="Room 3100">Room 3100</a>
       <div class="row">
-        <div id="main" class="col-md-9">
-          <h1>
-            Articles tagged moin
-          </h1>
-          <ul>
-            <li>
-              <a href="/blog/2013/11/16/moin-with-nginx.html">MoinMoin WikiをNginxで動かす</a><span> Nov 16, 2013</span>
-            </li>
-          </ul>
+        <div id="main" class="col-md-9"><current_article class="article" itemscope="" itemtype="http://schema.org/Article"><header>
+    <h1 class="title" itemprop="name">
+      Arch LinuxからODBC経由でMS SQLServerにアクセスする
+    </h1>
+    <div class="meta">
+      <time class="date" itemprop="datePublished" content="2014-11-20T16:00:00+09:00" datetime="2014-11-20T16:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">20</span><span class="year">2014</span></time>
+      <div class="article-tag">
+        <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+          <li>
+            <a href="/blog/tags/arch.html">arch</a>
+          </li>
+          <li>
+            <a href="/blog/tags/odbc.html">odbc</a>
+          </li>
+          <li>
+            <a href="/blog/tags/r.html">r</a>
+          </li>
+          <li>
+            <a href="/blog/tags/sql-server.html">sql server</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="body markdown" itemprop="articleBody"><h1 id="section">概要</h1>
+
+<p>今の仕事では
+データを格納しているDBが<code>Microsoft SQL Server</code>(以下SQLServer)というのが主な理由で
+<code>R</code>スクリプトの実装をWindows上で行っています。
+(<code>R</code>とSQLServerの連携自体は<code>ODBC</code>を利用しています。)</p>
+
+<p>しかし、<code>cygwin</code>にだんだん嫌気が差してきたので
+<code>arch</code>でODBCの設定を行い、
+各スクリプトをarch上で使えるようにしてみました。</p>
+
+<p>SQLServer 2012で検証していますが、それ以外でも大丈夫かと思います。</p>
+
+<h1 id="odbc">ODBCの準備</h1>
+
+<p>まず<code>FreeTDS</code>というライブラリを導入します。
+これはSQLServerやSybaseなどと通信するためのライブラリ群です。</p>
+
+<pre class="highlight plaintext"># pacman -S freetds
+</pre>
+
+<h1 id="odbc-1">ODBCの設定</h1>
+
+<p>続いて、設定ファイルの編集してきます。</p>
+
+<p>/etc/odbcinst.ini</p>
+
+<pre class="highlight plaintext">[FreeTDS]
+Driver      = /usr/lib/libtdsodbc.so
+UsageCount  = 1
+</pre>
+
+<p>/etc/odbc.ini</p>
+
+<pre class="highlight plaintext">[your_server_name]
+Driver      = FreeTDS
+Servername  = your_server_name
+Database    = your_db_name
+</pre>
+
+<p>/etc/freetds/freetds.conf</p>
+
+<pre class="highlight plaintext">[your_server_name]
+host            = xxx.xxx.xxx.xxx # Host name or IP
+port            = xxxxx           # Default: 1433
+tds version     = 7.1
+client charset  = UTF-8
+</pre>
+
+<h1 id="section-1">接続テスト</h1>
+
+<p>Rのスクリプト例です。
+<code>RODBC</code>パッケージを使って接続するのが簡単でしょうか。</p>
+
+<p>もちろん、他の言語からも利用可能なはずです。</p>
+
+<pre class="highlight r"><span class="c1"># your_server_name: ODBCの設定名(上と同じ名前)
+# user: ユーザ名
+# password: パスワード
+# library(RODBC)
+</span><span class="n">sql</span> <span class="o">&lt;-</span> <span class="s1">'SELECT column1, column2 FROM your_db.dbo.table1'</span>
+<span class="n">con</span> <span class="o">&lt;-</span> <span class="n">odbcConnect</span><span class="p">(</span><span class="n">your_server_name</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="n">as.data.frame</span><span class="p">(</span><span class="n">sqlQuery</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="n">sql</span><span class="p">))</span>
+<span class="n">odbcClose</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+</pre>
+
+<p>エラーが出る場合などは</p>
+
+<pre class="highlight r"><span class="n">options</span><span class="p">(</span><span class="n">error</span> <span class="o">=</span> <span class="n">recover</span><span class="p">)</span>
+</pre>
+
+<p>などで追い詰めると良いかもです。</p>
+
+<h1 id="section-2">参考</h1>
+
+<p><a href="https://wiki.archlinux.org/index.php/odbc">Odbc - ArchWiki</a></p>
+
+  </div>
+  <div class="clearfix"></div>
+  <footer></footer>
+</current_article>
         </div>
         <div id="sidebar" class="col-md-3">
           <article id="profile" itemprop="author" itemscope="" itemtype="http://schema.org/Person">

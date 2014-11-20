@@ -15,6 +15,43 @@
 </p>
 <header>
   <h1 class="title" itemprop="name">
+    npm:globalとlocal
+  </h1>
+  <div class="meta">
+    <time class="date" itemprop="datePublished" content="2014-06-28T11:07:00+09:00" datetime="2014-06-28T11:07:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">28</span><span class="year">2014</span></time>
+    <div class="article-tag">
+      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+        <li>
+          <a href="/blog/tags/node-js.html">node.js</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header><h2 id="section">概要</h2>
+
+<p><code>node.js</code>のパッケージ管理ツールである<code>npm</code>。
+<code>package.json</code>などと併用すると非常に便利ですが
+<code>-g</code>オプションの使い分けが気になりました。</p>
+
+<h2 id="section-1">資料</h2>
+
+<p><code>node.js</code>の公式サイトに、<code>npm 1.0</code>が登場した時の記事があります。</p>
+
+<p><a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation">npm 1.0: Global vs Local installation</a></p>
+
+<h2 id="section-2">基本機能</h2>
+
+<p>知っている人には今更かもしれませんが、おさらいです。</p>
+
+<h3 id="global">global</h3>
+
+<ul>
+<li>パッケージは<code>{prefix}/lib/node_modules</code>に置かれる</li>
+  <li>実行...</li>
+</ul><a href="/blog/2014/06/28/npm-global-vs-local.html">続きを読む</a>
+<hr>
+<header>
+  <h1 class="title" itemprop="name">
     Slackを使ってみた感想
   </h1>
   <div class="meta">
@@ -128,38 +165,6 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
 
 <p>Arch...</p><a href="/blog/2014/04/26/arch-linux-as-server-os.html">続きを読む</a>
 <hr>
-<header>
-  <h1 class="title" itemprop="name">
-    DigitalOceanがArchの提供をやめるらしい
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2014-04-13T12:00:00+09:00" datetime="2014-04-13T12:00:00+09:00" pubdate=""><span class="month">Apr</span><span class="day">13</span><span class="year">2014</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/digitalocean.html">digitalocean</a>
-        </li>
-        <li>
-          <a href="/blog/tags/arch.html">arch</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><p><img alt="snap" src="/blog/2014/04/13/digitalocean-are-deprecating-arch/snapshot.png"></p>
-
-<h2 id="section">概要</h2>
-
-<p><a href="https://www.digitalocean.com/">DigitalOcean</a>が<code>Arch</code>イメージの提供を廃止予定だそうです。その理由ですが</p>
-
-<ul>
-<li>使っているユーザがそれほど多くない</li>
-  <li>ローリングアップデートに対応する労力を避けない</li>
-</ul><p>とのこと。<code>Arch</code>の素晴らしさが世間に十分認知されず、とても残念です。</p>
-
-<h2 id="section-1">私見</h2>
-
-<p>個人的には<code>Docker</code>が安定すればその上で<code>Arch</code>を動かせばいいやと思っているので、すぐ代替先を探そう！とはなりません。が、<code>Docker 0.10</code>では<code>systemd</code>がうまく動作しない問題があるため、そちらが早く治ってくれると...</p><a href="/blog/2014/04/13/digitalocean-are-deprecating-arch.html">続きを読む</a>
-<hr>
 <p>
   <a href="/page/3/">次へ</a>
 </p>
@@ -203,6 +208,9 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
             </h3>
             <ul>
               <li>
+                <a href="/blog/2014/11/20/odbc-in-arch-linux.html">Arch LinuxからODBC経由でMS SQLServerにアクセスする</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-11-20T16:00:00+09:00" datetime="2014-11-20T16:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">20</span><span class="year">2014</span></time>
+              </li>
+              <li>
                 <a href="/blog/2014/11/03/swift-with-vim.html">SwiftをVimから叩きたい</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-11-03T12:00:00+09:00" datetime="2014-11-03T12:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">03</span><span class="year">2014</span></time>
               </li>
               <li>
@@ -220,14 +228,23 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
               <li>
                 <a href="/blog/2014/06/27/first-impression-of-slack.html">Slackを使ってみた感想</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-27T22:00:00+09:00" datetime="2014-06-27T22:00:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">27</span><span class="year">2014</span></time>
               </li>
-              <li>
-                <a href="/blog/2014/06/06/broken-snapshot-on-digital-ocean.html">DigitalOceanのSnapshotが壊れる？</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-06T08:30:00+09:00" datetime="2014-06-06T08:30:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">06</span><span class="year">2014</span></time>
-              </li>
             </ul>
           </article><h3>
             Tags
           </h3>
           <ul class="tags holizontal">
+            <li>
+              <a href="/blog/tags/arch.html">arch</a> (3)
+            </li>
+            <li>
+              <a href="/blog/tags/odbc.html">odbc</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/r.html">r</a> (1)
+            </li>
+            <li>
+              <a href="/blog/tags/sql-server.html">sql server</a> (1)
+            </li>
             <li>
               <a href="/blog/tags/vim.html">vim</a> (4)
             </li>
@@ -263,9 +280,6 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
             </li>
             <li>
               <a href="/blog/tags/xcode.html">xcode</a> (1)
-            </li>
-            <li>
-              <a href="/blog/tags/arch.html">arch</a> (2)
             </li>
             <li>
               <a href="/blog/tags/objective-c.html">objective-c</a> (1)
@@ -311,7 +325,7 @@ XCode5向けに導入する場合は、ブランチを変...</p><a href="/blog/2
           </h3>
           <ul class="holizontal">
             <li>
-              <a href="/blog/2014.html">2014</a> (15)
+              <a href="/blog/2014.html">2014</a> (16)
             </li>
             <li>
               <a href="/blog/2013.html">2013</a> (6)

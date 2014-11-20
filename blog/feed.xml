@@ -5,16 +5,103 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-11-03T03:00:00Z</updated>
+  <updated>2014-11-20T07:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Arch LinuxからODBC経由でMS SQLServerにアクセスする</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2014/11/20/odbc-in-arch-linux.html"/>
+    <id>http://3100.github.io/blog/2014/11/20/odbc-in-arch-linux.html</id>
+    <published>2014-11-20T07:00:00Z</published>
+    <updated>2014-11-20T11:25:26+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1 id="section"&gt;概要&lt;/h1&gt;
+
+&lt;p&gt;今の仕事では
+データを格納しているDBが&lt;code&gt;Microsoft SQL Server&lt;/code&gt;(以下SQLServer)というのが主な理由で
+&lt;code&gt;R&lt;/code&gt;スクリプトの実装をWindows上で行っています。
+(&lt;code&gt;R&lt;/code&gt;とSQLServerの連携自体は&lt;code&gt;ODBC&lt;/code&gt;を利用しています。)&lt;/p&gt;
+
+&lt;p&gt;しかし、&lt;code&gt;cygwin&lt;/code&gt;にだんだん嫌気が差してきたので
+&lt;code&gt;arch&lt;/code&gt;でODBCの設定を行い、
+各スクリプトをarch上で使えるようにしてみました。&lt;/p&gt;
+
+&lt;p&gt;SQLServer 2012で検証していますが、それ以外でも大丈夫かと思います。&lt;/p&gt;
+
+&lt;h1 id="odbc"&gt;ODBCの準備&lt;/h1&gt;
+
+&lt;p&gt;まず&lt;code&gt;FreeTDS&lt;/code&gt;というライブラリを導入します。
+これはSQLServerやSybaseなどと通信するためのライブラリ群です。&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;# pacman -S freetds
+&lt;/pre&gt;
+
+&lt;h1 id="odbc-1"&gt;ODBCの設定&lt;/h1&gt;
+
+&lt;p&gt;続いて、設定ファイルの編集してきます。&lt;/p&gt;
+
+&lt;p&gt;/etc/odbcinst.ini&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;[FreeTDS]
+Driver      = /usr/lib/libtdsodbc.so
+UsageCount  = 1
+&lt;/pre&gt;
+
+&lt;p&gt;/etc/odbc.ini&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;[your_server_name]
+Driver      = FreeTDS
+Servername  = your_server_name
+Database    = your_db_name
+&lt;/pre&gt;
+
+&lt;p&gt;/etc/freetds/freetds.conf&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;[your_server_name]
+host            = xxx.xxx.xxx.xxx # Host name or IP
+port            = xxxxx           # Default: 1433
+tds version     = 7.1
+client charset  = UTF-8
+&lt;/pre&gt;
+
+&lt;h1 id="section-1"&gt;接続テスト&lt;/h1&gt;
+
+&lt;p&gt;Rのスクリプト例です。
+&lt;code&gt;RODBC&lt;/code&gt;パッケージを使って接続するのが簡単でしょうか。&lt;/p&gt;
+
+&lt;p&gt;もちろん、他の言語からも利用可能なはずです。&lt;/p&gt;
+
+&lt;pre class="highlight r"&gt;&lt;span class="c1"&gt;# your_server_name: ODBCの設定名(上と同じ名前)
+# user: ユーザ名
+# password: パスワード
+# library(RODBC)
+&lt;/span&gt;&lt;span class="n"&gt;sql&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s1"&gt;'SELECT column1, column2 FROM your_db.dbo.table1'&lt;/span&gt;
+&lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;odbcConnect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;your_server_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;df&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;as.data.frame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sqlQuery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;con&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sql&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;odbcClose&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;con&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;エラーが出る場合などは&lt;/p&gt;
+
+&lt;pre class="highlight r"&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;recover&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;などで追い詰めると良いかもです。&lt;/p&gt;
+
+&lt;h1 id="section-2"&gt;参考&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href="https://wiki.archlinux.org/index.php/odbc"&gt;Odbc - ArchWiki&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>SwiftをVimから叩きたい</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/11/03/swift-with-vim.html"/>
     <id>http://3100.github.io/blog/2014/11/03/swift-with-vim.html</id>
     <published>2014-11-03T03:00:00Z</published>
-    <updated>2014-11-03T05:58:59+00:00</updated>
+    <updated>2014-11-20T11:25:26+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -87,7 +174,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/07/03/martini-and-gin.html"/>
     <id>http://3100.github.io/blog/2014/07/03/martini-and-gin.html</id>
     <published>2014-07-03T13:00:00Z</published>
-    <updated>2014-11-03T05:58:59+00:00</updated>
+    <updated>2014-11-20T11:25:26+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -188,7 +275,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
     <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
     <published>2014-06-30T12:36:00Z</published>
-    <updated>2014-11-03T05:58:59+00:00</updated>
+    <updated>2014-11-20T11:25:26+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -354,7 +441,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
     <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
     <published>2014-06-29T16:50:00Z</published>
-    <updated>2014-11-03T05:58:59+00:00</updated>
+    <updated>2014-11-20T11:25:26+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -438,7 +525,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
     <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
     <published>2014-06-28T02:07:00Z</published>
-    <updated>2014-11-03T05:58:59+00:00</updated>
+    <updated>2014-11-20T11:25:26+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -499,112 +586,6 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
 &lt;p&gt;上記記事では子フォルダでさらに&lt;code&gt;npm install&lt;/code&gt;する例も紹介されていますが、管理上面倒なことになりますし、あまり気にする必要はないでしょう。&lt;/p&gt;
 
 &lt;p&gt;また、localにインストールしてもPATHを通せばコマンドラインインターフェースも使用できるので、globalインストールを全く使わないという選択肢もありです。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Slackを使ってみた感想</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html"/>
-    <id>http://3100.github.io/blog/2014/06/27/first-impression-of-slack.html</id>
-    <published>2014-06-27T13:00:00Z</published>
-    <updated>2014-11-03T05:58:59+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;経緯&lt;/h2&gt;
-
-&lt;p&gt;いまだに&lt;code&gt;IP Messenger&lt;/code&gt;が幅をきかす社内ですが、技術的興味が似ている若手社員の間では色々チャットサービスを試しています。&lt;/p&gt;
-
-&lt;p&gt;過去の変遷は&lt;a href="http://lingr.com/"&gt;lingr&lt;/a&gt; → &lt;a href="http://www.codefirst.org/AsakusaSatellite/"&gt;AsakusaSatellite&lt;/a&gt; → &lt;a href="http://kato.im/"&gt;kato.im&lt;/a&gt;で、ここ数ヶ月ほどは&lt;code&gt;kato.im&lt;/code&gt;がお気に入りでした。
-検討したサービスには&lt;a href="https://www.hipchat.com/"&gt;hipchat&lt;/a&gt;や&lt;a href="http://www.chatwork.com/ja/"&gt;chatwork&lt;/a&gt;などもありましたが、見た目が&lt;code&gt;kato.im&lt;/code&gt;ほどではないことなどから、食指が動きません。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;kato.im&lt;/code&gt;の欠点は&lt;code&gt;hipchat&lt;/code&gt;が人数無制限無料となった今も10人を超えると課金対象になることです。($5ppmなので課金開始額は$50pm。)
-&lt;code&gt;AsakusaSatellite&lt;/code&gt;から導入していた&lt;a href="https://hubot.github.com/"&gt;hubot&lt;/a&gt;も立派に1人としてカウントされるため、実質9人までしか同じログを共有することができません。
-利用者が10人を超えていたので、結果としてログイン頻度や発言数などによって人が2つのグループを行き来するという運用になっていました。&lt;/p&gt;
-
-&lt;p&gt;一方、最近巷で話題の&lt;a href="https://slack.com/"&gt;slack&lt;/a&gt;は&lt;code&gt;hipchat&lt;/code&gt;を意識してなのかそうでないのか、人数無制限無料です。また、ビジュアル的にもいい感じであることが事前に確認されていました。
-そこで、今回試験的に導入してみることにしました。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;個人的に重視する部分&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使いやすいチャット機能&lt;/li&gt;
-  &lt;li&gt;Wikiを置き換えたい&lt;/li&gt;
-  &lt;li&gt;見た目&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;7年近く運用している&lt;code&gt;moinmoin&lt;/code&gt;をそろそろ違うWikiに置き換えたい機運が高まっています。
-似たような用途で、&lt;a href="https://github.com/volpe28v/DevHub"&gt;devhub&lt;/a&gt;を運用しているチームもいますが、できれば長期にわたる使用に耐えられるようなものが望ましいです。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id="section-2"&gt;いいところ&lt;/h2&gt;
-
-&lt;h3 id="ui"&gt;UIが変態的だけどなかなか爽快&lt;/h3&gt;
-
-&lt;p&gt;初めてログインすると、画面のあちこちに円形のマーキングがされたりして、今っぽさを感じます。
-決して使いやすい素直なUIではありませんが、デザインにこだわりを感じます。&lt;/p&gt;
-
-&lt;h3 id="section-3"&gt;スニペット機能や記事投稿機能が便利&lt;/h3&gt;
-
-&lt;p&gt;コードスニペットや記事投稿機能のあるチャットシステムというのが意外性あります。&lt;code&gt;Devhub&lt;/code&gt;で経験している機能ですが、より洗練された印象を受けます。&lt;/p&gt;
-
-&lt;h3 id="section-4"&gt;過去に遡って発言を訂正できる&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;kato.im&lt;/code&gt;では直前の発言のみ1分間だけ修正可能という仕様でした。
-このルール内でネタ発言を歴史に刻むかどうかの壮大なチキンレースが繰り広げられたりすることもありましたが、やはり不便です。&lt;/p&gt;
-
-&lt;p&gt;いつでも発言を訂正できるというのは、言質を重視する開発現場では欠点かもしれませんが、やはり必要な機能だと思います。&lt;/p&gt;
-
-&lt;h3 id="hubot"&gt;hubot対応&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;hubot&lt;/code&gt;に何をさせているかといえば、本当に大したことはさせていませんが、僕達には必要不可欠なおもちゃです。&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="slack" src="/blog/2014/06/27/first-impression-of-slack/slack.png" /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id="section-5"&gt;悪いところ&lt;/h2&gt;
-
-&lt;h3 id="section-6"&gt;利用料金は高め&lt;/h3&gt;
-
-&lt;p&gt;基本無料ではありますが、課金段階においてはユーザ単価が高め($8ppm〜)なのが気になります。&lt;/p&gt;
-
-&lt;p&gt;また、他のサービスとの連携も無料版は5種類に制限されているので、やや不便です。&lt;/p&gt;
-
-&lt;h3 id="ui-1"&gt;UIに慣れるまで目的のことをするのが難しい&lt;/h3&gt;
-
-&lt;p&gt;驚き最小の原則には反している気がします。例えば、ユーザやチャンネルの右側にある☓ボタンは、自分から見えなくするだけです。削除ボタンかな？という印象を受けます。
-チームのホーム画面とチャット画面の行き来も最初はとまどいます。&lt;/p&gt;
-
-&lt;h3 id="gfmgithub-flavored-markdown"&gt;GFM(Github Flavored Markdown)ではない&lt;/h3&gt;
-
-&lt;p&gt;なぜだ。&lt;/p&gt;
-
-&lt;h3 id="section-7"&gt;スニペットや記事にタグ付けできない&lt;/h3&gt;
-
-&lt;p&gt;あくまでチャットの補助機能という位置づけなのでしょうか。
-個人的にはここが拡充されれば色々なサービスを喰う存在になると予想します。&lt;/p&gt;
-
-&lt;h3 id="section-8"&gt;1画面に複数チャンネルを表示できない&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;hootsuite&lt;/code&gt;や&lt;code&gt;kato.im&lt;/code&gt;に慣れている人間にはやや不便です。&lt;/p&gt;
-
-&lt;h3 id="huboturlheroku"&gt;hubotにURLが必要なのでherokuなどを使うことになる&lt;/h3&gt;
-
-&lt;p&gt;使用上の制限なんでしょうか。従来は&lt;code&gt;digitalocean&lt;/code&gt;上で動かしていましたが、仕方なく&lt;code&gt;heroku&lt;/code&gt;へ移行させました。&lt;/p&gt;
-
-&lt;p&gt;話がずれますが、&lt;a href="http://wercker.com/"&gt;wercker&lt;/a&gt;は便利ですね。githubへのプッシュからの自動デプロイが簡単です。&lt;code&gt;travis-ci&lt;/code&gt;の時はもうちょっと面倒だった記憶があります。&lt;/p&gt;
-
-&lt;h2 id="section-9"&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;残念だったのは記事機能です。現時点ではタグやカテゴリといった機能は存在せず、キーワード検索か最新記事一覧から閲覧せざるを得ません。慣れの問題かもしれませんが、検索性や俯瞰性に難ありでしょう。&lt;/p&gt;
-
-&lt;p&gt;結論としては、&lt;code&gt;kato.im&lt;/code&gt;から移行して引き続き利用していくことになったものの、Wikiを完全に代替できるわけではなく、機能改良が望まれるかあるいは諦めるかという感じになりました。&lt;/p&gt;
-
-&lt;p&gt;尚、運用中のhubotは以下に公開されています。少しだけ独自スクリプトもあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/3100/slack-hubot"&gt;3100/slack-hubot&lt;/a&gt;&lt;/p&gt;
-
 </content>
   </entry>
 </feed>
