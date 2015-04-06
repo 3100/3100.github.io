@@ -1,0 +1,89 @@
+---
+title: "CVを始めてみた"
+published: false
+date: 2014-11-29 14:00
+comments: true
+tags: cv
+---
+
+# 準備
+
+* pyvlfeat (`VLFeat`のPythonバインディング)
+* scikit-learn (機械学習ライブラリ)
+
+## pyvlfeat
+
+`pyvlfeat`を導入する前に
+
+* Boost.Python (`Boost`のPythonバインディング)
+* Numpy (数値計算ライブラリ)
+* Matplotlib (グラフ描画ツール)
+
+が必要となります。
+
+### Boost.Python
+
+`bjam`は`boost`をビルドするのに使うビルドツールらしいですが
+`Boost.Python`のビルドに必要そうです。
+
+~~~bash
+$ brew install boost-python
+~~~
+
+環境によってはエラーが出るかも。
+
+cf. [boost --with-python required on osx for pycaffe target #465 · Issue #1193 · BVLC/caffe](https://github.com/BVLC/caffe/issues/1193)
+
+### NumpyとMatplotlib
+
+こちらは`pip`からインストールするのが簡単そうです。
+
+~~~bash
+# pip install numpy matplotlib
+~~~
+
+### pyvlfeat
+
+[pyvlfeat 0.1.1a3 : Python Package Index](https://pypi.python.org/pypi/pyvlfeat/)
+
+~~~bash
+$ wget https://pypi.python.org/packages/source/p/pyvlfeat/pyvlfeat-0.1.1a3.tar.gz
+$ tar xvzf pyvlfeat-0.1.1a3.tar.gz
+$ mv setup.py setup.py.org
+$ wget https://gist.githubusercontent.com/fish2000/1628347/raw/f03272b422e8c5e972618aaa2fe9132be986fa92/setup.py
+~~~
+
+`pyvlfeat`の`setup.py`が動かないので、
+[Setup script for the Python VLFeat bindings](https://gist.github.com/fish2000/1628347)
+を利用しています。
+
+`setup.py`を開いて
+
+* BOOST_PATH
+* LIBBOOST_PATH
+* NUMPY_PATH
+
+を変更します。それぞれコメントを参考に場所を調べることが出来ます。
+
+* `find`は重たいので、純粋な専用環境じゃない場合は頭に`nice`を付けてあげると良いかもしれません。
+* `NUMPY_PATH`はnumpyフォルダの1つ上までを指定。
+
+各変数を修正したら
+
+~~~bash
+# python setup.py build
+~~~
+
+## scikit-learn
+
+公式サイトを見ると、`pip`で導入できるようです。
+
+~~~bash
+# pip install -U scikit-learn
+~~~
+
+## flickrpy
+
+~~~
+$ wget http://flickrpy.googlecode.com/svn/trunk/flickr.py
+~~~
