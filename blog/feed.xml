@@ -5,16 +5,101 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2014-11-20T07:00:00Z</updated>
+  <updated>2015-04-06T11:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Github Pagesでリアルタイムアクセス解析を行う</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2015/04/06/analytics-for-github-pages.html"/>
+    <id>http://3100.github.io/blog/2015/04/06/analytics-for-github-pages.html</id>
+    <published>2015-04-06T11:00:00Z</published>
+    <updated>2015-04-06T11:38:50+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;先日、&lt;code&gt;hexo&lt;/code&gt;という&lt;code&gt;Node.js&lt;/code&gt;製静的サイト作成ツールを用いて&lt;a href="http://npminside.github.io/"&gt;Npm Inside&lt;/a&gt;というブログを新たに始めました。
+ついでに、遅ればせながらきちんとアクセス解析もしようと思い立ちました。
+このブログは&lt;code&gt;middleman&lt;/code&gt;で作っていますが、こちらも特に解析をしていませんでした。&lt;/p&gt;
+
+&lt;p&gt;早速調べたところ、&lt;code&gt;ga-beacon&lt;/code&gt;というライブラリが良さそうだったので導入してみました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/igrigorik/ga-beacon"&gt;igrigorik/ga-beacon&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id="ga-beacon"&gt;ga-beaconとは&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="https://camo.githubusercontent.com/56019dbde15bdf7303fa16e9860ba07787801b72/68747470733a2f2f6c68352e676f6f676c6575736572636f6e74656e742e636f6d2f2d5a753972396d37557630632f557353516c4a354f6f65492f414141414141414148776f2f6676485f6c7256555630772f77313030372d683436372d6e6f2f736b697463682e706e67" width="800px" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ga-beacon&lt;/code&gt;は&lt;code&gt;MIT&lt;/code&gt;ライセンスで公開されているツールで、&lt;code&gt;Google Analytics&lt;/code&gt;と連携してリアルタイムにアクセス解析を行ってくれるものです。
+&lt;code&gt;Google Analytics&lt;/code&gt;の画面から現在どのページに何人アクセスしているのかを閲覧することができます。&lt;/p&gt;
+
+&lt;p&gt;元々、&lt;code&gt;Github Pages&lt;/code&gt;用のアクセス解析は無いかと探していて、このツールにたどり着きました。&lt;/p&gt;
+
+&lt;h2 id="section"&gt;導入方法&lt;/h2&gt;
+
+&lt;p&gt;導入は簡単です。事前に&lt;code&gt;Google Analytics&lt;/code&gt;に登録をします。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;新しいプロパティを作成します。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Website&lt;/code&gt;を選択します。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Website name&lt;/code&gt;に識別用の名前を入力します。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;WebSite URL&lt;/code&gt;の項目に&lt;code&gt;https://ga-beacon.appspot.com/&lt;/code&gt;と入力します。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Get Tracking ID&lt;/code&gt;をクリックし、&lt;code&gt;UA-XXXXX-X&lt;/code&gt;というIDをコピーするかメモります。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;https://ga-beacon.appspot.com&lt;/code&gt;のように外部URLを指定したくないという方は、自前でGAE上にインスタンスを建てることも可能です。&lt;/p&gt;
+
+&lt;p&gt;続いて、アクセス解析を行いたいページに以下のようなHTMLを追加します。ここに貼られた画像がいわゆるビーコンとしてアクセスを検知します。&lt;/p&gt;
+
+&lt;pre class="highlight html"&gt;&lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"http://your.site.com/page-name"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://ga-beacon.appspot.com/UA-XXXXX-X/your.site.com/page-name"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;もし、ビーコン画像を表示したくない場合は、&lt;code&gt;img src&lt;/code&gt;で指定したURLの最後に&lt;code&gt;?pixel&lt;/code&gt;を付与しましょう。&lt;/p&gt;
+
+&lt;p&gt;実際のケースでは、これを全てのページに登録するのはとても骨の折れる作業です。
+静的サイト作成ツールを利用している場合にはなんとか自動化しましょう。&lt;/p&gt;
+
+&lt;h3 id="middleman"&gt;middlemanのケース&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;middleman&lt;/code&gt;を&lt;code&gt;middleman-blog&lt;/code&gt;と共に利用している場合は、&lt;code&gt;source/_layouts/article.slim&lt;/code&gt;にて&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;= link_to current_article
+  = image_tag "https://ga-beacon.appspot.com/UA-XXXXX-X/#{current_article.url}?pixel"
+&lt;/pre&gt;
+
+&lt;p&gt;を適当なところに埋め込むと良いでしょう。(&lt;code&gt;slim&lt;/code&gt;の例)
+デフォルトのテンプレートエンジンなら、以下の様な感じでしょうか。(違っていたらごめんなさい)&lt;/p&gt;
+
+&lt;pre class="highlight erb"&gt;&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="n"&gt;link_to&lt;/span&gt; &lt;span class="n"&gt;current_article&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;image_tag&lt;/span&gt; &lt;span class="s2"&gt;"https://ga-beacon.appspot.com/UA-XXXXX-X/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;current_article&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;?pixel"&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;h3 id="hexo"&gt;hexoのケース&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;hexo&lt;/code&gt;を利用している場合は、&lt;code&gt;themes/your-theme/layout/_partial/article.ejs&lt;/code&gt;内の適当な箇所に&lt;/p&gt;
+
+&lt;pre class="highlight html"&gt;&lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;"&amp;lt;%- post.permalink %&amp;gt;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;"https://ga-beacon.appspot.com/UA-XXXXX-X/&amp;lt;%- post.path -%&amp;gt;?pixel"&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;と追加すると良いかと思います。&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;以上のような感じで、リアルタイムにアクセス解析が実現します。
+素晴らしいですね。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Arch LinuxからODBC経由でMS SQLServerにアクセスする</title>
     <link rel="alternate" href="http://3100.github.io/blog/2014/11/20/odbc-in-arch-linux.html"/>
     <id>http://3100.github.io/blog/2014/11/20/odbc-in-arch-linux.html</id>
     <published>2014-11-20T07:00:00Z</published>
-    <updated>2015-04-06T10:29:40+00:00</updated>
+    <updated>2015-04-06T11:38:50+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -101,7 +186,7 @@ client charset  = UTF-8
     <link rel="alternate" href="http://3100.github.io/blog/2014/11/03/swift-with-vim.html"/>
     <id>http://3100.github.io/blog/2014/11/03/swift-with-vim.html</id>
     <published>2014-11-03T03:00:00Z</published>
-    <updated>2015-04-06T10:29:40+00:00</updated>
+    <updated>2015-04-06T11:38:50+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -174,7 +259,7 @@ client charset  = UTF-8
     <link rel="alternate" href="http://3100.github.io/blog/2014/07/03/martini-and-gin.html"/>
     <id>http://3100.github.io/blog/2014/07/03/martini-and-gin.html</id>
     <published>2014-07-03T13:00:00Z</published>
-    <updated>2015-04-06T10:29:40+00:00</updated>
+    <updated>2015-04-06T11:38:50+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -275,7 +360,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
     <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
     <published>2014-06-30T12:36:00Z</published>
-    <updated>2015-04-06T10:29:40+00:00</updated>
+    <updated>2015-04-06T11:38:50+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -441,7 +526,7 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
     <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/vue-js-with-date.html"/>
     <id>http://3100.github.io/blog/2014/06/30/vue-js-with-date.html</id>
     <published>2014-06-29T16:50:00Z</published>
-    <updated>2015-04-06T10:29:40+00:00</updated>
+    <updated>2015-04-06T11:38:50+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -518,74 +603,6 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
 &lt;/pre&gt;
 
 &lt;p&gt;なんかもっとスマートな方法はないものか。。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>npm:globalとlocal</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html"/>
-    <id>http://3100.github.io/blog/2014/06/28/npm-global-vs-local.html</id>
-    <published>2014-06-28T02:07:00Z</published>
-    <updated>2015-04-06T10:29:40+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;node.js&lt;/code&gt;のパッケージ管理ツールである&lt;code&gt;npm&lt;/code&gt;。
-&lt;code&gt;package.json&lt;/code&gt;などと併用すると非常に便利ですが
-&lt;code&gt;-g&lt;/code&gt;オプションの使い分けが気になりました。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;資料&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;node.js&lt;/code&gt;の公式サイトに、&lt;code&gt;npm 1.0&lt;/code&gt;が登場した時の記事があります。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation"&gt;npm 1.0: Global vs Local installation&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="section-2"&gt;基本機能&lt;/h2&gt;
-
-&lt;p&gt;知っている人には今更かもしれませんが、おさらいです。&lt;/p&gt;
-
-&lt;h3 id="global"&gt;global&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;パッケージは&lt;code&gt;{prefix}/lib/node_modules&lt;/code&gt;に置かれる&lt;/li&gt;
-  &lt;li&gt;実行ファイルは&lt;code&gt;{prefix}/bin&lt;/code&gt;に配置される&lt;/li&gt;
-  &lt;li&gt;manページがある場合は&lt;code&gt;{prefix}/share/man&lt;/code&gt;に置かれる&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;{prefix}&lt;/code&gt;は&lt;code&gt;/usr/local&lt;/code&gt;など。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id="local"&gt;local&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;パッケージは現在のディレクトリ下、&lt;code&gt;./node_modules&lt;/code&gt;に置かれる&lt;/li&gt;
-  &lt;li&gt;実行ファイルは&lt;code&gt;./node_modules/bin&lt;/code&gt;に配置される&lt;/li&gt;
-  &lt;li&gt;manページはインストールされない&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id="section-3"&gt;使い分け&lt;/h2&gt;
-
-&lt;p&gt;基本的には以下の方針に従えば良さそうです。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;今のプロジェクトで使いたいだけなら&lt;code&gt;require('whatever')&lt;/code&gt;して、localにインストールする。&lt;/li&gt;
-  &lt;li&gt;シェルやコマンドプロンプトなどから使いたい場合は&lt;code&gt;-g&lt;/code&gt;オプションをつけてglobalにインストールする。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id="coffeescriptexpress"&gt;CoffeescriptやExpressなど&lt;/h2&gt;
-
-&lt;p&gt;こうしたパッケージはライブラリでもありますが、コマンドラインインターフェースも備えています。
-こうした場合、2つの方法があるそうです。(前者がオススメされています。)&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;globalとlocal両方にインストールする。実質これで動くし、ディスクスペースを多少浪費するくらい。&lt;/li&gt;
-  &lt;li&gt;globalにインストールしたあとで&lt;code&gt;npm link express&lt;/code&gt;などとする。これでglobal側だけ更新していくようにすれば他のシンボリックリンクにも反映される。(Windowsではcygwinなどを使わない限り、この方法は取れない)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id="section-4"&gt;その他&lt;/h2&gt;
-
-&lt;p&gt;上記記事では子フォルダでさらに&lt;code&gt;npm install&lt;/code&gt;する例も紹介されていますが、管理上面倒なことになりますし、あまり気にする必要はないでしょう。&lt;/p&gt;
-
-&lt;p&gt;また、localにインストールしてもPATHを通せばコマンドラインインターフェースも使用できるので、globalインストールを全く使わないという選択肢もありです。&lt;/p&gt;
 </content>
   </entry>
 </feed>
