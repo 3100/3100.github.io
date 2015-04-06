@@ -10,6 +10,6 @@
       = partial "header", locals: {article: current_article}
     .body.markdown itemprop="articleBody" = current_article.body
     .clearfix
-    a href=current_article.slug
-      img src="https://ga-beacon.appspot.com/UA-61582910-2/#{current_article.title}"
+    = link_to current_article
+      = image_tag "https://ga-beacon.appspot.com/UA-61582910-2/#{current_article.url}?pixel"
     footer
