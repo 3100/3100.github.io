@@ -5,16 +5,75 @@
   <id>http://3100.github.io/blog</id>
   <link href="http://3100.github.io/blog"/>
   <link href="http://3100.github.io/blog/feed.xml" rel="self"/>
-  <updated>2015-05-07T13:00:00Z</updated>
+  <updated>2015-08-10T15:28:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Another Log</title>
+    <link rel="alternate" href="http://3100.github.io/blog/2015/08/11/another-log.html"/>
+    <id>http://3100.github.io/blog/2015/08/11/another-log.html</id>
+    <published>2015-08-10T15:28:00Z</published>
+    <updated>2015-08-10T16:02:14+00:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;このブログ自体は&lt;code&gt;middleman&lt;/code&gt;で書いています。
+最近は&lt;code&gt;hexo&lt;/code&gt;がお気に入りになりつつありますが、
+色々と考えていることもあって、ここはひとまずそのまま残しておく予定です。&lt;/p&gt;
+
+&lt;h2 id="section"&gt;1日7時間をひねり出す&lt;/h2&gt;
+
+&lt;p&gt;2ヶ月ほど前に、長岡秀隆さんという方のTEDx動画を見て
+1日7時間を別の人生のために使うアイデアに感銘を受けました。&lt;/p&gt;
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/EzXvih454dM" frameborder="0" allowfullscreen=""&gt;&lt;/iframe&gt;
+
+&lt;p&gt;(偶然ですけどCourier Japonの最新号でも似たような事を述べている人の例が紹介されていました。)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;熱しやすく冷めやすい性格&lt;/strong&gt;なのですが、最近はなるべく時間を有意義に使おうと、1日の行動をメモ帳につけたりしています。&lt;/p&gt;
+
+&lt;p&gt;思えばスマホのゲームも全部アンインストールしました。&lt;/p&gt;
+
+&lt;p&gt;おかげで、最近は映画や本に沢山触れられる生活ができています。
+(大学時代ぽい)&lt;/p&gt;
+
+&lt;h2 id="section-1"&gt;フローとストック&lt;/h2&gt;
+
+&lt;p&gt;時間を上手に使うことと同程度にやりたいこととしては、とにかく思考をアウトプット(記憶の外部化)していきたくて、
+整理されていない状態の脳内をどんどん書き出していくツールを探しているところです。&lt;/p&gt;
+
+&lt;p&gt;要するにフロー向けのツール。人によってA4のノートが良いとか様々なことを言うのですが
+とりあえずはデジタルでやることにして、慣れ親しんだmarkdown記法を使うhexoでアウトプットしています。
+(これは完全なプライベート)&lt;/p&gt;
+
+&lt;p&gt;このフローの中から、
+特に技術的な事柄について若干整理したものを以下のサイトに残していくようにしようと実行中です。
+ストックとまではいかないのだけど、フローとストックの中間くらい。
+他の人にとってはあまり役に立たないかもしれないけど、自分のためになればそれでも良い気がします。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://3100.github.io/log"&gt;http://3100.github.io/log - 3log&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これがもしかしたらそのうちストックになるかもしれないけど、まだ今のところは荒削りな事物をとにかく書き留めていく場所に過ぎない予定。&lt;/p&gt;
+
+&lt;h2 id="medium"&gt;はてなブログとかMediumとかを使わないわけ&lt;/h2&gt;
+
+&lt;p&gt;ブログを構築することはコア部分ではないのだけど、&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;データを単なるテキストデータとgitで管理したい&lt;/li&gt;
+  &lt;li&gt;手元でいつでも検索したい。数年後にもすぐに見つけられるように&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ということで、学習コストの低いhexoが割りと合っているように思っています。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>新生活で買ってよかったもの(調理編)</title>
     <link rel="alternate" href="http://3100.github.io/blog/2015/05/07/best-buy-cook.html"/>
     <id>http://3100.github.io/blog/2015/05/07/best-buy-cook.html</id>
     <published>2015-05-07T13:00:00Z</published>
-    <updated>2015-05-07T18:05:18+00:00</updated>
+    <updated>2015-08-10T16:02:14+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -292,7 +351,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2015/04/06/analytics-for-github-pages.html"/>
     <id>http://3100.github.io/blog/2015/04/06/analytics-for-github-pages.html</id>
     <published>2015-04-06T11:00:00Z</published>
-    <updated>2015-05-07T18:05:18+00:00</updated>
+    <updated>2015-08-10T16:02:14+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -377,7 +436,7 @@
     <link rel="alternate" href="http://3100.github.io/blog/2014/11/20/odbc-in-arch-linux.html"/>
     <id>http://3100.github.io/blog/2014/11/20/odbc-in-arch-linux.html</id>
     <published>2014-11-20T07:00:00Z</published>
-    <updated>2015-05-07T18:05:18+00:00</updated>
+    <updated>2015-08-10T16:02:14+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -464,7 +523,7 @@ client charset  = UTF-8
     <link rel="alternate" href="http://3100.github.io/blog/2014/11/03/swift-with-vim.html"/>
     <id>http://3100.github.io/blog/2014/11/03/swift-with-vim.html</id>
     <published>2014-11-03T03:00:00Z</published>
-    <updated>2015-05-07T18:05:18+00:00</updated>
+    <updated>2015-08-10T16:02:14+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -537,7 +596,7 @@ client charset  = UTF-8
     <link rel="alternate" href="http://3100.github.io/blog/2014/07/03/martini-and-gin.html"/>
     <id>http://3100.github.io/blog/2014/07/03/martini-and-gin.html</id>
     <published>2014-07-03T13:00:00Z</published>
-    <updated>2015-05-07T18:05:18+00:00</updated>
+    <updated>2015-08-10T16:02:14+00:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -631,172 +690,6 @@ WAFが高速化すると嬉しい部分はまだまだありそうです。&lt;/
 
 &lt;p&gt;そんなに話す速度も速くないし、割りと日本の英語教育でも学ぶような言い回しが多いので、
 &lt;code&gt;martini&lt;/code&gt;が気になっている方は聴いてみると良いかもしれません。&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>linq.jsを触ってみた</title>
-    <link rel="alternate" href="http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html"/>
-    <id>http://3100.github.io/blog/2014/06/30/introduction-of-linq-js.html</id>
-    <published>2014-06-30T12:36:00Z</published>
-    <updated>2015-05-07T18:05:18+00:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;h2 id="section"&gt;概要&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href="http://linqjs.codeplex.com/"&gt;linq.js&lt;/a&gt;という、データを汎用的に処理するクエリ機能を試してみました。&lt;/p&gt;
-
-&lt;h2 id="section-1"&gt;前置き&lt;/h2&gt;
-
-&lt;p&gt;先日から&lt;code&gt;vue.js&lt;/code&gt;という&lt;code&gt;MVVM&lt;/code&gt;ライクな実装を可能にするライブラリを触っています。
-&lt;code&gt;MVVM&lt;/code&gt;といえば&lt;code&gt;Silverlight&lt;/code&gt;や&lt;code&gt;WPF&lt;/code&gt;。
-元々Microsoftが流行らせようとしたパターンです。&lt;/p&gt;
-
-&lt;p&gt;そのMicrosoftが開発したもう1つの便利ツールがあります。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;LINQ&lt;/code&gt;です。
-あまりご存知でない方のために簡単に説明しますと、データの形態を気にせずに、汎用的に使えることを目指した強力なクエリ機能です。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://msdn.microsoft.com/ja-jp/library/bb397926.aspx"&gt;統合言語クエリ (LINQ: Language-Integrated Query)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;この&lt;code&gt;LINQ&lt;/code&gt;、&lt;code&gt;C#&lt;/code&gt;や&lt;code&gt;VisualBasic&lt;/code&gt;向けなんですが、
-有志が雰囲気そのままに&lt;code&gt;JavaScript&lt;/code&gt;へ移植していることは以前から知っていました。&lt;/p&gt;
-
-&lt;p&gt;今回&lt;code&gt;MVVM&lt;/code&gt;もやるんだし、ちょうど良い機会だろうということで実際に触ってみることにしました。&lt;/p&gt;
-
-&lt;h2 id="section-2"&gt;導入方法&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js&lt;/li&gt;
-  &lt;li&gt;//cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/linq.min.js&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上記2ライブラリを組み込むのがとりあえず触るには簡単かと思います。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id="section-3"&gt;使い方&lt;/h2&gt;
-
-&lt;h3 id="json"&gt;JSON&lt;/h3&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;demo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;isSameMonth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;date&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;date&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;checkedMenu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;indexOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;menu&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Select&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;Enumerable.From()&lt;/code&gt;で&lt;code&gt;json&lt;/code&gt;形式のオブジェクトを取り込むことが出来ます。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Where()&lt;/code&gt;は条件節。該当するデータのみ次へ送ります。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Select()&lt;/code&gt;は出力対象を指定します。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;ToArray()&lt;/code&gt;で実際に処理が実行されます。&lt;code&gt;LINQ&lt;/code&gt;は遅延処理&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id="dom"&gt;DOM&lt;/h3&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;checked&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"input[id^=check]"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="na"&gt;toEnumerable&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"$.attr('checked') == 'checked'"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;toEnumerable()&lt;/code&gt;で&lt;code&gt;jQuery&lt;/code&gt;のセレクタを取り込めます。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Where()&lt;/code&gt;の中のような表現で書くことも出来ます。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id="section-4"&gt;注意点: クエリは遅延実行&lt;/h3&gt;
-
-&lt;p&gt;上にもさらっと書きましたが、&lt;code&gt;LINQ&lt;/code&gt;は実行されるまではただのクエリです。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;ToArray()&lt;/code&gt;などで呼び出すことで、実際に処理が行われます。&lt;/p&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="c1"&gt;# ただのクエリ。処理はまだ行われない
-&lt;/span&gt;&lt;span class="nx"&gt;query&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Where&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;price&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="c1"&gt;# ここで初めて処理が実行される
-&lt;/span&gt;&lt;span class="nx"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="c1"&gt;# やはり、まだ処理は行われない
-&lt;/span&gt;&lt;span class="nx"&gt;query2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;query&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderBy&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;price&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nx"&gt;arr2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;query2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Select&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;price&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;price&lt;/span&gt; &lt;span class="p"&gt;})&lt;/span&gt;
-         &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# ここで処理が行われる
-&lt;/span&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id="section-5"&gt;クエリの種類&lt;/h2&gt;
-
-&lt;p&gt;その数なんと90種類！
-&lt;code&gt;LINQ&lt;/code&gt;にあるものは大抵用意されているようです。独自のものもあります。&lt;/p&gt;
-
-&lt;p&gt;少しだけ紹介します。&lt;/p&gt;
-
-&lt;h3 id="groupby"&gt;GroupBy&lt;/h3&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;GroupBy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"$.menu"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;null&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="s"&gt;"{ y: $$.Count(), name: $}"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;GroupBy()&lt;/code&gt;は集計用によく用いられる関数です。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;第1引数はキー&lt;/li&gt;
-  &lt;li&gt;第2引数は中間データを加工する際に使用？&lt;/li&gt;
-  &lt;li&gt;第3引数で出力データを指定。&lt;code&gt;$$&lt;/code&gt;は集計関数用&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id="join"&gt;Join&lt;/h3&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;jsonA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;jsonB&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"$.id"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"$.id"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"{idA: $.id, valA: $.val, valB: $$.val}"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;2つのデータを紐付けする関数です。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;第1引数に別データ&lt;/li&gt;
-  &lt;li&gt;第2引数と第3引数にキー&lt;/li&gt;
-  &lt;li&gt;第4引数に出力形式。&lt;code&gt;$$&lt;/code&gt;は2番めのデータ。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id="orderby"&gt;OrderBy&lt;/h3&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderByDescending&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"$.y"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;これはわかりますよね。順序付けを行う関数です。&lt;code&gt;OrderByDescending()&lt;/code&gt;は降順。&lt;/p&gt;
-
-&lt;h3 id="take"&gt;Take&lt;/h3&gt;
-
-&lt;pre class="highlight coffeescript"&gt;&lt;span class="nx"&gt;Enumerable&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;From&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Take&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ToArray&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;先頭から指定件数だけ取得する関数です。&lt;/p&gt;
-
-&lt;h3 id="section-6"&gt;その他&lt;/h3&gt;
-
-&lt;p&gt;公式サイトにもサンプルがあるので、そちらもどうぞ。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href="http://linqjs.codeplex.com/wikipage?title=linq.js%20Samples"&gt;http://linqjs.codeplex.com/wikipage?title=linq.js%20Samples&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id="section-7"&gt;感想&lt;/h2&gt;
-
-&lt;p&gt;さらっと上辺をなぞっただけですが、いかがでしたでしょうか。
-&lt;code&gt;JavaScript&lt;/code&gt;上でのデータ操作や集計が、とても簡単になりそうな印象を受けました。
-&lt;code&gt;LINQ&lt;/code&gt;自体に慣れ親しんでいる方からすると、
-割りと直感的に使えるのではないかと思います。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;linq.js&lt;/code&gt;、なかなかオススメです。&lt;/p&gt;
 </content>
   </entry>
 </feed>

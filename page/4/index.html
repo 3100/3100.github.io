@@ -15,6 +15,35 @@
 </p>
 <header>
   <h1 class="title" itemprop="name">
+    RubyMotionのチュートリアルでハマったところ
+  </h1>
+  <div class="meta">
+    <time class="date" itemprop="datePublished" content="2014-03-30T22:00:00+09:00" datetime="2014-03-30T22:00:00+09:00" pubdate=""><span class="month">Mar</span><span class="day">30</span><span class="year">2014</span></time>
+    <div class="article-tag">
+      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
+        <li>
+          <a href="/blog/tags/rubymotion.html">rubymotion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header><h2 id="section">概要</h2>
+
+<p><a href="http://www.rubymotion.com/">RubyMotion</a>の<a href="http://tutorial.rubymotion.jp/">チュートリアルサイト</a>を進めています。
+しかし、チュートリアルが書かれてからだいぶ経つせいか
+ところどころハマりそうな部分がありましたので、ここにメモとして残しておきます。</p>
+
+<h2 id="uilabel">UILabelの背景色</h2>
+
+<p>7章でUILabelにModelの値変更を反映させるのですが、iOS7で変更があったのかどうなのか
+指示どおりに作ってもラベルが見えません。</p>
+
+<p>実は背景色が黒になっていることが原因なので、明示的に白を指定することで解決しました。</p>
+
+<pre class="highlight ruby">  <span class="k">def</span> <span class="nf">application</span></pre><a href="/blog/2014/03/30/issues-in-ruby-motion-tutorial.html">続きを読む</a>
+<hr>
+<header>
+  <h1 class="title" itemprop="name">
     ページ読み込みを高速化するInstantClickを導入しました
   </h1>
   <div class="meta">
@@ -127,37 +156,6 @@
 <p>まずMoinMoinをインストールします。公式サイトからソースを落としてきてもいいですが、
 今回は以下のパッケージを利用し...</p><a href="/blog/2013/11/16/moin-with-nginx.html">続きを読む</a>
 <hr>
-<header>
-  <h1 class="title" itemprop="name">
-    rbenvでruby2.0を入れようとするとOpensslのエラーが出る
-  </h1>
-  <div class="meta">
-    <time class="date" itemprop="datePublished" content="2013-11-08T00:00:00+09:00" datetime="2013-11-08T00:00:00+09:00" pubdate=""><span class="month">Nov</span><span class="day">08</span><span class="year">2013</span></time>
-    <div class="article-tag">
-      <span class="glyphicon glyphicon-tags"></span><ul class="tags horizontal">
-        <li>
-          <a href="/blog/tags/ruby.html">ruby</a>
-        </li>
-        <li>
-          <a href="/blog/tags/os-x.html">os x</a>
-        </li>
-        <li>
-          <a href="/blog/tags/rbenv.html">rbenv</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header><p>Marvericksを入れた後のMacでrbenvからRuby2.0を入れようとするとエラーになってしまいました。</p>
-
-<pre class="highlight plaintext">$ gem install 2.0.0-p0
-Downloading ruby-2.0.0-p0.tar.gz...
--&gt; http://dqw8nmjcqpjn7.cloudfront.net/50d307c4dc9297ae59952527be4e755d
-Installing ruby-2.0.0-p0...
-
-BUILD FAILED
-
-Inspect or clean...</pre><a href="/blog/2013/11/08/openssl-error-installing-ruby-2.html">続きを読む</a>
-<hr>
 <p>
   <a href="/page/5/">次へ</a>
 </p>
@@ -201,6 +199,9 @@ Inspect or clean...</pre><a href="/blog/2013/11/08/openssl-error-installing-ruby
             </h3>
             <ul>
               <li>
+                <a href="/blog/2015/08/11/another-log.html">Another Log</a>&nbsp;<time class="date" itemprop="datePublished" content="2015-08-11T00:28:00+09:00" datetime="2015-08-11T00:28:00+09:00" pubdate=""><span class="month">Aug</span><span class="day">11</span><span class="year">2015</span></time>
+              </li>
+              <li>
                 <a href="/blog/2015/05/07/best-buy-cook.html">新生活で買ってよかったもの(調理編)</a>&nbsp;<time class="date" itemprop="datePublished" content="2015-05-07T22:00:00+09:00" datetime="2015-05-07T22:00:00+09:00" pubdate=""><span class="month">May</span><span class="day">07</span><span class="year">2015</span></time>
               </li>
               <li>
@@ -217,9 +218,6 @@ Inspect or clean...</pre><a href="/blog/2013/11/08/openssl-error-installing-ruby
               </li>
               <li>
                 <a href="/blog/2014/06/30/introduction-of-linq-js.html">linq.jsを触ってみた</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T21:36:00+09:00" datetime="2014-06-30T21:36:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
-              </li>
-              <li>
-                <a href="/blog/2014/06/30/vue-js-with-date.html">vue.jsとDate</a>&nbsp;<time class="date" itemprop="datePublished" content="2014-06-30T01:50:00+09:00" datetime="2014-06-30T01:50:00+09:00" pubdate=""><span class="month">Jun</span><span class="day">30</span><span class="year">2014</span></time>
               </li>
             </ul>
           </article><h3>
@@ -333,7 +331,7 @@ Inspect or clean...</pre><a href="/blog/2013/11/08/openssl-error-installing-ruby
           </h3>
           <ul class="holizontal">
             <li>
-              <a href="/blog/2015.html">2015</a> (2)
+              <a href="/blog/2015.html">2015</a> (3)
             </li>
             <li>
               <a href="/blog/2014.html">2014</a> (16)
